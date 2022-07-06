@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> Welcome to DanielQi&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <script src="https://mermaid-js.github.io/mermaid/"></script>
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover6.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">Welcome to DanielQi&#39;s Blog</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['from import to export', 'from asking to serving', 'from idea to reality'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  
+  
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content">一个安静优雅的hexo主题，拥有轻量化页面。</div>
+</div>
+
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-FPS项目文档"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/06/30/FPS%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/"
+    >FPS项目文档v1.0</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/06/30/FPS%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/" class="article-date">
+  <time datetime="2022-06-30T03:45:30.000Z" itemprop="datePublished">2022-06-30</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="0-前言（套盾）"><a href="#0-前言（套盾）" class="headerlink" title="0.前言（套盾）"></a>0.前言（<del>套盾</del>）</h1><p><strong>本文档仅供项目组内部参考使用</strong><br><strong>本文档内链接均用于学习</strong><br><strong>本文档所属项目仅为学习用demo，非商业化作品</strong><br><strong>本文档中包含游戏机制、游戏道具、各类属性的说明与策划给出的部分实现思路</strong></p>
+<hr>
+<h1 id="1-项目目标"><a href="#1-项目目标" class="headerlink" title="1.项目目标"></a>1.项目目标</h1><ul>
+<li><p>实现多人联机功能：</p>
+<ul>
+<li>房间的创建、删除</li>
+<li>地图加载</li>
+<li>房间的进入、退出</li>
+<li>同步</li>
+</ul>
+</li>
+<li><p>实现FPS的基本内容：</p>
+<ul>
+<li>战斗<ul>
+<li>武器</li>
+<li>道具</li>
+<li>技能</li>
+<li>动作</li>
+</ul>
+</li>
+<li>角色<ul>
+<li>角色定位</li>
+<li>外观</li>
+<li>数值</li>
+<li>技能（是在地图里获取技能还是角色自带技能）</li>
+</ul>
+</li>
+<li>交互<ul>
+<li>UI</li>
+<li>键位</li>
+<li>与场景交互</li>
+</ul>
+</li>
+<li>地图/场景<ul>
+<li>地图加载/销毁</li>
+<li>地图内设施</li>
+<li>道具刷新点</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li><p>实现游戏核心机制：</p>
+<ul>
+<li>角色<ul>
+<li>角色选择</li>
+<li>角色创建与初始化<ul>
+<li>角色数值初始化</li>
+<li>出生点选择</li>
+</ul>
+</li>
+<li>角色状态与转换<ul>
+<li>健康</li>
+<li>负伤</li>
+<li>死亡（<del>盒子</del>）</li>
+<li>转换</li>
+</ul>
+</li>
+<li>角色掉落<ul>
+<li>部分掉落</li>
+<li>完全掉落</li>
+</ul>
+</li>
+<li>角色属性与变化机制</li>
+<li>角色销毁<ul>
+<li>撤离点</li>
+<li>被击杀</li>
+<li>迷失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>限时撤离</li>
+<li>胜利目标</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="2-项目设定"><a href="#2-项目设定" class="headerlink" title="2.项目设定"></a>2.项目设定</h1><h2 id="2-1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）"><a href="#2-1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）" class="headerlink" title="2.1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）"></a>2.1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）</h2><h2 id="2-2项目参考-（更新中）"><a href="#2-2项目参考-（更新中）" class="headerlink" title="2.2项目参考 （更新中）"></a>2.2项目参考 <em>（更新中）</em></h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zPZK7C5_BQo">利用Photon实现服务器</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kC4y1s73">搭建服务器框架和实现联机大厅</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uh8XaC0Y5MA">Unity C#服务器</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aTnBAzin9vE">UnityFPS官方示例</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ms411E7XE">枪械后坐力参考</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1V3411j7NN">逃离塔科夫枪械后坐参数说明</a></p>
+<hr>
+<h1 id="3-具体设计说明"><a href="#3-具体设计说明" class="headerlink" title="3.具体设计说明"></a>3.具体设计说明</h1><h2 id="3-0-游戏总体设计"><a href="#3-0-游戏总体设计" class="headerlink" title="3.0 游戏总体设计"></a>3.0 游戏总体设计</h2><p>玩家在初始界面设定联机ID创建角色，连接进入游戏大厅，选择房间或创建房间。开始游戏后，玩家先有若干秒选择角色，同时地图上随机刷新资源，倒计时结束后出生在随机出生点。玩家可在地图上搜集资源。击杀其他玩家时，可以获取其携带物资和标识，并获得少量分数，当地图上仅剩一名玩家时，游戏界面倒计时撤离时间，若最后一名玩家未在规定时间内撤出，则会被强制击杀。被击杀或撤离时弹出结算界面和分数，物资可兑换少量分数，击杀玩家可兑换大量分数。游戏结束后，分数汇总生成表格推送给玩家。</p>
+<h2 id="3-1-武器与战斗（策划与动画、美术、叶宝对接）"><a href="#3-1-武器与战斗（策划与动画、美术、叶宝对接）" class="headerlink" title="3.1 武器与战斗（策划与动画、美术、叶宝对接）"></a>3.1 武器与战斗（策划与动画、美术、叶宝对接）</h2><h3 id="3-1-0-战斗的大致介绍"><a href="#3-1-0-战斗的大致介绍" class="headerlink" title="3.1.0 战斗的大致介绍"></a>3.1.0 战斗的大致介绍</h3><p>主要以中近程战斗为主，玩家使用武器与自身技能击杀敌人，使用道具回复血量与护甲，击杀敌人后获取1击杀数，并根据被击杀玩家的击杀数获取奖励分数，敌人变成道具箱（道具箱UI同角色背包）；被击杀则在倒地后画面逐渐变黑，显示被击杀页面</p>
+<h3 id="3-1-1-武器"><a href="#3-1-1-武器" class="headerlink" title="3.1.1 武器"></a>3.1.1 武器</h3><h4 id="武器的基本设定"><a href="#武器的基本设定" class="headerlink" title="武器的基本设定"></a>武器的基本设定</h4><ul>
+<li>外观</li>
+<li>射击条件（枪械配件槽内有弹匣、弹匣内有子弹方可射击，只有这个配件决定枪械是否开火）</li>
+<li>枪声（枪声的更改发生在消音器被安装/取下的时候）</li>
+<li>射速（理解为枪口生成子弹的速度）</li>
+<li>后坐力（分为水平和垂直，水平后坐力导致枪身左右晃动，垂直导致枪身上下晃动）</li>
+<li>枪口回落速度（射击停止后枪口朝向回到原方向的时间，也可以设置为速度）</li>
+<li>子弹散布（我的思路是后坐力方向变化范围，参考2.2给出的塔科夫枪械后座参数说明）</li>
+<li>可用弹种</li>
+<li>可使用配件（配件将可能对枪械的基本属性进行更改）</li>
+<li>枪械本身分值（枪械本身不含配件的分数）</li>
+</ul>
+<h4 id="武器种类与数值"><a href="#武器种类与数值" class="headerlink" title="武器种类与数值"></a>武器种类与数值</h4><p>较为具体的设计我在表格内已经给出了，这里要补充的一点是半自动步枪的定位。半自动步枪的定位是精准，因此初始散布应当是最小的，且具有最快的枪口回落速度。</p>
+<h3 id="3-1-2-战斗"><a href="#3-1-2-战斗" class="headerlink" title="3.1.2 战斗"></a>3.1.2 战斗</h3><ul>
+<li>射击（鼠标左键）：使用不同瞄具的瞄准和腰射<ul>
+<li>需要考虑的要素：当前使用的瞄具，当前使用的握把，后坐力的大小，目前站姿势（站立、蹲、趴）</li>
+<li>注意：跳跃不可射击</li>
+<li>弹匣内无弹药且背包内无可用弹药时再按鼠标左键切换武器</li>
+</ul>
+</li>
+<li>换弹匣（R）<ul>
+<li>需要考虑的要素：弹匣的种类，技能是否开启（对换弹时间的改变）</li>
+</ul>
+</li>
+<li>切换枪械（1和2）：一支在手里一支在背上（背上可以放置武器的地方在背两侧），当切换枪械时，先将手里的换到背上空出的地方，再将另一把从背上换到手里，播放完动画才可进行其他对武器的操作<ul>
+<li>需要考虑的要素：枪械大小，枪械移位与角色部位活动的绑定</li>
+<li></li>
+</ul>
+</li>
+<li>改装武器（动作可以先不做，但改装武器必须花费时间）每更换一次配件，整个枪的状态就要更新一次，更换配件的方法是将背包内的配件拖到配件槽上，更换时间结束后两个配件的图标交换，更换时间=原配件的更换时间（见表格）+新配件的更换时间（见表格），若选择</li>
+<li>一个准则：对武器的操作之间是互斥进行的（瞄准包含在射击内）<h2 id="3-2-道具（策划与叶宝对接）"><a href="#3-2-道具（策划与叶宝对接）" class="headerlink" title="3.2 道具（策划与叶宝对接）"></a>3.2 道具（策划与叶宝对接）</h2><h3 id="3-2-1-道具分类"><a href="#3-2-1-道具分类" class="headerlink" title="3.2.1 道具分类"></a>3.2.1 道具分类</h3></li>
+<li>弹药<ul>
+<li>手枪弹药：低伤害低分数带的多</li>
+<li>步枪弹药：高伤害高分数带的少</li>
+<li>弹药击中玩家屏幕中央给出击中X形图标反馈，由枪械生成。暂时不做弹道下坠，弹药击中场景内物体（除弹药箱、玩家死后变成的盒子、玩家外）生成贴图</li>
+</ul>
+</li>
+<li>回复道具（护甲回复与血量回复）<ul>
+<li>维修套装（一次性）：中刷新中分值</li>
+<li>血量回复<ul>
+<li>急救包（一次性回血）：高刷新低分值</li>
+<li>回血针（持续回血）：低刷新高分值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配件<ul>
+<li>带倍率瞄具：试着做镜内放大吧</li>
+<li>机瞄和红点：实际上是两种类型的机瞄</li>
+<li>握把和后托，握把实现垂直后坐力的削弱和枪口散布范围的缩小，后托实现水平后坐力的削弱</li>
+</ul>
+</li>
+<li>稀有道具（高分极低刷）<ul>
+<li>金/银/铜球</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-2-道具刷新"><a href="#3-2-2-道具刷新" class="headerlink" title="3.2.2 道具刷新"></a>3.2.2 道具刷新</h3><p>道具的刷新点、爆率、特性已经在表格内给出。</p>
+<h2 id="3-3-角色（策划与动画、叶宝对接）"><a href="#3-3-角色（策划与动画、叶宝对接）" class="headerlink" title="3.3 角色（策划与动画、叶宝对接）"></a>3.3 角色（策划与动画、叶宝对接）</h2><h3 id="3-3-1-角色的属性"><a href="#3-3-1-角色的属性" class="headerlink" title="3.3.1 角色的属性"></a>3.3.1 角色的属性</h3><ul>
+<li>血量（见表格）</li>
+<li>护甲值（见表格）</li>
+<li>技能点（见表格）</li>
+<li>移速（具有三档速度，数值举例见表格，按x进入/退出静步，静步将不再发出声音，按shift进入快跑，<strong>快跑持续时间和回复速度待定</strong>）</li>
+<li>耐力（见表格，决定了玩家能连续跑多久）</li>
+<li>耐力消耗速度/回复速度（见表格）</li>
+<li>击杀数（见表格）</li>
+<li>得分（玩家按两下3即可在画面右上角显示，显示时间为3s，3s内再发出查询命令则重置计时器）</li>
+</ul>
+<h3 id="3-3-2-角色状态、数值的转化机制"><a href="#3-3-2-角色状态、数值的转化机制" class="headerlink" title="3.3.2 角色状态、数值的转化机制"></a>3.3.2 角色状态、数值的转化机制</h3><ul>
+<li>玩家被击中时若有护甲，则被击中产生的伤害80%由护甲承担，剩余20%为真伤，<strong>该伤害判定在击中时发生，若剩余护甲小于子弹伤害的80%，则护甲置0，剩余伤害均为真伤。</strong></li>
+<li>玩家可通过回复道具回复血量，<strong>产生的溢出不会被计算</strong>。</li>
+<li>若判定玩家承受该子弹伤害后血量&lt;=0，则触发死亡退出机制，使用布娃娃系统实现脱力倒地成为尸体，可以搜刮。</li>
+</ul>
+<h3 id="3-3-3-角色的动作"><a href="#3-3-3-角色的动作" class="headerlink" title="3.3.3 角色的动作"></a>3.3.3 角色的动作</h3><ul>
+<li>移动：匍匐（z）、蹲走（ctrl）、静步（x）、快走、跑步、跳跃</li>
+<li>战斗：举枪、瞄准、射击、换弹、切换武器、死亡</li>
+<li><em>拿取物品（暂定为静止不动）</em></li>
+<li>恢复：包扎（急救包）、扎针（回血针）、修补护甲（参照apex）</li>
+<li>技能<ul>
+<li>方案1：专门做一套技能动画</li>
+<li>方案2：在原有动作上进行更改（比如增速技能就提高跑步动画的播放速度）</li>
+</ul>
+</li>
+<li>死亡（先倒地再黑屏后结算）</li>
+<li>迷失（先黑屏后结算）</li>
+</ul>
+<h3 id="3-3-4-角色的背包"><a href="#3-3-4-角色的背包" class="headerlink" title="3.3.4 角色的背包"></a>3.3.4 角色的背包</h3><p>每个角色的背包是和角色绑定的，不会变化。玩家进入游戏并选好角色后按照表格内给出的刷新概率刷新物品，并更新玩家的得分。玩家被击杀时，计算背包内物品的总分数，玩家对背包内物品的每次调整都将刷新分数，玩家随时可以查询。角色的背包由通用武器槽、子弹槽、回复道具槽和任意物品槽四类槽位构成，各个槽位能放置的物品及其数量上限见表格，不能放在槽内的物品被拖拽时将不会被换入槽内，结束拖拽，图标将自行归位。</p>
+<h4 id="子弹的消耗机制（涉及到背包）"><a href="#子弹的消耗机制（涉及到背包）" class="headerlink" title="子弹的消耗机制（涉及到背包）"></a>子弹的消耗机制（涉及到背包）</h4><p><strong>每个槽内只能放一种子弹</strong>，当玩家换弹时自动查询弹药槽，<strong>只会消耗放在弹药槽内的弹药</strong>若有该类弹匣对应的子弹则自动填充，若没有则按3.1.2对换弹的说明进行切换武器，如果弹药在任意物品槽内则不会被自动消耗，需玩家自行拖拽至弹药槽内。</p>
+<h4 id="你可以把不要的东西丢出去！"><a href="#你可以把不要的东西丢出去！" class="headerlink" title="你可以把不要的东西丢出去！"></a>你可以把不要的东西丢出去！</h4><p>如果你想丢掉一些东西，右键点击即可抛弃，然后这个物体的模型将从身体周围生成并掉到地上。</p>
+<h4 id="我后悔了怎么办"><a href="#我后悔了怎么办" class="headerlink" title="我后悔了怎么办"></a>我后悔了怎么办</h4><p><strong>对于半径1m以内的物体</strong>看向它（轮廓会高亮）<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1R3411W73E">高亮教程</a>，然后按左键，将对背包进行查询，如果有位置就能放入。</p>
+<h2 id="3-4-地图（策划与美术、叶宝对接）"><a href="#3-4-地图（策划与美术、叶宝对接）" class="headerlink" title="3.4 地图（策划与美术、叶宝对接）"></a>3.4 地图（策划与美术、叶宝对接）</h2><h3 id="3-4-0-地图设定"><a href="#3-4-0-地图设定" class="headerlink" title="3.4.0 地图设定"></a>3.4.0 地图设定</h3><p>目前的方案是商场内的一个区域，多楼层，多房间，多过道，中央是一个天井供中距离战斗，包含多个出生点且均有随机性，撤离点有通用撤离点、限时撤离点、随机撤离点、触发撤离点四种，房间最大人数10，具体每层的设计后续会和美术磋商。</p>
+<h3 id="3-4-1-出生点"><a href="#3-4-1-出生点" class="headerlink" title="3.4.1 出生点"></a>3.4.1 出生点</h3><p>出生点是玩家刷新的地方，角色初始满甲满血，按表格内给出的爆率在背包内刷新物品。出生点的数量和房间内最大玩家容量一致且均匀分布在地图角落，玩家在哪个出生点进入游戏是随机的。玩家在各个刷新点的刷新概率应均等（这个好做，比如在玩家池中随机选出一个玩家，然后随机安排出生点，再从剩余玩家里接着选一个并安排，以此类推），每个玩家的出生点都被设置好，所有资源均加载完毕后进入游戏。</p>
+<h3 id="3-4-2-撤离点"><a href="#3-4-2-撤离点" class="headerlink" title="3.4.2 撤离点"></a>3.4.2 撤离点</h3><p>撤离点是玩家触发退出机制的地方，若撤离点可用，则玩家进入判定区域将弹出倒计时页面，待一段时间就可撤离并进入结算页面，不会留下任何东西。</p>
+<h4 id="通用撤离点"><a href="#通用撤离点" class="headerlink" title="通用撤离点"></a>通用撤离点</h4><p><strong>玩家进入游戏后随时都可撤离</strong>，将会被放在商场的门口、通风管道这样的地方，<strong>难以找到或比较偏僻</strong>。</p>
+<h4 id="限时撤离点"><a href="#限时撤离点" class="headerlink" title="限时撤离点"></a>限时撤离点</h4><p><strong>会在特定的时间点开启，并有限定时间</strong>，比如从天而降的救生舱、临时开启的大门等等，玩家可以从外表判断该撤离点可否撤离且该撤离点有人员限制（如逃生舱）。</p>
+<h4 id="随机撤离点"><a href="#随机撤离点" class="headerlink" title="随机撤离点"></a>随机撤离点</h4><p>会在<strong>每局开始时就决定是否开启，若开启则会有外观的变化（比如某处墙壁是否有裂口）</strong>。</p>
+<h4 id="触发撤离点"><a href="#触发撤离点" class="headerlink" title="触发撤离点"></a>触发撤离点</h4><p><strong>满足某种条件才可激活（比如拉电闸），需在一定时间内赶到撤离点撤离，否则需重新触发</strong>，比如电梯。</p>
+<h3 id="3-4-3-物品箱"><a href="#3-4-3-物品箱" class="headerlink" title="3.4.3 物品箱"></a>3.4.3 物品箱</h3><p>物品箱的种类和道具爆率等设定均已在表格内给出。</p>
+<h2 id="3-5-游戏机制"><a href="#3-5-游戏机制" class="headerlink" title="3.5 游戏机制"></a>3.5 游戏机制</h2><h3 id="3-5-1-房间（策划与lzy对接）"><a href="#3-5-1-房间（策划与lzy对接）" class="headerlink" title="3.5.1 房间（策划与lzy对接）"></a>3.5.1 房间（策划与lzy对接）</h3><p>进入游戏，设定用户名，分配玩家ID，连接到游戏大厅，玩家点击开始游戏，若当前没有可加入的房间则生成一个房间，客户端显示一定时长的倒计时，若在时间内房间满员则开始游戏，进入角色选择页面（给30s准备时间）并加载地图内资源，30s倒计时结束且地图资源加载完毕即可进入游戏；如果倒计时结束没有足够玩家（2人）则退回主页面。游戏结束（所有玩家都已完成游戏或每局时间上线已到）后对玩家分数进行排名，生成分数记录榜并通过邮件系统推送给玩家（实现服务器的用户连接、创建房间、加入房间、玩家信息记录、玩家同步、排行榜的创建）</p>
+<h3 id="3-5-2-游戏内机制（策划与ycy对接）"><a href="#3-5-2-游戏内机制（策划与ycy对接）" class="headerlink" title="3.5.2 游戏内机制（策划与ycy对接）"></a>3.5.2 游戏内机制（策划与ycy对接）</h3><h4 id="撤离点和出生点（见3-4-1与3-4-2）"><a href="#撤离点和出生点（见3-4-1与3-4-2）" class="headerlink" title="撤离点和出生点（见3.4.1与3.4.2）"></a>撤离点和出生点（见3.4.1与3.4.2）</h4><h4 id="玩家分数的计算规则"><a href="#玩家分数的计算规则" class="headerlink" title="玩家分数的计算规则"></a>玩家分数的计算规则</h4><p><strong>如果你死亡</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5<br><strong>如果你在最后10分钟内撤离</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5 <strong>+1000</strong><br><strong>如果你在最初5分钟撤离</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5 <strong>-1000</strong><br><strong>如果你迷失</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5 <strong>-1500</strong></p>
+<h4 id="游戏结束的触发条件"><a href="#游戏结束的触发条件" class="headerlink" title="游戏结束的触发条件"></a>游戏结束的触发条件</h4><p><strong>场上玩家均死亡/迷失/撤离</strong></p>
+<hr>
+<h1 id="4-美术需求（动画、美术、策划对接）"><a href="#4-美术需求（动画、美术、策划对接）" class="headerlink" title="4.美术需求（动画、美术、策划对接）"></a>4.美术需求（动画、美术、策划对接）</h1><h2 id="4-1-模型-目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型"><a href="#4-1-模型-目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型" class="headerlink" title="4.1 模型 目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型"></a>4.1 模型 <em>目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型</em></h2><ul>
+<li>人物的模型</li>
+<li>各类武器、道具、配件的模型（种类表格内已给出）</li>
+<li>场景需要的模型<ul>
+<li>建筑物（地图本身）</li>
+<li>各类摆设</li>
+<li>各类道具箱</li>
+<li>撤离点</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-2-UI"><a href="#4-2-UI" class="headerlink" title="4.2 UI"></a>4.2 UI</h2><h3 id="4-2-1-图标-目前需要的Sprite暂以现有素材替代"><a href="#4-2-1-图标-目前需要的Sprite暂以现有素材替代" class="headerlink" title="4.2.1 图标 目前需要的Sprite暂以现有素材替代"></a>4.2.1 图标 <em>目前需要的Sprite暂以现有素材替代</em></h3><h4 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h4><ul>
+<li>（如果选择实现方案1）武器、配件、道具的图标均由模型的截图替代</li>
+<li>（如果选择实现方案2）武器、配件、道具的图标均需另画</li>
+<li>此外还需要：HUD（血条、技能条、护甲条、耐力条、击杀反馈图标、受伤反馈），背包内图标（配件槽的图标（配件槽可使用/配件槽不可使用）、各类道具槽的图标），道具箱内图标（武器槽、弹药槽、配件槽、药品槽、随机槽）</li>
+</ul>
+<h4 id="互动方案"><a href="#互动方案" class="headerlink" title="互动方案"></a>互动方案</h4><ul>
+<li>实现方案1：塔科夫，点击后可以检视物品（观察模型），配有文字说明弹出</li>
+<li>实现方案2：点击后弹出一个带固定图片和文字介绍的UI</li>
+</ul>
+<h3 id="4-2-2-面板-目前需要的Sprite暂以现有素材替代"><a href="#4-2-2-面板-目前需要的Sprite暂以现有素材替代" class="headerlink" title="4.2.2 面板 目前需要的Sprite暂以现有素材替代"></a>4.2.2 面板 <em>目前需要的Sprite暂以现有素材替代</em></h3><ul>
+<li>HUD（弹匣内弹药数/总弹药数，</li>
+<li>背包的面板</li>
+<li>各类道具箱的面板</li>
+<li>服务器选房间的面板</li>
+<li>选择角色页面的面板：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1jF41137n4">选择角色的页面我想做成滑动的</a></li>
+<li>被击杀页面的面板：显示存活时间、最终分数和击杀者（每颗子弹带有击杀者信息，角色需记录并更新最后一颗射向自己的子弹是谁，初始为NULL，死亡时调用这个属性）</li>
+</ul>
+<h3 id="4-2-3-字体（实在没空就先默认字体吧，有空再做）"><a href="#4-2-3-字体（实在没空就先默认字体吧，有空再做）" class="headerlink" title="4.2.3 字体（实在没空就先默认字体吧，有空再做）"></a>4.2.3 字体（实在没空就先默认字体吧，有空再做）</h3><h2 id="4-3-动画与特效"><a href="#4-3-动画与特效" class="headerlink" title="4.3 动画与特效"></a>4.3 动画与特效</h2><h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><p>动作分类我已在3.1.2和3.3.3给出，不过技能和护甲受击是否需要做特效呢？</p>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>撤离点状态的切换（比如仓库大门的打开和关闭、逃生舱的降落与起飞）<br>道具箱状态的切换（打开和关闭）</p>
+<hr>
+<h1 id="5-音乐与音效需求"><a href="#5-音乐与音效需求" class="headerlink" title="5.音乐与音效需求"></a>5.音乐与音效需求</h1><h2 id="5-1-背景音乐-（有空再找）"><a href="#5-1-背景音乐-（有空再找）" class="headerlink" title="5.1 背景音乐  （有空再找）"></a>5.1 背景音乐  <em>（有空再找）</em></h2><p>主场景、选择角色、结算</p>
+<h2 id="5-2-音效"><a href="#5-2-音效" class="headerlink" title="5.2 音效"></a>5.2 音效</h2><ul>
+<li>玩家移动的各类音效</li>
+<li>枪械切换、射击、换弹的各类音效</li>
+<li>技能开启的音效</li>
+<li>与场景互动的音效</li>
+<li>护甲被击中的音效</li>
+<li>受伤、濒死的声音反馈</li>
+<li>回复道具使用的音效</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FPS/" rel="tag">FPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%81%94%E6%9C%BA/" rel="tag">联机</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-视频拍摄方案"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/18/%E8%A7%86%E9%A2%91%E6%8B%8D%E6%91%84%E6%96%B9%E6%A1%88/"
+    >视频拍摄方案</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/18/%E8%A7%86%E9%A2%91%E6%8B%8D%E6%91%84%E6%96%B9%E6%A1%88/" class="article-date">
+  <time datetime="2022-04-18T14:28:39.000Z" itemprop="datePublished">2022-04-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Unity/">Unity</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="视频组成（自上而下为时间轴）"><a href="#视频组成（自上而下为时间轴）" class="headerlink" title="视频组成（自上而下为时间轴）"></a>视频组成（自上而下为时间轴）</h1><ul>
+<li>场景展示</li>
+<li>成员介绍</li>
+<li>实操视频</li>
+<li>项目细节展示</li>
+</ul>
+<p><strong>预期时长6-8分钟</strong><br><strong>分辨率固定为1K</strong></p>
+<hr>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><h2 id="场景展示"><a href="#场景展示" class="headerlink" title="场景展示"></a>场景展示</h2><ul>
+<li>包含内容：三个场景的展示</li>
+<li>拍摄方式：使用unity camera recorder录制并导出main camera画面</li>
+<li>排序原因：先用视觉元素唬住评委<h2 id="成员介绍"><a href="#成员介绍" class="headerlink" title="成员介绍"></a>成员介绍</h2></li>
+<li>包含内容：成员介绍（分工）</li>
+<li>拍摄方式：由五个短片段组成，每个短片段5s左右，每个片段内容如下：<br><img src="../photos/Unity/VR/x_1.jpg" title="拍摄方式示意图 "><br>拍摄的时候让成员做一些操作，比如lzy的片段可以是：拖动场景内的某个物体，或者修改水面参数，然后弹出弹窗：lzy——技术美术</li>
+<li>排序原因：介绍团队最好放在偏开头的地方，让评委认识你<h2 id="实操视频"><a href="#实操视频" class="headerlink" title="实操视频"></a>实操视频</h2></li>
+<li>包含内容：完整的游玩过程（主场景——灯谜场景，玩一个灯谜——园林场景，刻几个字——回到主场景）</li>
+<li>拍摄方式：画面主要是游戏内画面，即使用unity camera recorder录制并导出main camera画面，玩家实况以小窗形式在画面左下角，将场景切换的部分以加速方式压缩</li>
+<li>需要注意的：<ul>
+<li>场景切换时尽量不要动头（因为动头会露出锯齿状的画面边缘）</li>
+<li>在主场景就需要将玩家移动方式（走动、传送）和大部分UI交互（按钮动态效果、制作人员名单，国赛要用）展示出来</li>
+<li>刻字要慢，增强笔画连续性，刻几个字就行，展示临摹UI和介绍UI，在场景内移动时尽量不要让人看出穿模</li>
+<li>灯谜只用做一个，然后让评委看到下一个灯谜的内容（在下一个灯谜只用将提示触发即可）</li>
+<li>一次录完，不要分段拼凑</li>
+</ul>
+</li>
+<li>排序原因：全视频的核心<h2 id="项目细节展示"><a href="#项目细节展示" class="headerlink" title="项目细节展示"></a>项目细节展示</h2></li>
+<li>包含内容：代码截图和shader graph截图</li>
+<li>拍摄方式：几秒过一张图</li>
+<li>排序原因：因为是最无聊的部分，故放在最后</li>
+</ul>
+<hr>
+<h1 id="目前问题"><a href="#目前问题" class="headerlink" title="目前问题"></a>目前问题</h1><ul>
+<li>unity camera recorder功能仍需论证</li>
+<li>必剪有待上手</li>
+<li>考虑飞花令玩法是否加入和加入后对视频结构的影响，目前仍然需要留插入的空余</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VR/" rel="tag">VR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E8%AE%BE/" rel="tag">计设</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-操作系统笔记3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B03/"
+    >操作系统笔记3</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B03/" class="article-date">
+  <time datetime="2022-04-13T10:34:25.000Z" itemprop="datePublished">2022-04-13</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-操作系统笔记2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B02/"
+    >操作系统笔记2</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B02/" class="article-date">
+  <time datetime="2022-04-04T02:32:26.000Z" itemprop="datePublished">2022-04-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">课程笔记_操作系统</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="依照学校教学安排，第二章为进程的描述与控制"><a href="#依照学校教学安排，第二章为进程的描述与控制" class="headerlink" title="依照学校教学安排，第二章为进程的描述与控制"></a>依照学校教学安排，第二章为进程的描述与控制</h1><h1 id="本帖仅供个人学习使用"><a href="#本帖仅供个人学习使用" class="headerlink" title="本帖仅供个人学习使用"></a>本帖仅供个人学习使用</h1><h1 id="使用虚拟机平台VMware-Workstation"><a href="#使用虚拟机平台VMware-Workstation" class="headerlink" title="使用虚拟机平台VMware Workstation"></a>使用虚拟机平台VMware Workstation</h1><hr>
+<h1 id="2-1-前趋图和程序执行（考点）"><a href="#2-1-前趋图和程序执行（考点）" class="headerlink" title="2.1 前趋图和程序执行（考点）"></a>2.1 前趋图和程序执行（考点）</h1><h2 id="2-1-1-前趋图（要求会画并发执行和顺序执行的）"><a href="#2-1-1-前趋图（要求会画并发执行和顺序执行的）" class="headerlink" title="2.1.1 前趋图（要求会画并发执行和顺序执行的）"></a>2.1.1 前趋图（要求会画并发执行和顺序执行的）</h2><ul>
+<li>前趋图是一个有向无循环图，用于描述进程之间执行的先后顺序，图中的每个结点可以用来表示一个进程或程序段乃至一条语句，结点间的有向边表示两个结点之间的偏序关系或前驱关系。</li>
+<li>直接前趋和直接后继：设前趋图中某有向边为Pi-&gt;Pj，则称Pi为Pj的直接前趋，Pj为Pi的直接后继</li>
+<li>初始结点：没有直接前趋的结点</li>
+<li>终止结点：没有直接后继的结点</li>
+<li>为什么前趋图不能存在循环路径：若图中Pi和Pj间存在循环路径，则会导致Pi开始执行前要求Pj先执行完毕，Pj开始执行前要求Pi先执行完毕，这是相互矛盾的<h2 id="2-1-2-程序顺序执行（考点）"><a href="#2-1-2-程序顺序执行（考点）" class="headerlink" title="2.1.2 程序顺序执行（考点）"></a>2.1.2 程序顺序执行（考点）</h2><h3 id="程序的顺序执行"><a href="#程序的顺序执行" class="headerlink" title="程序的顺序执行"></a>程序的顺序执行</h3></li>
+<li><strong>输入操作I要在计算操作C之前执行，打印操作P要在输入操作I和计算操作C后执行</strong></li>
+<li>即使是一个程序段，也可能存在着执行顺序问题，下面给出了一个包含了三条语句的程序段：<br>S1:a=x+y<br>S2:b=a-1<br>S3:c=b+2<br>其中，语句S2必须在语句S1后（因为需要先得到a的值），语句S3必须在语句S2后（因为要先得到b的值），因此三条语句存在的前趋关系为S1-&gt;S2-&gt;S3<h3 id="程序顺序执行时的特征"><a href="#程序顺序执行时的特征" class="headerlink" title="程序顺序执行时的特征"></a>程序顺序执行时的特征</h3>由上述可知，在程序顺序执行时具有这样三个特征：</li>
+<li><strong>顺序性</strong>：处理机严格地按照程序规定的顺序执行</li>
+<li><strong>封闭性</strong>：程序在封闭的环境下运行，程序运行时独占全机资源，资源的状态（除初始状态外）只有程序能改变它，程序一旦开始执行，其执行结果不受外界影响</li>
+<li><strong>可再现性</strong>：只要程序执行时的环境和初始条件相同，当程序重复执行时，不论它是从头到尾不停顿地执行还是“停停走走式”执行，都可获得相同的结果<h2 id="2-1-3-程序并发执行（考点）"><a href="#2-1-3-程序并发执行（考点）" class="headerlink" title="2.1.3 程序并发执行（考点）"></a>2.1.3 程序并发执行（考点）</h2></li>
+<li>程序顺序执行虽然便利了程序员，但系统资源的利用率却很低，为此引入多道程序技术使程序或程序段间能并发执行。然而，<strong>并非所有程序都能并发执行，只有没有直接前趋关系的程序之间才能并发执行</strong><h2 id="程序并发执行时的特征"><a href="#程序并发执行时的特征" class="headerlink" title="程序并发执行时的特征"></a>程序并发执行时的特征</h2></li>
+<li>程序并发执行功能虽然提高了系统的吞吐量和资源利用率，但由于<strong>它们共享系统资源</strong>，以及它们为完成同一项任务而相互合作，导致这些并发执行的程序间必将<strong>形成相互制约的关系</strong></li>
+<li><strong>程序并发执行的新特征</strong>：<ul>
+<li><strong>间断性</strong>：由于并发执行的程序共享资源导致它们之间存在制约关系，因此只有当使其暂停执行的因素消失后程序才可执行，由此可见，相互制约导致并发程序具有<strong>执行-暂停-执行</strong>的间断活动规律</li>
+<li><strong>失去封闭性</strong>：由于并发执行的程序共享资源，导致<strong>任何一个程序运行时都不能独占全机资源，即它们的运行环境能够被其它程序影响</strong>，故失去了封闭性</li>
+<li><strong>不可再现性</strong>：由于程序并发执行时失去了封闭性，也将导致其失去可再现性，因为程序的结果不再只受初始环境和条件影响，也在运行过程中受到影响</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="2-2-进程的描述（考点）"><a href="#2-2-进程的描述（考点）" class="headerlink" title="2.2 进程的描述（考点）"></a>2.2 进程的描述（考点）</h1><h2 id="2-2-1-进程的定义和描述-搭配1-3-1食用"><a href="#2-2-1-进程的定义和描述-搭配1-3-1食用" class="headerlink" title="2.2.1 进程的定义和描述(搭配1.3.1食用)"></a>2.2.1 进程的定义和描述(搭配1.3.1食用)</h2><h3 id="进程的定义"><a href="#进程的定义" class="headerlink" title="进程的定义"></a>进程的定义</h3><ul>
+<li><strong>需求</strong>：由于在并发执行的程序失去了顺序性、封闭性、可再现性，尤其是后两者，所以导致通常的程序运行结果不能保障，也就失去了意义。<strong>为了让程序能够并发执行，并且可以对并发执行的程序加以描述和控制</strong>，人们引入了进程的概念</li>
+<li><strong>进程控制块PCB</strong>：为了让并发执行的每个程序能够独立运行，操作系统中必须为之配置一个专门的数据结构：进程控制块，这样<strong>由程序段、相关数据、程序控制块</strong>三部分组成了进程实体，即进程，<strong>所谓创建进程，实质是创建进程中的PCB，相对应的，撤销进程实质上就是撤销进程中的PCB</strong></li>
+<li><strong>进程的定义</strong> <del>梅开二度</del>：在系统中能独立运行并作为资源分配的基本单位，由进程控制块、相关数据和程序段组成，是一个能独立运行的活动实体，是操作系统运行的基础。<h3 id="进程的特征"><a href="#进程的特征" class="headerlink" title="进程的特征"></a>进程的特征</h3></li>
+<li><strong>动态性</strong>：由创建而产生，由调度而执行，由撤销而消亡</li>
+<li><strong>并发性</strong>：多个进程同存于内存中，且能在一段时间内并发执行</li>
+<li><strong>独立性</strong>：进程实体是一个能独立运行、独立获得资源、独立接收调度的基本单位</li>
+<li><strong>异步性</strong>：进程是按异步方式运行的，即“执行-暂停-执行”<h2 id="2-2-2-进程的基本状态及转换"><a href="#2-2-2-进程的基本状态及转换" class="headerlink" title="2.2.2 进程的基本状态及转换"></a>2.2.2 进程的基本状态及转换</h2><h3 id="进程的三种基本状态"><a href="#进程的三种基本状态" class="headerlink" title="进程的三种基本状态"></a>进程的三种基本状态</h3></li>
+<li><strong>就绪</strong>：进程已经分配到除CPU外的所有必要资源</li>
+<li><strong>执行</strong>：进程已获得CPU并正在执行，单处理机系统中只有一个进程处于执行状态，多处理机系统中有多个进程处于执行状态</li>
+<li><strong>阻塞</strong>：正在执行的某进程因为发生某事件（如I/O请求、申请缓冲区失败等）暂时无法继续执行的状态，此时引起进程调度，将阻塞进程放入阻塞队列中等待，一般出于提高系统效率的需要，根据阻塞原因的不同，会设置多个阻塞队列<h3 id="三种基本状态的切换"><a href="#三种基本状态的切换" class="headerlink" title="三种基本状态的切换"></a>三种基本状态的切换</h3>见图<br><img src="../photos/OSCourse/2_1.png" title="就绪-执行-阻塞三态转换示意图"></li>
+<li>补充-时间片：操作系统分配给每个进程在CPU上的一段执行时间<h3 id="创建状态与中止状态"><a href="#创建状态与中止状态" class="headerlink" title="创建状态与中止状态"></a>创建状态与中止状态</h3></li>
+<li>需求：为了满足PCB对数据及操作的完整性要求以及增强管理的灵活性，通常在系统中又为进程引入了两种常见的状态：创建状态和终止状态。</li>
+<li>创建状态：进程由创建而产生，创建一个进程的过程要通过多个步骤：进程申请一个空白PCB，向PCB中填写用于控制和管理进程的信息，为该进程分配除CPU外必须的资源，将进程转入就绪状态并插入就绪队列中。将进程申请PCB开始到加入就绪队列前的这个状态称为创建状态。</li>
+<li>终止状态：进程的终止也要通过两个步骤：等待操作系统进行善后处理，再将PCB清理并返还系统。进程到达自然结束点，若出现无法克服的错误，或被操作系统终结，或被其它有终止权的进程所终结，它将进入终结状态，进入终结状态的进程不能再被执行，但在操作系统中保留记录供其它进程收集，一旦其它进程完成收集，操作系统将删除该进程并清零PCB、返还给系统。<br><img src="../photos/OSCourse/2_2.png" title="进程的五种基本状态及其转换示意图"><h2 id="2-2-3-挂起操作和进程状态的转换"><a href="#2-2-3-挂起操作和进程状态的转换" class="headerlink" title="2.2.3 挂起操作和进程状态的转换"></a>2.2.3 挂起操作和进程状态的转换</h2></li>
+<li>在许多系统中，进程除了就绪、执行、阻塞三个基本状态外,为了系统和用户观察和分析进程的需要，还引入了一个对进程的重要操作：挂起。<strong>当挂起操作作用域某个进程时，该进程将被挂起，意味着此时该进程处于静止状态，如果该进程正在执行，它将暂停执行，若该进程处于就绪状态，则该进程此时暂不接受调度</strong>，与挂起操作对应的操作是<strong>激活</strong>操作。<h3 id="挂起操作的引入"><a href="#挂起操作的引入" class="headerlink" title="挂起操作的引入"></a>挂起操作的引入</h3></li>
+<li>终端用户的需要：发现可疑问题需要暂停程序运行</li>
+<li>父进程请求：用于协调各子进程</li>
+<li>负荷调节的需要</li>
+<li>操作系统的需要：检查运行中的资源使用状况<h3 id="引入挂起原语操作后三个进程基本状态的转换（需要会画图）"><a href="#引入挂起原语操作后三个进程基本状态的转换（需要会画图）" class="headerlink" title="引入挂起原语操作后三个进程基本状态的转换（需要会画图）"></a>引入挂起原语操作后三个进程基本状态的转换（需要会画图）</h3></li>
+<li>补充-原语：指由若干条指令组成的程序段，用来实现某个特定功能，<strong>在执行过程中不可被中断</strong>。</li>
+<li>挂起原语Suspend：用于活动-&gt;静止的转换</li>
+<li>激活原语Active：用于静止-&gt;活动的转换</li>
+<li>活动就绪Readys：处于活动就绪状态的进程可以被调度执行</li>
+<li>静止就绪Readya：处于静止就绪状态的进程不再被调度执行</li>
+<li>活动阻塞Blockeda：处于活动阻塞状态的进程完成I/O后变为活动就绪状态等待调度使用</li>
+<li>静止阻塞Blockeds：处于静止阻塞状态的进程完成I/O后变为静止就绪状态等待激活成为活动就绪<h3 id="引入挂起操作后五个进程状态的转换（需要会画图）"><a href="#引入挂起操作后五个进程状态的转换（需要会画图）" class="headerlink" title="引入挂起操作后五个进程状态的转换（需要会画图）"></a>引入挂起操作后五个进程状态的转换（需要会画图）</h3></li>
+<li>创建-&gt;活动就绪：若当前系统性能和内存容量均允许，完成创建的必要操作 <em>（申请PCB、填写PCB、分配除CPU外资源）</em>后，相应的系统进程将进程的状态转换为活动就绪状态</li>
+<li>创建-&gt;静止就绪：若当前系统性能和内存容量不允许加入新的进程，则不分配给新建进程所需资源，将进程转为静止就绪状态，被安置在外层，此时进程创建工作尚未完成（也就是处于创建状态）</li>
+<li>执行-&gt;终止：当一个进程已完成任务时，或是出现了无法克服的错误，或是被OS或是被其他进程所终结，此时将进程的状态转换为终止状态<h2 id="2-2-4-进程管理中的数据结构"><a href="#2-2-4-进程管理中的数据结构" class="headerlink" title="2.2.4 进程管理中的数据结构"></a>2.2.4 进程管理中的数据结构</h2><h3 id="操作系统中用于管理控制的数据结构（考点）"><a href="#操作系统中用于管理控制的数据结构（考点）" class="headerlink" title="操作系统中用于管理控制的数据结构（考点）"></a>操作系统中用于管理控制的数据结构（考点）</h3></li>
+<li>OS管理需要的数据结构的分类：<strong>内存表、设备表、文件表和用于进程管理的进程表</strong>，通常<strong>进程表又被称为进程控制块PCB</strong></li>
+<li>OS中的数据结构包含了资源或进程的标识、描述、状态等信息以及一批指针。<h3 id="PCB的作用（考点）"><a href="#PCB的作用（考点）" class="headerlink" title="PCB的作用（考点）"></a>PCB的作用（考点）</h3></li>
+<li>PCB的作用：使一个在多道程序环境下不能独立运行的程序称为一个能独立运行的基本单位，一个能与其他进程并发执行的进程。</li>
+<li>PCB的作用：<ul>
+<li><strong>作为独立运行基本单位的标志</strong></li>
+<li>能实现间断性运行方式</li>
+<li>提供进程管理所需要的信息</li>
+<li>提供进程调度所需要的信息</li>
+<li>实现与其它进程的同步与通信</li>
+</ul>
+</li>
+</ul>
+<h3 id="PCB中的信息（考点）"><a href="#PCB中的信息（考点）" class="headerlink" title="PCB中的信息（考点）"></a>PCB中的信息（考点）</h3><ul>
+<li>进程标识符：用于唯一地标识一个进程<ul>
+<li>内部标识符：为每一个进程赋予一个唯一的<strong>数字标识符</strong>，方便系统使用</li>
+<li>外部标识符：由创建者提供，通常<strong>由字母、数字组成</strong>，往往由用户进程访问该进程时使用</li>
+</ul>
+</li>
+<li>处理机状态：也称为处理机的上下文，由处理机各寄存器中的内容组成：通用寄存器、指令计数器、程序状态字PSW、用户栈指针</li>
+<li>进程调度信息：进程状态、进程优先级、进程调度所需的其他信息、阻塞原因</li>
+<li>进程控制信息：程序和数据的地址、进程同步和通信机制、资源清单、链接指针<h3 id="进程控制块的组织方式"><a href="#进程控制块的组织方式" class="headerlink" title="进程控制块的组织方式"></a>进程控制块的组织方式</h3></li>
+<li>线性方式：将系统中的所有PCB组织在一张线性表中，将该表首地址存放在一个专用区域内。</li>
+<li>链接方式：将具有同一状态的PCB用其中的链接字链接成一个队列，排成执行队列、就绪队列、阻塞队列或空白队列等，用相对应的队列指针指向这些队列的第一个PCB。<br><img src="../photos/OSCourse/2_3.png" title="PCB链接方式示意图"></li>
+<li>索引方式：系统根据所有进程状态的不同，建立几张索引表如就绪索引表、阻塞索引表等，并把各索引表在内存的首地址记录在内存的一些专用单元中。（用表取代队列）。</li>
+</ul>
+<hr>
+<h1 id="2-3-进程控制"><a href="#2-3-进程控制" class="headerlink" title="2.3 进程控制"></a>2.3 进程控制</h1><p><strong>进程控制、进程同步、进程通信、处理机调度是操作系统处理机管理功能的四个主要组成</strong>，进程的控制包含<strong>进程创建、进程终止、进程阻塞和唤醒</strong>，由OS内核中的<strong>原语</strong>来实现</p>
+<h2 id="2-3-1-操作系统内核"><a href="#2-3-1-操作系统内核" class="headerlink" title="2.3.1 操作系统内核"></a>2.3.1 操作系统内核</h2><p><strong>OS内核</strong>：在具有分层结构的OS中由常驻内存且与硬件紧密相关的各类驱动程序和运行频率较高的模块所组成的部分。<br>使用内核的目的：便于对这些软件进行保护、提高OS的运行效率<br>系统态和用户态：为了保护OS本身及关键数据，通常将处理机的执行状态分为系统态和用户态。</p>
+<ul>
+<li>系统态/管态/内核态：具有较高特权的执行状态，能执行一切指令，访问所有寄存器和存储区</li>
+<li>用户态/目态：具有较低特权的执行状态，仅能执行规定的指令，访问指定的寄存器和存储区。一般情况下，应用程序只能在用户态运行，不能去执行OS指令及访问OS区域。</li>
+</ul>
+<h3 id="OS内核包含的两大功能（考点）"><a href="#OS内核包含的两大功能（考点）" class="headerlink" title="OS内核包含的两大功能（考点）"></a>OS内核包含的两大功能（考点）</h3><ul>
+<li>支撑功能：中断处理、时钟管理、原语操作<ul>
+<li>中断处理:是整个操作系统赖以活动的基础，内核在对中断进行有限处理后，便转入相关的进程，由这些进程继续完成后续的处理工作。</li>
+<li>时钟管理:对进程的执行提供时间控制</li>
+<li>原语操作:原语是一个不可分割的基本单位，由若干条指令构成，在执行过程中不允许被中断。原语在系统态下执行，常驻内存。</li>
+</ul>
+</li>
+<li>资源管理功能：进程管理、存储器管理、设备管理<ul>
+<li>进程管理：为了提高进程管理的效率和满足多种功能的需要，这些操作相关的原语被放在内核中。</li>
+<li>存储器管理：存储器管理软件的运行模块（逻辑地址与物理地址映射、地址转换，内存保护，内存分配和回收等）因为使用频率较高，故也放在内核中。</li>
+<li>设备管理：由于设备管理与硬件紧密相关，因此设备管理的相关模块（缓和CPU与I/O速率不匹配矛盾的缓冲管理，各类设备的驱动程序，设备分配等）也放在内核中。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-2-进程的创建"><a href="#2-3-2-进程的创建" class="headerlink" title="2.3.2 进程的创建"></a>2.3.2 进程的创建</h2><h3 id="进程的层次结构"><a href="#进程的层次结构" class="headerlink" title="进程的层次结构"></a>进程的层次结构</h3><ul>
+<li>子进程和父进程：在OS中，允许一个进程创建另一个进程，我们称创建进程的进程为<strong>父进程</strong>，被创建的进程为<strong>子进程</strong>，子进程能够继承父进程的所有资源 <em>（父进程打开的文件、父进程所分配到的缓冲区等）</em>，相对应的，撤销子进程时，应当将继承的资源返还给父进程，父进程被撤销时其生成的子进程也必须同时撤销。</li>
+<li>补充：在WINDOWS中不存在进程层次概念，所有的进程地位相同，而取代上下级控制关系的是<strong>句柄</strong>，拥有句柄的进程就拥有了控制其它进程的权限，句柄也可以进行传递。因此在WINDOWS中，进程之间不是层级关系，而是控制与被控制关系。<h3 id="进程图"><a href="#进程图" class="headerlink" title="进程图"></a>进程图</h3></li>
+<li>用于描述进程的家族关系，是一棵有向树，树的根结点称为进程家族的<strong>祖先</strong><h3 id="引起创建进程的事件（考点）"><a href="#引起创建进程的事件（考点）" class="headerlink" title="引起创建进程的事件（考点）"></a>引起创建进程的事件（考点）</h3></li>
+<li><strong>用户登录</strong>（为用户创建进程）</li>
+<li><strong>作业调度</strong>（为用户创建进程）：在多道批处理系统中，当作业调度程序按一定的算法调度到某个作业时，将它们装入内存，并为它们创建进程、插入就绪队列中</li>
+<li><strong>提供服务</strong>（为用户创建进程）：当运行中的用户程序提出某种请求后，系统将专门创建一个进程来提供用户程序需要的服务</li>
+<li><strong>应用请求</strong>（用户自己创建进程）：用户进程自己创建新进程以使新进程和创建者进程并发运行完成某些特定任务，从而提高运行效率<h3 id="进程的创建"><a href="#进程的创建" class="headerlink" title="进程的创建"></a>进程的创建</h3></li>
+<li>Step1：申请空白PCB</li>
+<li>Step2：为新进程分配资源</li>
+<li>Step3：PCB初始化（填写控制进程所需要的信息如：标识符、状态信息、优先级等）</li>
+<li>Step4：如果进程就绪队列能够接纳新进程，便将新进程插入就绪队列<h2 id="2-3-3-进程的终止"><a href="#2-3-3-进程的终止" class="headerlink" title="2.3.3 进程的终止"></a>2.3.3 进程的终止</h2><h3 id="引起进程终止的事件"><a href="#引起进程终止的事件" class="headerlink" title="引起进程终止的事件"></a>引起进程终止的事件</h3></li>
+<li>正常结束：进程任务已经完成，准备退出运行。在任何系统中都应该有一个用于表示进程已经运行完成的指示。在批处理系统中对应的指令是Halt，在分时系统中对应的指令是Logs off，当程序运行到这个指令时，产生一个中断告诉OS进程已运行完毕</li>
+<li>异常结束：进程在运行时发生了某种异常事件，使程序无法继续运行，常见的异常事件有：<ul>
+<li>越界错：程序访问的存储区超出规定区域</li>
+<li>保护错：进程试图访问一个不被允许访问的文件</li>
+<li>非法指令：指令不存在</li>
+<li>特权指令错：进程视图执行一条只允许OS执行的指令</li>
+<li>运行超时：进程执行时间超过规定的最大值</li>
+<li>等待超时：进程等待某事件的时间超过规定最大值</li>
+<li>算术运算错：进程试图执行一个被禁止的运算</li>
+<li>I/O故障：I/O过程发生了错误</li>
+</ul>
+</li>
+<li>外界干预：进程应外界请求终止运行，这些干预有：<ul>
+<li>操作员或操作系统干预</li>
+<li>父进程请求</li>
+<li>父进程终止</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程的终止进程"><a href="#进程的终止进程" class="headerlink" title="进程的终止进程"></a>进程的终止进程</h3><ul>
+<li>Step1：根据被终止进程的标识符从PCB集合中检索对应PCB，读取该进程的状态</li>
+<li>Step2-1：若被终止进程处于执行状态，立刻终止该进程执行，并置调度标志为真，用于指示该进程被终止后应重新进行调度</li>
+<li>Step2-2：若该进程有子孙进程，应一并终止其所有子孙进程</li>
+<li>Step3：将被终止进程及其子孙进程的所有资源或者还给其父进程，或者还给系统</li>
+<li>Step4：将被终止进程的PCB从所在队列/链表中一出，等待其它程序来搜索信息<h2 id="2-3-4-进程的阻塞与唤醒"><a href="#2-3-4-进程的阻塞与唤醒" class="headerlink" title="2.3.4 进程的阻塞与唤醒"></a>2.3.4 进程的阻塞与唤醒</h2><h3 id="引起进程阻塞和唤醒的事件"><a href="#引起进程阻塞和唤醒的事件" class="headerlink" title="引起进程阻塞和唤醒的事件"></a>引起进程阻塞和唤醒的事件</h3></li>
+<li>向系统请求共享资源失败：资源被其它进程占用-阻塞，释放-唤醒</li>
+<li>等待某种操作的完成：操作没完成-阻塞等待，完成-唤醒</li>
+<li>新数据尚未到达：未到达-因没有数据而阻塞等待，完成-唤醒</li>
+<li>新进程尚未到达：没有需要处理的新进程-进程自我阻塞，有新进程要处理-唤醒<h3 id="进程阻塞过程"><a href="#进程阻塞过程" class="headerlink" title="进程阻塞过程"></a>进程阻塞过程</h3></li>
+<li>Step1：调用阻塞原语Block将自己阻塞</li>
+<li>Step2：若仍在执行则停止执行，并将PCB中的执行状态改为阻塞</li>
+<li>Step3：PCB被插入阻塞队列</li>
+<li>Step4：转给调动程序重新调度，将处理机分配给另一就绪进程<h3 id="进程唤醒过程"><a href="#进程唤醒过程" class="headerlink" title="进程唤醒过程"></a>进程唤醒过程</h3></li>
+<li>Step1：由有关进程调用唤醒原语Wakeup唤醒进程</li>
+<li>Step2：将进程从阻塞队列中调出</li>
+<li>Step3：将该进程的PCB由阻塞状态改为就绪</li>
+<li>Step4：将该进程插入就绪队列中</li>
+</ul>
+<h2 id="2-3-5-进程的挂起与激活"><a href="#2-3-5-进程的挂起与激活" class="headerlink" title="2.3.5 进程的挂起与激活"></a>2.3.5 进程的挂起与激活</h2><h3 id="进程的挂起"><a href="#进程的挂起" class="headerlink" title="进程的挂起"></a>进程的挂起</h3><ul>
+<li>Step1：由OS调用挂起原语suspend挂起进程</li>
+<li>Step2：检查被挂起进程的状态，若活动就绪则改为静止就绪，若活动阻塞则改为静止阻塞</li>
+<li>Step3：将该进程PCB复制到某指定内存区域</li>
+<li>Step4：若被挂起进程正在执行，则转向调度程序重新调度<h3 id="进程的激活"><a href="#进程的激活" class="headerlink" title="进程的激活"></a>进程的激活</h3></li>
+<li>Step1：由OS调用激活原语active激活进程</li>
+<li>Step2：被激活进程从外存调入内存</li>
+<li>Step3：检查该进程状态，若静止就绪则改为活动就绪，若静止阻塞则改为活动阻塞</li>
+<li>Step4：若为静止就绪，改为活动就绪后，将其优先级和队列中其他进程优先级进行比较，若优先级低则不必重新调度，否则直接剥夺当前进程的运行，将处理机分配给刚被激活的进程</li>
+</ul>
+<hr>
+<h1 id="2-4-进程同步"><a href="#2-4-进程同步" class="headerlink" title="2.4 进程同步"></a>2.4 进程同步</h1><h2 id="2-4-1-进程同步的基本概念"><a href="#2-4-1-进程同步的基本概念" class="headerlink" title="2.4.1 进程同步的基本概念"></a>2.4.1 进程同步的基本概念</h2><p>进程同步机制的主要任务是对并发执行的多个相关进程在执行次序上进行协调</p>
+<h3 id="两种形式的制约关系"><a href="#两种形式的制约关系" class="headerlink" title="两种形式的制约关系"></a>两种形式的制约关系</h3><p>在多道程序环境下对于同处于一个系统中的多个进程，它们之间可能存在两种形式的制约关系</p>
+<ul>
+<li>间接相互制约关系：多个进程在并发执行时由于共享CPU、I/O设备等一次只能允许一个进程访问的资源，导致这些并发执行的程序之间形成了间接相互制约关系。对于这类临界资源，必须保证多个进程对之间只能互斥地访问，这类资源由系统实施统一分配，即用户在使用之前应先提出申请。</li>
+<li>直接相互制约关系：对于合作完成某一任务的多个进程而言，它们之间会因进程的异步性、并发性和执行顺序导致的无法从缓冲中及时取出数据而产生阻塞，即进程之间的直接制约关系。为了杜绝这种因为不正确的访问顺序而产生的“与时间有关的错误”，系统必须对进程的执行次序进行协调。<br><img src="../photos/OSCourse/2_4.png" title="生产者、消费者对缓冲区中数据的读写"><h3 id="临界资源（考点，会写伪代码）"><a href="#临界资源（考点，会写伪代码）" class="headerlink" title="临界资源（考点，会写伪代码）"></a>临界资源（考点，会写伪代码）</h3></li>
+</ul>
+<p><strong>临界资源</strong>：进程采用互斥访问方式共享的资源，如各类I/O设备、处理机等。<br><strong>生产者-消费者问题</strong><br>问题描述：有一群生产者在生产产品（数据），同时有一群消费者在消费产品（数据），为了能使生产者（进程）和消费者（进程）并发执行，在两者之间设置了一个具有n个缓冲区的缓冲池，生产者进程将产生的数据放入缓冲区中，消费者进程可从缓冲区取出数据，虽然这两类进程的执行是异步的，但是它们对缓冲区的数据存取必须同步，即<strong>不能让消费者进程从空的缓冲区取数据，也不能让生产者进程将数据存入满的缓冲区</strong><br>生产者-消费者问题的伪代码表示如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int in=0, out =0,count =0;//输入、输出指针初始化，counter表示当前缓冲区中的数据量</span><br><span class="line">item buffer[n];//buffer为缓冲池</span><br><span class="line">void producer()&#123;//生产者进程</span><br><span class="line">   while(1)&#123;</span><br><span class="line">      produce an item in nextp;//将生产的数据存入nextp，nextp和nextc均为局部变量</span><br><span class="line">      ...</span><br><span class="line">      while (counter == n);//counter表示当前缓冲池内数据量，counter==n表示当前缓冲池内数据满，不能将nextp中暂存的数据放入池中，故等待。</span><br><span class="line">         ...</span><br><span class="line">         buffer[in] = nextp;//将nextp中的数据存入当前输入指针指向的缓冲区</span><br><span class="line">         in = (in+1)%n;//in向前移动</span><br><span class="line">         counter++;//数据量++</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void consumer()&#123;//消费者进程</span><br><span class="line">   while(1)&#123;</span><br><span class="line">      while(counter==0);//counter==0表示当前缓冲池空，无数据可取</span><br><span class="line">         ...</span><br><span class="line">         nextc = buffer[out];//将当前输出指针指向缓冲区内容存入nextc</span><br><span class="line">         out = (out+1)%n;//输出指针指向下一个</span><br><span class="line">         counter--;//数据量--</span><br><span class="line">         consumer the item in nextc;//消费nextc中暂存的数据</span><br><span class="line">         ...</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两个进程交替执行不会有任何问题，但如果这两个进程的语句是交替进行的会导致counter偏离理论值，因此，<strong>生产者进程和消费者进程要互斥地访问临界资源缓冲池和变量counter</strong></p>
+<h3 id="临界区（考点）"><a href="#临界区（考点）" class="headerlink" title="临界区（考点）"></a>临界区（考点）</h3><p>由上述可知无论是硬件临界资源还是软件临界资源，多个并发执行的进程必须互斥地进行访问，我们将这些<strong>进程中访问临界资源的代码段称为临界区</strong>。若要保证进程对临界资源的互斥访问，要让每个进程在进入临界区之前，检查欲访问的临界资源是否在被其他进程访问。由此可知，在进程的临界区前要加上一段<strong>对临界资源进行预检查的代码段，即进入区</strong>，相应地，在临界区后也要加上一段<strong>退出临界资源访问的代码，即退出区</strong>，<strong>进程中除进入区、临界区、退出区外的剩余部分被称为剩余区</strong>，故一个访问临界资源的循环进程描述如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while(1)&#123;</span><br><span class="line">   剩余区;</span><br><span class="line">   进入区;</span><br><span class="line">   临界区;</span><br><span class="line">   退出区;</span><br><span class="line">   剩余区;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="同步机制应遵循的规则（考点）"><a href="#同步机制应遵循的规则（考点）" class="headerlink" title="同步机制应遵循的规则（考点）"></a>同步机制应遵循的规则（考点）</h3><ul>
+<li><strong>空闲让进</strong>：临界资源空闲（无进程进入临界区）时应允许一个请求进入临界区的进程立即进入临界区。</li>
+<li><strong>忙则等待</strong>：当已有进程进入临界区时，表明临界资源正在被访问，因而其它试图进入临界区的进程必须等待。</li>
+<li><strong>有限等待</strong>：进程等待进入临界区的时间应该有上限。</li>
+<li><strong>让权等待</strong>：当进程不能进入自己的临界区时，应立即释放分配给这个进程的处理机<h2 id="2-4-2-硬件同步机制"><a href="#2-4-2-硬件同步机制" class="headerlink" title="2.4.2 硬件同步机制"></a>2.4.2 硬件同步机制</h2>由于使用软件指令解决临界区问题有一定难度且有局限性，因此目前许多计算机提供了硬件指令解决临界区问题。<ul>
+<li>临界区管理提供一个作为锁的标识，“锁开”进入，“锁关”等待</li>
+<li>初始状态下锁为打开状态，每个进入临界区的进程必须对锁进行测试</li>
+<li>为了不让所同时进行多个测试，故测试和关锁操作必须连续（原语操作），<em>先关锁后开锁</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="关中断"><a href="#关中断" class="headerlink" title="关中断"></a>关中断</h3><p>进入锁测试前关闭中断，完成锁测试并关锁后打开中断，进程在临界区时计算机系统不响应中断，不会引发调度，缺点：</p>
+<ul>
+<li>滥用关中断可能导致严重后果</li>
+<li>关中断时间过长会影响系统效率</li>
+<li>不适用于多CPU系统</li>
+</ul>
+<h3 id="利用Test-and-Set-（测试并建立）指令实现互斥"><a href="#利用Test-and-Set-（测试并建立）指令实现互斥" class="headerlink" title="利用Test-and-Set （测试并建立）指令实现互斥"></a>利用Test-and-Set <em>（测试并建立）</em>指令实现互斥</h3><p><strong>在进程内实现互斥访问</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">boolean TS(boolean *lock)&#123;//获取lock参数，*lock==TRUE时，表示锁关；*lock==FALSE时，表示锁开</span><br><span class="line">   boolean old;</span><br><span class="line">   old = *lock;//将lock存储的地址指向的空间内内容赋给old</span><br><span class="line">   *lock = TRUE;</span><br><span class="line">   return old;</span><br><span class="line">&#125;</span><br><span class="line">do&#123;//进程代码</span><br><span class="line">   ...</span><br><span class="line">   while (TS(&amp;lock));//这个代码逻辑妙啊，如果lock第一次传入时是true，即锁关，那么传出来的old也是true，进程将阻塞在while语句，而lock仍保持true（锁关）</span><br><span class="line">   //而如果lock第一次传入时是false，即锁开，那么传出来的old是false，进程跳出while循环继续执行，而false将改为true，表示当前进程进入临界区并关锁，关锁和传参（测试）是在一块的，因此不可分开，也就实现了逻辑上的连续</span><br><span class="line">   critical section;//临界区</span><br><span class="line">   *lock:=FALSE;//:=为赋值语句</span><br><span class="line">   remainder section;//退出区、剩余区</span><br><span class="line">&#125;while(TRUE);</span><br></pre></td></tr></table></figure>
+<h3 id="利用Swap指令实现进程互斥"><a href="#利用Swap指令实现进程互斥" class="headerlink" title="利用Swap指令实现进程互斥"></a>利用Swap指令实现进程互斥</h3><p><strong>在资源中实现互斥访问</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void Swap(boolean *a,boolean *b)&#123;</span><br><span class="line">   boolean temp;</span><br><span class="line">   temp = *a;</span><br><span class="line">   *a = *b;</span><br><span class="line">   *b = temp;</span><br><span class="line">&#125;</span><br><span class="line">do&#123;</span><br><span class="line">   key = TRUE;//给资源的初始状态是“可访问”</span><br><span class="line">   do&#123;</span><br><span class="line">      swap(&amp;lock,&amp;key);</span><br><span class="line">   &#125;while(key!=FALSE);//先进行do操作，若，lock为false，key为true，则第一次测试可以访问该资源，lock和key转换，表示该进程正在被访问，而key变为false后则不再进行转换操作，即其它进程的访问无效，直至lock变为true后再次重头访问该进程时（退出区）再度交换释放该资源。</span><br><span class="line">   lock = FALSE;</span><br><span class="line">   ...</span><br><span class="line">&#125;while(1);</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-3-信号量机制"><a href="#2-4-3-信号量机制" class="headerlink" title="2.4.3 信号量机制"></a>2.4.3 信号量机制</h2><p><strong>信号量</strong>是一种卓有成效的进程同步工具，它包含：</p>
+<ul>
+<li>整型信号量<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wait(S)&#123;//P操作</span><br><span class="line">   while(S&lt;=0);//信号量少于0，即表示没有资源，则一直wait（阻塞）</span><br><span class="line">   S--;//能操作了，占用资源，S--</span><br><span class="line">&#125;</span><br><span class="line">signal(S)&#123;//V操作</span><br><span class="line">   S++;//释放了资源，S++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>记录型信号量<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line">   int value;//表示某类资源数目，若value值为1，则可实现进程互斥</span><br><span class="line">   struct process_control_block *list;//进程列表指针list</span><br><span class="line">&#125;semaphore;//记录型信号量定义</span><br><span class="line">wait(semaphore *S)&#123;//P操作</span><br><span class="line">   S-&gt;value --;//请求一个单位的该类资源</span><br><span class="line">   if (S-&gt;value&lt;0)//若该资源已经被分配完毕，进程调用block原语自我阻塞</span><br><span class="line">      block(S-&gt;list);</span><br><span class="line">&#125;</span><br><span class="line">signal(S)&#123;//V操作</span><br><span class="line">   S-&gt;value ++;//释放一个单位的该类资源</span><br><span class="line">   if(S-&gt;value&lt;=0)//若仍有等待该类资源的进程被阻塞</span><br><span class="line">      wakeup(S-&gt;list);//调用wakeup原语，唤醒链表中的第一个等待进程</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>AND型信号量<br>整型信号量和记录型信号量的问题<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//若进程A和进程B为两个共享数据D和E的进程，它们按下列次序交替进行wait操作，Dmutex和Emutex的初始值均为1以实现互斥访问</span><br><span class="line">processA: wait(Dmutex);//Dmutex = 0</span><br><span class="line">processB: wait(Emutex);//Emutex = 0</span><br><span class="line">processA: wait(Emutex);//Emutex = -1，A阻塞</span><br><span class="line">processB: wait(Dmutex);//Dmutex = -1，B阻塞，两个进程死锁。</span><br></pre></td></tr></table></figure>
+AND同步机制的思想：<strong>将进程所需要的所有资源一次性分配</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Signal（S1，S2，···，Sn）&#123;//释放所有资源</span><br><span class="line">   for(i=1;i&lt;=n;i++)&#123;</span><br><span class="line">      Si=Si+1;</span><br><span class="line">      Remove all the process waiting in the queue associated with Si into the ready queue.//有了资源，将所有需要Si的进程移入就绪队列</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">Swait（S1，S2，···，Sn）&#123;</span><br><span class="line">   while（true）&#123;</span><br><span class="line">      if（S1≥1andS2≥1and...andSn≥1）&#123;//若需要的所有类型资源都有</span><br><span class="line">         for(i=1;i&lt;=n;i++)//</span><br><span class="line">         Si=Si–1;//分别发出请求</span><br><span class="line">         break;</span><br><span class="line">      &#125;</span><br><span class="line">      else&#123;</span><br><span class="line">            place the process in the waiting queue associated with the first Si found with Si＜1,</span><br><span class="line">            and set the program count of this process to the beginning of Swait operation.//一旦发现第i类资源不满足要求，则将该进程调入与Si相关联的等待队伍，还要将此进程中PCB的程序计数器设置到Swait操作的开始处。</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>信号量集<br>在每次分配时，采用信号量集来控制，可以分配多个资源<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Swait（S1，t1，d1，...，Sn，tn，dn）&#123;//满足ti≥di，Si、ti、di分别对应资源信号量、资源下限值、需求量</span><br><span class="line">   if(S1≥t1&amp;...&amp;Sn≥tn)&#123;//如果所有资源都就绪了</span><br><span class="line">      for(i=1;i&lt;=n;i++)&#123;</span><br><span class="line">         Si＝Si－di;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   else&#123;</span><br><span class="line">      Place the executing process in the waiting queue of the first Si with Si＜ti and set its program counter to the beginning of the Swait operation。将该进程调入与Si相关联的等待队伍并将此进程中PCB的程序计数器设置到Swait操作的开始处。</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">//Swait(S,d,d)：允许每次申请d个资源。当资源数少于d时，不予分配。</span><br><span class="line">//Swait(S,1,1)：S&gt;1，记录型信号量。S=1时，互斥型信号量。</span><br><span class="line">//Swait(S,1,0)，可控开关，当S&gt;=1时，允许进入，S&lt;1时，不能进入。</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-4-信号量的应用"><a href="#2-4-4-信号量的应用" class="headerlink" title="2.4.4 信号量的应用"></a>2.4.4 信号量的应用</h2><h3 id="利用信号量实现互斥访问"><a href="#利用信号量实现互斥访问" class="headerlink" title="利用信号量实现互斥访问"></a>利用信号量实现互斥访问</h3>为了使多个进程能互斥地访问某临界资源，只须为该资源设置一互斥信号量mutex，并设其初始值为1，然后将各进程访问该资源的临界区CS置于wait（mutex）和signal（mutex）操作之间即可。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">semaphore mutex=1;</span><br><span class="line">process1()&#123;// or process2</span><br><span class="line">   while(1)&#123;</span><br><span class="line">      wait(mutex);//为了实现进程对资源的互斥访问，wait和signal必须成对出现，缺少wait(mutex)会导致系统混乱，不能实现互斥访问。</span><br><span class="line">      critical section;//临界区</span><br><span class="line">      signal(mutex);//缺少signal(mutex)会使临界资源永远不被释放，从而使因等待该资源而阻塞的进程不能被唤醒。</span><br><span class="line">      remainder section;//剩余区</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="利用信号量实现前趋关系（可能考看伪代码画前趋图或看前趋图写伪代码，希望不会是后者）"><a href="#利用信号量实现前趋关系（可能考看伪代码画前趋图或看前趋图写伪代码，希望不会是后者）" class="headerlink" title="利用信号量实现前趋关系（可能考看伪代码画前趋图或看前趋图写伪代码，希望不会是后者）"></a>利用信号量实现前趋关系（可能考看伪代码画前趋图或看前趋图写伪代码，希望不会是后者）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p1()&#123;S1；signal（a）；signal（b）；&#125;//浅显易懂</span><br><span class="line">p2()&#123;wait(a);S2；signal（c）；signal（d）;&#125;</span><br><span class="line">p3()&#123;wait（b）；S3；signal（e）；&#125;</span><br><span class="line">p4()&#123;wait（c）；S4；signal（f）；&#125;</span><br><span class="line">p5()&#123;wait（d）；S5；signal（g）；&#125;</span><br><span class="line">p6()&#123;wait（e）；wait（f）；wait（g）；S6；&#125;</span><br><span class="line">voidmain()&#123;</span><br><span class="line">   semaphorea,b,c,d,e,f,g;</span><br><span class="line">   a.value=b.value=c.value=0;</span><br><span class="line">   d.value=e.value=f.value=g.value=0;</span><br><span class="line">   cobegin</span><br><span class="line">     p1();p2();p3();p4();p5();p6();</span><br><span class="line">   coend;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-4-5-管程机制"><a href="#2-4-5-管程机制" class="headerlink" title="2.4.5 管程机制"></a>2.4.5 管程机制</h2><h3 id="管程的定义"><a href="#管程的定义" class="headerlink" title="管程的定义"></a>管程的定义</h3>当共享资源用共享数据结构semaphore表示时，资源管理程序可用对该数据结构进行操作的一组过程来表示（如资源的请求和释放），我们把这样一组相关的数据结构和过程一并称为<strong>管程</strong></li>
+</ul>
+<p><strong>管程</strong>：一个管程定义了一个数据结构和能被并发进程在该数据结构上所执行的一组操作，这组操作能够同步进程和改变管程中的数据。</p>
+<h3 id="管程的组成"><a href="#管程的组成" class="headerlink" title="管程的组成"></a>管程的组成</h3><ul>
+<li>管程的名字</li>
+<li>管程局部的共享数据结构的说明</li>
+<li>对该数据结构进行操作的一组过程</li>
+<li>对管程局部的数据设置初始值的语句<h3 id="管程的主要特点"><a href="#管程的主要特点" class="headerlink" title="管程的主要特点"></a>管程的主要特点</h3></li>
+<li>局部数据变量只能被管程的过程访问，任何外部过程都不能访问</li>
+<li>一个进程通过调用管程的一个过程进入管程</li>
+<li>在任何时候，只能有一个进程在管程中执行，调用管程的任何其他进程都被挂起，以等待管程变为可用的</li>
+</ul>
+<hr>
+<h1 id="2-5-经典进程的同步问题"><a href="#2-5-经典进程的同步问题" class="headerlink" title="2.5 经典进程的同步问题"></a>2.5 经典进程的同步问题</h1><h2 id="2-5-1-生产者-消费者问题"><a href="#2-5-1-生产者-消费者问题" class="headerlink" title="2.5.1 生产者-消费者问题"></a>2.5.1 生产者-消费者问题</h2><h3 id="利用记录型信号量解决生产者-消费者问题"><a href="#利用记录型信号量解决生产者-消费者问题" class="headerlink" title="利用记录型信号量解决生产者-消费者问题"></a>利用记录型信号量解决生产者-消费者问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">int in=0,out=0;</span><br><span class="line">item buffer[n];</span><br><span class="line">semaphore mutex = 1, empty = n, full = 0;//初始状态下所有缓冲区都是空的</span><br><span class="line">void producer();</span><br><span class="line">void consumer();</span><br><span class="line">void main()&#123;</span><br><span class="line">   //cobegin </span><br><span class="line">      producer();</span><br><span class="line">      consumer();</span><br><span class="line">   //coend</span><br><span class="line">&#125;</span><br><span class="line">void producer()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      ...</span><br><span class="line">      produce an item in nextp;</span><br><span class="line">      ...</span><br><span class="line">      wait(empty);</span><br><span class="line">      wait(mutex);</span><br><span class="line">      buffer(in):=nextp;</span><br><span class="line">      in:=(in+1) % n;</span><br><span class="line">      signal(mutex);</span><br><span class="line">      signal(full);</span><br><span class="line">      ...</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br><span class="line">void consumer()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      wait(full);</span><br><span class="line">      wait(mutex);</span><br><span class="line">      nextc:=buffer(out);</span><br><span class="line">      out:=(out+1) % n;</span><br><span class="line">      signal(mutex);</span><br><span class="line">      signal(empty);</span><br><span class="line">      consume an item in nextc;</span><br><span class="line">      ...</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="利用AND信号量解决生产者-消费者问题"><a href="#利用AND信号量解决生产者-消费者问题" class="headerlink" title="利用AND信号量解决生产者-消费者问题"></a>利用AND信号量解决生产者-消费者问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">int in =0,out = 0;</span><br><span class="line">item buffer[n];</span><br><span class="line">semaphoremutex = 1, empty = n,full = 0;</span><br><span class="line">void producer()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      ...</span><br><span class="line">      produce an item in nextp;</span><br><span class="line">      ...</span><br><span class="line">      wait(empty,mutex);</span><br><span class="line">      buffer[in]=nextp;</span><br><span class="line">      in:=(in+1)%n;</span><br><span class="line">      signal(mutex,full);</span><br><span class="line">   &#125;while(True);</span><br><span class="line">&#125;</span><br><span class="line">void consumer&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      wait(full,mutex);</span><br><span class="line">      nextc = buffer[out];</span><br><span class="line">      out = (out+1)%n;</span><br><span class="line">      signal(mutex,empty);</span><br><span class="line">      consumer the item in nextc;</span><br><span class="line">   &#125;whiel(TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-2-哲学家进餐问题"><a href="#2-5-2-哲学家进餐问题" class="headerlink" title="2.5.2 哲学家进餐问题"></a>2.5.2 哲学家进餐问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>五个哲学家共用一张圆桌，每个人之间有一只筷子，哲学家要么思考，要么吃饭，吃饭时先左后右拿起两边的筷子，思考前放下筷子。若五个哲学家要同时吃饭，则它们同时拿起左边的筷子后，都等待右边的筷子被放下，从而引发死锁。<br>对于死锁，有以下几种解决方法：</p>
+<ul>
+<li>至多只允许有四位哲学家同时去拿左边的筷子，保证至少有一位哲学家能进餐</li>
+<li>仅当哲学家的左右两只筷子均可用时才允许进餐</li>
+<li>规定奇数号哲学家先左后右拿筷子，偶数号科学家先右后左拿筷子，这样总有哲学家能进餐<h3 id="利用AND信号量机制解决哲学家进餐问题"><a href="#利用AND信号量机制解决哲学家进餐问题" class="headerlink" title="利用AND信号量机制解决哲学家进餐问题"></a>利用AND信号量机制解决哲学家进餐问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">semaphore chopstick[5]=&#123;1,1,1,1,1&#125;;</span><br><span class="line">do&#123;</span><br><span class="line">   ...</span><br><span class="line">   //think</span><br><span class="line">   ...</span><br><span class="line">   wait(chopstick[(i+1)%5],chopstick[i]);</span><br><span class="line">   ...</span><br><span class="line">   ///eat</span><br><span class="line">   ...</span><br><span class="line">   signal(chopstick[(i+1)%5],chopstick[i]);</span><br><span class="line">&#125;while(true);</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-3-读者-写者问题"><a href="#2-5-3-读者-写者问题" class="headerlink" title="2.5.3 读者-写者问题"></a>2.5.3 读者-写者问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3>存在读者和写者两类进程，我们将<strong>只读取文件</strong>的进程称为Reader进程，其它进程则称为Writer进程，<strong>读进程可共享同一对象，写进程不可共享同一对象</strong>，即我们允许多个Reader进程同时访问一个共享对象，但不允许Writer进程和其它任何类型进程同时访问数据对象，因为会引起混乱。因此Writer进程必须互斥地与其它进程访问共享对象。<h3 id="利用记录型信号量解决读者-写者问题"><a href="#利用记录型信号量解决读者-写者问题" class="headerlink" title="利用记录型信号量解决读者-写者问题"></a>利用记录型信号量解决读者-写者问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">semaphore rmutex=1,wmutex=1;//设置两个信号量：读信号量和写信号量，初始值均为1，故先写还是先读都可以</span><br><span class="line">int readcount=0;//readcount用于表示当前有多少个进程在执行读操作，是读进程释放写信号量的判断依据</span><br><span class="line">void reader()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      wait(rmutex);//先等待读信号量为1（表示可以开始执行读进程，注意是开始进程不是正式读），且读信号量并不由写进程控制</span><br><span class="line">      if(readcount==0)//如果当前没有其他读进程在读程序，也有第二层含义是没有其它读进程有可能是因为有写进程在执行，因此要进行进一步检查</span><br><span class="line">         wait(wmutex);//检查当前是否有写进程在写文件，如果有（即wmutex=0）则等待，没有（即wmutex=1）则wmutex--，不让新的写进程执行</span><br><span class="line">      readcount++;//计数器++,表示该读进程正式进入读文件环节，也让其它并发执行的读进程得知有读进程在执行故可以跳过上面的if语句</span><br><span class="line">      signal(rmutex);//释放读信号量供并发读进程使用</span><br><span class="line">      ...</span><br><span class="line">      perform read operation;//正式读取操作</span><br><span class="line">      ...</span><br><span class="line">      wait(rmutex);//要结束了，需要释放写信号量，故进入检查环节</span><br><span class="line">      readcount --;//表示该进程已经结束读文件环节</span><br><span class="line">      if(readcount==0)//检查当前还是否有其它进程在读文件，并保证释放写信号量的进程是最后一个在执行的读进程</span><br><span class="line">         signal(wmutex);//注意，要先释放写信号量以防止新的读进程挤入导致写进程无法执行，然后再释放读信号量</span><br><span class="line">      signal(rmutex);</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void writer()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      wait(wmutex);//要么初始情况下先于读进程写，要么等读进程释放再写</span><br><span class="line">      perform write operation;</span><br><span class="line">      signal(wmutex);</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void main()&#123;</span><br><span class="line">   //cobegin</span><br><span class="line">      writer();//这里私认为读进程还是写进程在前并不重要</span><br><span class="line">      reader();</span><br><span class="line">   //coend</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="利用信号量集机制解决读者-写者问题"><a href="#利用信号量集机制解决读者-写者问题" class="headerlink" title="利用信号量集机制解决读者-写者问题"></a>利用信号量集机制解决读者-写者问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">int RN;//同时读进程最大数量</span><br><span class="line">semaphore L=RN,mx=1;//初始化，mx为互斥信号量</span><br><span class="line">void Reader()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      wait(L,1,1);//如果还能允许多一个读进程，就进入，否则等待</span><br><span class="line">      wait(mx,1,0);//满足ti≥di才能执行下一步，Si、ti、di分别对应资源信号量、资源下限值、需求量，这里是mx阻止读进程和写进程同时进行的步骤，若ti&lt;di即mx=0，则说明有写进程在执行，读进程需等待</span><br><span class="line">      ...</span><br><span class="line">      perform read operation;//正式读取操作</span><br><span class="line">      ...</span><br><span class="line">      signal(L,1);//将占用的一个读进程位（姑且这么叫）释放</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void writer()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      wait(mx,1,1);//先抢占写进程位以实现互斥写入（写进程间）和互斥读写（读写进程间）</span><br><span class="line">      wait(L,RN,0);//满足ti≥di才能执行下一步，Si、ti、di分别对应资源信号量、资源下限值、需求量，这里是检查是否还有其他读进程在执行的步骤，若L&lt;RN，则说明有读进程在执行，写进程需等待</span><br><span class="line">      perform write operation;//正式写入操作</span><br><span class="line">      signal(mx,1);//写入完毕，立即释放占用的写进程位</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void main()&#123;</span><br><span class="line">   cobegin</span><br><span class="line">      Reader();//顺序不重要</span><br><span class="line">      Writer();</span><br><span class="line">   coend</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="2-6-进程通信"><a href="#2-6-进程通信" class="headerlink" title="2.6 进程通信"></a>2.6 进程通信</h1><p>进程通信，即进程之间的信息交换，分为两类</p>
+<ul>
+<li>低级通信：以信号量机制为代表，它存在的缺点：<ul>
+<li>效率低：生产者每次只能向缓冲池内投放一个产品/信息，消费者每次只能从缓冲池中取出一个产品</li>
+<li>通信对用户不透明 <del>（我觉得就是根本没有）</del>：OS只为进程间的通信提供了共享存储器，而关于进程之间通信需要的数据结构、数据传送、进程互斥和同步机制都需要程序员实现，这对用户而言是不方便的</li>
+</ul>
+</li>
+<li>高级通信：使用OS提供的高级通信工具，其特点是：<ul>
+<li>便于使用：OS将进程通信封装为一组用于实现高级通信的原语，用户直接利用它实现进程之间的通信</li>
+<li>高效地传送大量数据：用户可直接利用高级通信命令/原语高效地传送大量数据<h2 id="2-6-1-进程通信的类型"><a href="#2-6-1-进程通信的类型" class="headerlink" title="2.6.1 进程通信的类型"></a>2.6.1 进程通信的类型</h2><h3 id="共享存储器系统"><a href="#共享存储器系统" class="headerlink" title="共享存储器系统"></a>共享存储器系统</h3></li>
+</ul>
+</li>
+<li>基于共享数据结构的通信方式，如生产者-消费者问题中的缓冲区</li>
+<li>基于共享存储区的通信方式，在内存中划出一块共享存储区域，数据的形式、位置和访问控制都是进程而不是OS负责，进程向OS申请得到存储区域中的一个分区，读写完成或不再需要时归还给共享存储区<h3 id="管道通信系统"><a href="#管道通信系统" class="headerlink" title="管道通信系统"></a>管道通信系统</h3></li>
+<li>指用于连接一个读进程和一个写进程以实现它们之间通信的一个共享文件，向管道提供输入的写进程以字符流形式将大量数据送入管道，读进程接收管道输出的数据</li>
+<li>建立管道通信需要提供以下三方面的协调能力：<ul>
+<li>互斥</li>
+<li>同步</li>
+<li>对方是否存在<h3 id="消息传递系统"><a href="#消息传递系统" class="headerlink" title="消息传递系统"></a>消息传递系统</h3></li>
+</ul>
+</li>
+<li>目前主要的通信方式，信息单位：消息（报文）</li>
+<li>实现方式：将通信数据封装在报文中，利用OS提供的一组通信命令/原语，在进程间进行消息传递</li>
+<li>基于消息传递系统的通信方式属于高级通信方式，因其实现方式的不同，可分为两类：<ul>
+<li>直接通信方式：发送进程利用OS提供的发送原语直接把消息发送给目标进程</li>
+<li>间接通信方式：发送和接收进程都通过共享中间实体（邮箱）进行消息的发送和接收<h3 id="客户机-服务器系统（略）"><a href="#客户机-服务器系统（略）" class="headerlink" title="客户机-服务器系统（略）"></a>客户机-服务器系统（略）</h3><h2 id="2-6-2-消息传递通信的实现方式"><a href="#2-6-2-消息传递通信的实现方式" class="headerlink" title="2.6.2 消息传递通信的实现方式"></a>2.6.2 消息传递通信的实现方式</h2><h3 id="直接消息传递系统"><a href="#直接消息传递系统" class="headerlink" title="直接消息传递系统"></a>直接消息传递系统</h3>直接消息传递系统指发送进程利用OS所提供的发送命令，直接把消息发送给目标进程<h4 id="直接通信原语"><a href="#直接通信原语" class="headerlink" title="直接通信原语"></a>直接通信原语</h4></li>
+</ul>
+</li>
+<li>对称寻址方式（<strong>1 to 1</strong>发送进程和接收进程都必须以显式方式提供对方的标识符）<ul>
+<li>系统提供下述两条通信命令/原语：<ul>
+<li>send(Receiver,message)</li>
+<li>receive(Sender,message)</li>
+<li>不足：一旦改变进程的名称，则可能需要找到有关该进程旧名称的所有引用以便修改，不利于进程定义的模块化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非对称寻址方式（<strong>1 to n</strong>在接收进程原语中，不需要命名发送进程，只填写表示源进程的参数，即完成通信后的返回值，而发送进程仍需要命名接收进程）<ul>
+<li>系统中该方式的发送和接收原语表示为：<ul>
+<li>send(P,message)</li>
+<li>receive(id,message)//id也可以是进程名字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">void producer()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      ...</span><br><span class="line">      produce an item in nextp;</span><br><span class="line">      ...</span><br><span class="line">      send(receiver,nextp);</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void consumer()&#123;</span><br><span class="line">   do&#123;</span><br><span class="line">      ...</span><br><span class="line">      receive(producer,nextc);</span><br><span class="line">      ...</span><br><span class="line">      consume the item in nextc;</span><br><span class="line">   &#125;while(TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="间接通信-信箱通信"><a href="#间接通信-信箱通信" class="headerlink" title="间接通信/信箱通信"></a>间接通信/信箱通信</h3><p>进程之间需要通过共享数据结构的实体进行通信，该实体建立在随机存储器的公用缓冲区上，通常把这种中间实体称为信箱。系统为信箱通信提供了若干条原语，分别用于信箱的创建、撤销和消息的发送、接收等</p>
+<h4 id="信箱的结构"><a href="#信箱的结构" class="headerlink" title="信箱的结构"></a>信箱的结构</h4><h4 id="信箱的创建和撤销"><a href="#信箱的创建和撤销" class="headerlink" title="信箱的创建和撤销"></a>信箱的创建和撤销</h4><ul>
+<li>进程可利用信箱创建原语来建立一个新信箱，创建者进程需给出：<ul>
+<li>信箱名称</li>
+<li>信箱属性/类型（公用、私用或共享）<ul>
+<li>私用邮箱：邮箱是创建邮箱进程的一部分，随进程消失</li>
+<li>公用邮箱：邮箱供系统中的所有核准进程使用，所有核准进程均可对邮箱进行信息送取操作，通常公用邮箱在系统运行期间始终存在</li>
+<li>共享邮箱：由某进程创建，在创建时或创建后指明它是可共享的，并给出共享进程/用户的名字，创建进程和其它共享进程权限相同，均可对邮箱进行信息送取操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="信箱的发送和接收"><a href="#信箱的发送和接收" class="headerlink" title="信箱的发送和接收"></a>信箱的发送和接收</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Send(mailbox,message)</span><br><span class="line">Receive(mailbox,message)//浅显易懂</span><br></pre></td></tr></table></figure>
+<h2 id="2-6-3-直接消息传送系统实例"><a href="#2-6-3-直接消息传送系统实例" class="headerlink" title="2.6.3 直接消息传送系统实例"></a>2.6.3 直接消息传送系统实例</h2><h3 id="消息缓冲队列通信机制中的数据结构"><a href="#消息缓冲队列通信机制中的数据结构" class="headerlink" title="消息缓冲队列通信机制中的数据结构"></a>消息缓冲队列通信机制中的数据结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//在消息缓冲队列通信方式中，主要利用的数据结构是消息缓冲区（一种数据缓冲区）</span><br><span class="line">typedef struct message_buffer&#123;</span><br><span class="line">   int sender;//发送者进程标识符</span><br><span class="line">   int size;//消息长度</span><br><span class="line">   char*text;//消息正文</span><br><span class="line">   message_buffer*next;//指向下一个发送区的指针</span><br><span class="line">&#125;</span><br><span class="line">//PCB中有关通信的数据项</span><br><span class="line">typedef struct processcontrol_block&#123;</span><br><span class="line">   ...</span><br><span class="line">   struct message_buffer * mq;//消息队列队首指针</span><br><span class="line">   semaphore mutex;//消息队列互斥信号量</span><br><span class="line">   semaphore sm;//消息队列资源信号量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="发送原语"><a href="#发送原语" class="headerlink" title="发送原语"></a>发送原语</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void send(receiver,a)&#123;//a和下面的b都是message_buffer类型数据，但a是发送区，b是接收区</span><br><span class="line">   getbuf(a.size,i);//根据a的size申请缓冲区</span><br><span class="line">   i.sender = a.sender;//这行起的三行的意思是将发送区a中的信息复制到消息缓冲区之中</span><br><span class="line">   i.size=a.size;</span><br><span class="line">   copy(i.text,a.text);</span><br><span class="line">   i.next=0;//或者也可以说i.next=null</span><br><span class="line">   getid(PCBset,receiver.j);//获得接收进程内部标识符</span><br><span class="line">   wait(j.mutex);//等待接收进程内部标识符状态为“队列可插入”</span><br><span class="line">   insert(&amp;j.mq,i);//将消息缓冲区插入消息队列j</span><br><span class="line">   signal(j.mutex);//释放以供其他进程使用</span><br><span class="line">   signal(j.sm);//这块没看懂，应该是++，毕竟是资源信号量，但是书上却没写wait(j.sm)，求解惑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接收原语"><a href="#接收原语" class="headerlink" title="接收原语"></a>接收原语</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void receive(b)&#123;</span><br><span class="line">   j = internal name;//j为接收进程内部的标识符</span><br><span class="line">   wait(j.sm);</span><br><span class="line">   wait(j.mutex);</span><br><span class="line">   remove(j.mq,i);//将消息队列中第一个消息移出</span><br><span class="line">   signal(j.mutex);</span><br><span class="line">   b.sender=i.sender;</span><br><span class="line">   b.size=i.size;</span><br><span class="line">   copy(b.text,i.text);//将消息缓冲区i中的信息复制到接收区b</span><br><span class="line">   releasebuf(i);//释放消息缓冲区</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="2-7-线程的基本概念"><a href="#2-7-线程的基本概念" class="headerlink" title="2.7 线程的基本概念"></a>2.7 线程的基本概念</h1><h2 id="2-7-1-线程的引入"><a href="#2-7-1-线程的引入" class="headerlink" title="2.7.1 线程的引入"></a>2.7.1 线程的引入</h2><p>线程：<strong>为了减少程序在并发执行时所付出的时空开销，使OS具有更好的并发性</strong></p>
+<h3 id="进程的两个基本属性"><a href="#进程的两个基本属性" class="headerlink" title="进程的两个基本属性"></a>进程的两个基本属性</h3><ul>
+<li>进程 <del>三羊开泰</del>：在系统中能独立运行并作为资源分配的基本单位，由进程控制块、相关数据和程序段组成，是一个能独立运行的活动实体，是操作系统运行的基础。</li>
+<li>进程是一个可独立调度和分派的基本单位<h3 id="程序并发执行所需付出的时空开销"><a href="#程序并发执行所需付出的时空开销" class="headerlink" title="程序并发执行所需付出的时空开销"></a>程序并发执行所需付出的时空开销</h3></li>
+<li>创建进程：需要分配资源</li>
+<li>撤销进程：需要回收资源</li>
+<li>进程切换：内存访问域变化，占用处理机时间</li>
+<li>以上这些限制了系统中所设置进程的数目，且进程切换也不宜过于频繁，从而限制了并发程度的进一步提高<h2 id="2-7-2-线程和进程相比-我还是觉得我们线程牛批"><a href="#2-7-2-线程和进程相比-我还是觉得我们线程牛批" class="headerlink" title="2.7.2 线程和进程相比 我还是觉得我们线程牛批"></a>2.7.2 线程和进程相比 <del>我还是觉得我们线程牛批</del></h2>线程 <em>threads</em>：<strong>线程是一个被调度和分派的基本单位并可独立运行的实体。</strong>大多数与执行相关的信息可以保存在线程级的数据结构中，线程是对进程的进一步细分。</li>
+<li>线程具有以下性质：<ul>
+<li><strong>线程可以并发执行</strong></li>
+<li><strong>线程是系统资源分配和调度的基本单位</strong></li>
+<li><strong>同一进程内的线程共享进程资源，它们驻留在同一块地址空间中，并且可以访问到相同的数据</strong></li>
+<li><strong>线程具有独立性</strong></li>
+<li><strong>线程的切换代价、创建和删除开销要远小于进程</strong></li>
+<li><strong>线程支持多处理机系统</strong><br><img src="../photos/OSCourse/2_5.png" title="进程和线程的结构示意图"></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-7-3-线程的状态和线程控制块TCB"><a href="#2-7-3-线程的状态和线程控制块TCB" class="headerlink" title="2.7.3 线程的状态和线程控制块TCB"></a>2.7.3 线程的状态和线程控制块TCB</h2><h3 id="线程运行的三个状态"><a href="#线程运行的三个状态" class="headerlink" title="线程运行的三个状态"></a>线程运行的三个状态</h3><ul>
+<li>执行状态：表示线程已经获得处理机且正在运行</li>
+<li>就绪状态：表示线程已具备了各种执行条件，只需再获得CPU（处理机）便可立即执行</li>
+<li>阻塞状态：表示线程在执行中因某事件受阻而处于暂停状态<h3 id="线程控制块TCB"><a href="#线程控制块TCB" class="headerlink" title="线程控制块TCB"></a>线程控制块TCB</h3></li>
+<li>如同每个进程有一个进程控制块一样，系统也为每个线程配置了一个线程控制块，将所有用于控制和管理线程的信息记录在线程控制块中。</li>
+<li>线程控制块的内容通常由以下几项构成：<ul>
+<li>线程标识符</li>
+<li>一组寄存器：包含程序计数器、状态寄存器和通用寄存器</li>
+<li>线程运行状态</li>
+<li>优先级</li>
+<li>线程专有存储区：存放现场保护信息和线程运行相关统计信息</li>
+<li>信号屏蔽</li>
+<li>堆栈指针：用于线程调用，保存局部变量和返回地址</li>
+</ul>
+</li>
+<li>备注：线程运行状态不是线程的上下文，线程/进程的上下文是在改变线程/进程的状态时的参考</li>
+</ul>
+<h3 id="多线程OS中的进程属性"><a href="#多线程OS中的进程属性" class="headerlink" title="多线程OS中的进程属性"></a>多线程OS中的进程属性</h3><ul>
+<li>OS支持在一个进程中的多个线程能并发执行，但此时的进程就不再作为一个执行的实体。多线程OS中的进程有以下属性：<ul>
+<li>进程是一个可拥有资源的基本单位（以前是可独立调度和分派的基本单位）</li>
+<li>一个进程内的多个线程可并发执行 </li>
+<li>进程已不是可执行的实体。在多线程OS中，把线程作为独立运行/调度分派的基本单位，但进程仍具有执行相关的状态。如“执行状态”指的是进程中的某线程正在执行;被挂起的进程中的所有线程也被挂起;被激活的进程中的所有线程也被激活</li>
+</ul>
+</li>
+</ul>
+<h3 id="线程状态变化的四种基本操作"><a href="#线程状态变化的四种基本操作" class="headerlink" title="线程状态变化的四种基本操作"></a>线程状态变化的四种基本操作</h3><ul>
+<li>派生：当产生一个新进程时，同时也为该进程派生了一个初始化线程，随后，可以在同一个进程中派生另一个线程，新线程被放置在就绪队列中</li>
+<li>阻塞：当线程需要等待另一个事件时，它将阻塞，此时处理器转而执行另一个就绪线程</li>
+<li>解除阻塞：当阻塞一个线程的事件发生时，该线程被转移到就绪队列中</li>
+<li>结束：当一个线程完成时，其寄存器的信息和栈都被释放</li>
+</ul>
+<hr>
+<h1 id="2-8-线程的实现"><a href="#2-8-线程的实现" class="headerlink" title="2.8 线程的实现"></a>2.8 线程的实现</h1><h2 id="2-8-1-线程的实现方式"><a href="#2-8-1-线程的实现方式" class="headerlink" title="2.8.1 线程的实现方式"></a>2.8.1 线程的实现方式</h2><p>在OS中的所有进程，无论是系统进程还是用户进程，都是在操作系统内核的支持下运行的。</p>
+<h3 id="内核支持线程KST"><a href="#内核支持线程KST" class="headerlink" title="内核支持线程KST"></a>内核支持线程KST</h3><ul>
+<li>无论是用户进程中的线程，还是系统进程中的线程，它们的创建、撤销和切换等，也是依靠内核实现的</li>
+<li>在内核空间为每一个内核线程设置了一个线程控制块，内核是根据该控制块而感知某线程的存在的，并对其加以控制</li>
+<li>内核支持线程的四个主要优点<ul>
+<li>在多处理器系统中，内核能够同时调度同一进程中的多个线程并行执行</li>
+<li>如果进程中的一个线程被阻塞了，内核可以调度该进程中的其它线程占有处理器运行，也可以运行其它进程中的线程</li>
+<li>内核支持线程具有很小的数据结构和堆栈，线程的切换比较快，切换开销小</li>
+<li>内核本身也可以采用多线程技术，可以提高系统的执行速度和效率</li>
+</ul>
+</li>
+<li>内核支持线程的主要缺点：对于用户的线程切换而言其<strong>模式切换</strong>的开销较大，需要从用户态转到和心态，这是因为用户进程的线程在用户态运行，而线程调度和管理是在内核实现的<h3 id="用户级线程ULT"><a href="#用户级线程ULT" class="headerlink" title="用户级线程ULT"></a>用户级线程ULT</h3></li>
+<li>用户级线程是在用户空间中实现的，线程的<strong>创建、撤销、同步和通信</strong>等功能都无需内核支持，<strong>用户级线程是与内核无关的</strong></li>
+<li>用户级线程的优点：<ul>
+<li>线程控制块设置在用户空间，内核完全不知道用户级线程的存在，这样可以节省模式切换系统开销</li>
+<li>各进程可以独立选择线程调度算法</li>
+<li>用户级线程与操作系统平台无关，甚至可以在不支持线程机制的操作系统平台上实现</li>
+</ul>
+</li>
+<li>用户级线程的缺点：<ul>
+<li>当线程执行系统调用引起进程阻塞时，进程中所有的线程都会被阻塞，会削弱进程中的线程的并发性，而内核支持线程不存在这个问题</li>
+<li>由于内核每次给一个进程分配一个CPU（处理机），用户级线程不能有效利用多处理机进行进程内的多线程并行操作，进程中仅有一个线程能够执行，在该线程释放处理机前，其它线程只能等待</li>
+</ul>
+</li>
+</ul>
+<h3 id="组合方式：同时支持内核线程和用户线程"><a href="#组合方式：同时支持内核线程和用户线程" class="headerlink" title="组合方式：同时支持内核线程和用户线程"></a>组合方式：同时支持内核线程和用户线程</h3><ul>
+<li>三种模式：<ul>
+<li>多对一（多个用户线程映射到一个内核控制线程）：纯用户线程模式</li>
+<li>一对一：内核线程模式、轻量级进程模式</li>
+<li>多对多（多个用户线程映射到<strong>同样数量或更少数量</strong>的内核线程上）：组合模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-8-2-线程的实现"><a href="#2-8-2-线程的实现" class="headerlink" title="2.8.2 线程的实现"></a>2.8.2 线程的实现</h2><h3 id="内核支持线程的实现"><a href="#内核支持线程的实现" class="headerlink" title="内核支持线程的实现"></a>内核支持线程的实现</h3><p>在仅设置了内核支持线程的OS中，系统在创建一个新进程时便为它分配一个任务数据区PTDA，其中包括若干个TCB空间，在每一个TCB中可保存线程标识符、优先级、线程运行的CPU状态等信息，每当进程要创建一个线程时，便为新线程分配一个TCB并将有关信息填入TCB中、为之分配必要的资源。当PTDA中的所有TCB空间已用完，而进程又要创建新的进程时，只要其所创建的线程数目未超过系统的允许值，系统可为再为其分配新的TCB空间。在撤销一个线程时，要么由系统回收，要么由进程回收供进程内的其它线程使用</p>
+<h3 id="用户级线程的实现"><a href="#用户级线程的实现" class="headerlink" title="用户级线程的实现"></a>用户级线程的实现</h3><h4 id="运行时系统"><a href="#运行时系统" class="headerlink" title="运行时系统"></a>运行时系统</h4><p>运行时系统，即用于管理和控制线程的函数（过程）的集合，其中包括用于创建和撤销线程的函数、线程同步和通信的函数以及实现线程调度的函数等。因为有这些函数，才能使用户级线程与内核无关。运行时系统中的所有函数都驻留在用户空间，作为用户级线程和内核之间的接口。<strong>用户层对用户级线程的全部支持</strong></p>
+<h4 id="内核控制线程"><a href="#内核控制线程" class="headerlink" title="内核控制线程"></a>内核控制线程</h4><p>内核控制线程，也称为轻型进程LWP，每一个进程都可拥有多个LWP。每个LWP都有自己的数据结构（和2.7.3中给出的一样）他们也可以共享进程所拥有的资源。LWP可以通过系统调用来获得内核提供的服务，这样可使用户级线程运行时只用连接到一个LWP上便具有内核支持线程的所有属性。<strong>用户级线程进行系统调用的接口</strong></p>
+<h2 id="2-8-3-线程的创建和终止（略）"><a href="#2-8-3-线程的创建和终止（略）" class="headerlink" title="2.8.3 线程的创建和终止（略）"></a>2.8.3 线程的创建和终止（略）</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">课程笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-操作系统笔记1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B01/"
+    >操作系统笔记1</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B01/" class="article-date">
+  <time datetime="2022-04-03T12:05:35.000Z" itemprop="datePublished">2022-04-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">课程笔记_操作系统</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="依照学校教学安排，第一章为操作系统引论"><a href="#依照学校教学安排，第一章为操作系统引论" class="headerlink" title="依照学校教学安排，第一章为操作系统引论"></a>依照学校教学安排，第一章为操作系统引论</h1><h1 id="本帖仅供个人学习使用"><a href="#本帖仅供个人学习使用" class="headerlink" title="本帖仅供个人学习使用"></a>本帖仅供个人学习使用</h1><h1 id="使用虚拟机平台VMware-Workstation"><a href="#使用虚拟机平台VMware-Workstation" class="headerlink" title="使用虚拟机平台VMware Workstation"></a>使用虚拟机平台VMware Workstation</h1><hr>
+<h1 id="1-1-操作系统的目标和作用"><a href="#1-1-操作系统的目标和作用" class="headerlink" title="1.1 操作系统的目标和作用"></a>1.1 操作系统的目标和作用</h1><h2 id="1-1-1-操作系统的目标（考点）"><a href="#1-1-1-操作系统的目标（考点）" class="headerlink" title="1.1.1 操作系统的目标（考点）"></a>1.1.1 操作系统的目标（考点）</h2><ul>
+<li><strong>方便性</strong>：没有OS的计算机是极难使用的，只能使用机器语言，OS对计算机操作进行了抽象化，使计算机便于易学易用。</li>
+<li><strong>有效性</strong>：OS可以通过合理地组织计算机的工作流程，加速程序的运行，缩短程序的运行周期，提高系统的吞吐量。</li>
+<li><strong>可扩充性</strong>：为适应计算机硬件、体系结构以及计算机应用发展的要求，OS必须具有很好的可扩充性，这与OS的结构有十分紧密的联系，由此推动OS从早期的无结构发展为模块化结构，进而又发展为层次化结构，近年来OS已广泛采用微内核结构。</li>
+<li><strong>开放性</strong>：为适应计算机应用日益普及的要求和互联网时代的发展，使OS的应用环境从单机转向网络环境，其使用环境必须更为开放，要求OS必须能遵循世界标准规范，从而兼容以相同标准开发的硬件软件。</li>
+</ul>
+<h2 id="1-1-2-操作系统的作用（考点）（见1-4）"><a href="#1-1-2-操作系统的作用（考点）（见1-4）" class="headerlink" title="1.1.2 操作系统的作用（考点）（见1.4）"></a>1.1.2 操作系统的作用（考点）（见1.4）</h2><ul>
+<li><strong>OS是用户与计算机硬件系统之间的接口</strong></li>
+<li><strong>OS是计算机系统资源的管理者</strong></li>
+<li><strong>OS实现了对计算机资源的抽象</strong></li>
+<li><strong>OS/虚拟机是计算机硬件平台上的虚拟机器</strong></li>
+</ul>
+<h2 id="1-1-3-推动操作系统发展的主要动力（考点）"><a href="#1-1-3-推动操作系统发展的主要动力（考点）" class="headerlink" title="1.1.3 推动操作系统发展的主要动力（考点）"></a>1.1.3 推动操作系统发展的主要动力（考点）</h2><ul>
+<li><strong>不断提高计算机资源利用率</strong></li>
+<li><strong>方便用户</strong></li>
+<li><strong>硬件的不断更新换代</strong></li>
+<li><strong>计算机体系结构的不断发展</strong></li>
+<li><strong>不断提出新的应用需求</strong></li>
+</ul>
+<h1 id="1-2-操作系统的发展过程"><a href="#1-2-操作系统的发展过程" class="headerlink" title="1.2 操作系统的发展过程"></a>1.2 操作系统的发展过程</h1><ul>
+<li>人工操作方式：卡带I/O，一个程序运行完毕并取走计算结果（卡带）后下一个人/程序才能上机，效率极低，人工读带（参考《功勋》里面于敏那集，人工读机器语言，属实是黑客帝国现实版了）。</li>
+<li>脱机I/O方式：事先将装有用户程序和数据的纸带装入纸带输入及，在一台外围机的控制下将卡带上的数据或程序输入到磁带上，当CPU需要这些程序或数据时再从磁带上高速地调入内存。输出时先从内存高速输送到磁带上，然后在外围机控制下通过相应输出设备输出。（个人理解是用磁带来当一个缓存），减少了CPU的空闲时间，I/O操作均由外围机操作，提高了I/O速度。</li>
+<li>单道批处理系统：处理完一个作业后紧接着处理下一个作业以减少机器的空闲等待时间，旨在提高系统资源利用率，但缺点也在用提高的不够充分，这是因为在内存中仅有一道程序，必须在I/O完成后才能运行，又因为I/O设备的低速性，更使CPU的利用率显著降低。若通过增大内存来提高效率，则会因为实际中80%以上的作业都属于中小型而造成在单道程序环境下对内存的浪费。</li>
+<li><strong>多道批处理系统</strong>：用户所提交的作业先存放在外存上，并排成一个队列称为“后备队列”然后由作业调度程序按一定的算法，从后备队列中选择若干个作业调入内存，使它们共享CPU和系统中的各种资源，让它们<strong>交替在CPU上运行</strong><ul>
+<li><strong>多道性、调度性、无序性</strong></li>
+<li>优点：<strong>资源利用率高、系统吞吐量大</strong></li>
+<li>缺点：<strong>平均周转时间长（作业要排队依次进行处理），无交互能力（用户不能与自己的程序交互直至作业完成）</strong></li>
+<li>要解决的问题：处理机争用问题、内存分配和保护问题、I/O设备分配问题、文件的组织和管理问题、作业管理问题、用户与系统的接口问题…（后续都会进一步讨论）</li>
+</ul>
+</li>
+<li><strong>分时系统</strong><ul>
+<li>需求：人机交互、共享主机（支持多设备同时I/O，多用户共享计算机资源）</li>
+<li>关键问题：及时接收、及时处理</li>
+<li>特征：<strong>多路性（允许多台终端同时连接到一台主机上，并按分时原则为每个用户服务）、独立性（每个用户彼此之间互不干扰）、及时性（用户请求短时间内获得响应）、交互性（用户可通过终端与系统进行广泛的人机对话）</strong></li>
+</ul>
+</li>
+<li><strong>实时系统</strong><ul>
+<li>任务类型：周期性实时任务和非周期性实时任务、硬实时任务和软实时任务</li>
+<li>实时系统与分时系统特征的比较<br>区别|实时系统|分时系统</li>
+</ul>
+</li>
+</ul>
+<p>–:|:–:|:–<br>多路性|系统周期性地对多路现场信息进行采集、对多个对象进行控制|系统按分时原则为多个终端用户服务<br>独立性|信息采集和对对象控制互不干扰，多用户与系统交互互不干扰|多用户与系统交互互不干扰<br>及时性|以控制对象所要求的的截止时间来决定对实时性的要求|对实时性的要求（延迟）是依据人能所接受的等待时间决定的<br>交互性|交互性仅限于访问系统中某些特定的专用服务程序|能向终端用户提供数据处理、资源共享等服务，实现广泛的人机对话<br>可靠性|要求系统高度可靠，采用多级容错措施| 要求系统可靠</p>
+<ul>
+<li><strong>多道批处理系统、分时系统、实时系统是三种基本操作系统</strong></li>
+<li>微机操作系统的发展（略）</li>
+</ul>
+<h1 id="1-3-操作系统的基本特性（考点）"><a href="#1-3-操作系统的基本特性（考点）" class="headerlink" title="1.3 操作系统的基本特性（考点）"></a>1.3 操作系统的基本特性（考点）</h1><ul>
+<li><strong>操作系统的四个基本特征</strong>：<strong>并发、共享、虚拟、异步</strong></li>
+</ul>
+<h2 id="1-3-1-并发"><a href="#1-3-1-并发" class="headerlink" title="1.3.1 并发"></a>1.3.1 并发</h2><h3 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h3><ul>
+<li><strong>并行</strong>：在同一<strong>时刻</strong>发生多个事件</li>
+<li><strong>并发</strong>：在同一<strong>时间间隔</strong>内发生多个事件</li>
+<li><strong>并行有并发，并发无并行</strong></li>
+</ul>
+<h3 id="进程的引入"><a href="#进程的引入" class="headerlink" title="进程的引入"></a>进程的引入</h3><ul>
+<li>进程：<strong>在系统中能独立运行并作为资源分配的基本单位</strong>，由<strong>机器指令、数据和堆栈等组成</strong>，是一个<strong>能独立运行的活动实体</strong>，多个进程之间可以并发执行和交换信息，是<strong>操作系统运行的基础</strong></li>
+<li>进程将程序的<strong>执行分段化</strong>，使得多个程序可以并发执行，大大提高资源系统的利用率，增加系统的吞吐量</li>
+</ul>
+<h2 id="1-3-2-共享"><a href="#1-3-2-共享" class="headerlink" title="1.3.2 共享"></a>1.3.2 共享</h2><ul>
+<li><strong>共享</strong>：系统中的资源可供内存中多并发作业共同使用</li>
+<li>互斥共享方式：<strong>一个进程访问资源时其他进程需要等待</strong>，我们将这种一段时间内只允许一个进程访问的资源称为 <em>临界资源</em>，系统中给的绝大多数物理设备以及栈、变量和表格都属于临界资源，只能被互斥地共享。</li>
+<li>同时访问方式：这里的“同时”在单处理机环境下是宏观意义上的，而在微观上，这些进程<strong>对资源的访问是交替进行的</strong>。</li>
+<li><strong>并发和共享是多用户OS的两个最基本特征</strong></li>
+</ul>
+<h2 id="1-3-3-虚拟-无中生有"><a href="#1-3-3-虚拟-无中生有" class="headerlink" title="1.3.3 虚拟 无中生有"></a>1.3.3 虚拟 <em>无中生有</em></h2><ul>
+<li>时分复用技术（时间）：<strong>多个用户交替使用处理机/物理IO设备</strong><ul>
+<li>虚拟处理机技术：为每道程序建立至少一个进程，让多个程序并发执行，虽然微观上系统只有一台处理机，但通过分时复用方法在宏观将处理机虚拟为多台逻辑上的处理机</li>
+<li>虚拟设备技术：将一台物理I/O设备在宏观上虚拟为多台逻辑上的I/O设备，在微观上让不同应用的进程交替使用I/O设备</li>
+<li>虚拟设备处理速度≤V/n，n为虚拟设备/并发应用个数，V为处理机处理速度</li>
+</ul>
+</li>
+<li>空分复用技术（空间）：<strong>每次只向内存中导入程序中被需要的部分，实现程序在比它小的内存中运行，并实现多个程序对内存的同时使用。</strong>，空分复用体现在将内存分为多个小部分供多个应用同时使用，时分复用体现在每个应用每次只导入当前需要的部分，用完就置换，让应用的每个部分分时进入内存。<ul>
+<li>虚拟设备占用空间≤S/N，n为虚拟设备/并发应用个数，S为内存大小</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-4-异步"><a href="#1-3-4-异步" class="headerlink" title="1.3.4 异步"></a>1.3.4 异步</h2><ul>
+<li><strong>异步</strong>：<strong>每个程序不知何时执行何时结束。</strong></li>
+<li>由于资源等因素的限制，进程在发出资源请求时通常不能及时得到满足，因此进程的执行通常不是一气呵成而是以停停走走的方式运行，导致了程序的执行时间是不可知的。</li>
+</ul>
+<h1 id="1-4-操作系统的主要功能"><a href="#1-4-操作系统的主要功能" class="headerlink" title="1.4 操作系统的主要功能"></a>1.4 操作系统的主要功能</h1><h2 id="1-4-1-处理机管理功能（考点）"><a href="#1-4-1-处理机管理功能（考点）" class="headerlink" title="1.4.1 处理机管理功能（考点）"></a>1.4.1 处理机管理功能（考点）</h2><ul>
+<li><strong>进程控制</strong></li>
+<li><strong>进程同步</strong></li>
+<li><strong>进程通信</strong></li>
+<li><strong>处理机调度</strong><h2 id="1-4-2-存储器管理功能（考点）"><a href="#1-4-2-存储器管理功能（考点）" class="headerlink" title="1.4.2 存储器管理功能（考点）"></a>1.4.2 存储器管理功能（考点）</h2></li>
+<li><strong>内存分配</strong>：<ul>
+<li>为每道程序分配内存空间</li>
+<li>提高存储器的利用率</li>
+<li>允许正在运行的程序申请附加的内存空间</li>
+<li>分配方式：<ul>
+<li>静态分配方式：每个作业的内存空间是在作业装入时确定的</li>
+<li>动态分配方式：每个作业的内存空间在作业装入是基本确定，反允许作业在运行过程中继续申请添加新的附加内存空间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>内存保护</strong>：<ul>
+<li>确保每道用户程序都互不干扰，仅在各自内存中运行</li>
+<li>绝不允许用户程序访问操作系统的程序和数据，也不允许用户程序转到非共享的其它用户程序中去执行</li>
+</ul>
+</li>
+<li><strong>地址映射</strong>：使各程序段的逻辑地址转换为内存空间中与之相对应的物理地址</li>
+<li><strong>内存扩充</strong>：借助虚拟存储技术从逻辑上扩充内存容量（比如1.3.3提到的空分复用技术）<h2 id="1-4-3-设备管理功能（知道有就行）"><a href="#1-4-3-设备管理功能（知道有就行）" class="headerlink" title="1.4.3 设备管理功能（知道有就行）"></a>1.4.3 设备管理功能（知道有就行）</h2></li>
+<li>缓冲管理</li>
+<li>设备分配</li>
+<li>设备处理<h2 id="1-4-4-文件管理功能（知道有就行）"><a href="#1-4-4-文件管理功能（知道有就行）" class="headerlink" title="1.4.4 文件管理功能（知道有就行）"></a>1.4.4 文件管理功能（知道有就行）</h2></li>
+<li>文件存储空间的管理</li>
+<li>目录管理</li>
+<li>文件的读写管理与保护<h2 id="1-4-5-操作系统与用户之间的接口（知道有就行）"><a href="#1-4-5-操作系统与用户之间的接口（知道有就行）" class="headerlink" title="1.4.5 操作系统与用户之间的接口（知道有就行）"></a>1.4.5 操作系统与用户之间的接口（知道有就行）</h2></li>
+<li>用户接口：让用户直接或间接地控制自己的作业</li>
+<li>程序接口：让程序方便地使用系统调用<h2 id="1-4-6-现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体"><a href="#1-4-6-现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体" class="headerlink" title="1.4.6 现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体"></a>1.4.6 现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体</h2><h1 id="1-5-OS结构设计"><a href="#1-5-OS结构设计" class="headerlink" title="1.5 OS结构设计"></a>1.5 OS结构设计</h1><h2 id="1-5-1-传统操作系统结构"><a href="#1-5-1-传统操作系统结构" class="headerlink" title="1.5.1 传统操作系统结构"></a>1.5.1 传统操作系统结构</h2></li>
+<li>古早的无结构操作系统：单人设计，规模小，缺乏首尾一致的设计思想，复杂又混乱</li>
+<li>模块化结构OS：有较为清晰的结构，由若干个具有一定独立性和大小的模块构成，每个模块分工不同，模块内又划分为若干个小模块，规定好各子模块之间的接口和模块间的接口<ul>
+<li>优点：提高了OS设计的准确性、可理解性和可维护性、增强了OS的可适应性、加速了OS的开发过程</li>
+<li>缺点：设计时对各模块间的接口规定很难满足在模块设计完成后对接口的实际需求，设计者的决策必须基于上一个决策，造成可靠性的难以保障</li>
+</ul>
+</li>
+<li>分层式结构OS：目标系统An和裸机系统（物理硬件）A0之间铺设若干个层次的软件，使An通过这些层次的软件最终在A0上运行，在OS中通常采用自底向上法来铺设这些中间层<ul>
+<li>优点：由于自底向上保证了决策的顺序性，从而易于保证系统的正确性；在系统中增加、修改、替换一个层次中的模块或整个层次只要不改变相应层次间的接口就不会影响其他层次，这使系统维护和扩充更加容易</li>
+<li>缺点：OS每执行一个功能，通常要自上而下地穿越多个层次，增加了系统的通信开销，导致系统效率的降低<h2 id="1-5-2-客户服务器模式-（详情请见计网笔记第一章）"><a href="#1-5-2-客户服务器模式-（详情请见计网笔记第一章）" class="headerlink" title="1.5.2 客户服务器模式 （详情请见计网笔记第一章）"></a>1.5.2 客户服务器模式 <em>（详情请见计网笔记第一章）</em></h2></li>
+</ul>
+</li>
+<li>客户服务器系统的三个部分：客户机、服务器、网络系统</li>
+<li>过程：客户机发送请求——服务器接收消息——服务器回送消息——客户机接收消息</li>
+<li>优点：数据分布处理和存储提升了可靠性、缓解了处理能力瓶颈；便于集中管理；具有灵活性和可扩充性；支持且易于改编应用软件</li>
+<li>缺点：若系统只有一个服务器，则一旦服务器故障，将导致整个网络瘫痪，也存在处理瓶颈，可通过增加网络中服务器数量来缓解该问题<h2 id="1-5-3-面向对象程序设计技术"><a href="#1-5-3-面向对象程序设计技术" class="headerlink" title="1.5.3 面向对象程序设计技术"></a>1.5.3 面向对象程序设计技术</h2></li>
+<li>啊这……就是抽象，将数据类型、数据结构、数据文件等进行抽象，方便调用，具体不细说了x</li>
+<li>优点：通过重用提高产品质量和生产率、使系统具有更好的易修改性和易扩展性、更易于保证系统的正确性和可靠性<h2 id="1-5-4-微内核OS结构"><a href="#1-5-4-微内核OS结构" class="headerlink" title="1.5.4 微内核OS结构"></a>1.5.4 微内核OS结构</h2><h3 id="什么是微内核"><a href="#什么是微内核" class="headerlink" title="什么是微内核"></a>什么是微内核</h3></li>
+<li>内核：能实现现代OS最基本核心功能的小型内核，微内核并非是一个完整的OS，只是具有OS最基本的部分，通常包含：与硬件处理紧密相关的部分、一些较为基本的功能、客户和服务器之间的通信<h3 id="微内核的基本功能"><a href="#微内核的基本功能" class="headerlink" title="微内核的基本功能"></a>微内核的基本功能</h3></li>
+<li>进程管理</li>
+<li>低级存储器管理</li>
+<li>中断和陷入处理<h3 id="微内核操作系统的优点"><a href="#微内核操作系统的优点" class="headerlink" title="微内核操作系统的优点"></a>微内核操作系统的优点</h3></li>
+<li>提高了系统的可扩展性</li>
+<li>增强了系统的可靠性</li>
+<li>可移植性强</li>
+<li>提供了对分布式系统的支持</li>
+<li>融入了面向对象技术，提高系统正确性、可靠性、易修改性、易扩展性，同时减少开发系统的开销</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">课程笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-数据库原理笔记4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B04/"
+    >数据库原理笔记4</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B04/" class="article-date">
+  <time datetime="2022-03-31T13:38:45.000Z" itemprop="datePublished">2022-03-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/">课程笔记_数据库原理</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="依照学校教学安排，第四章为数据库设计与实现"><a href="#依照学校教学安排，第四章为数据库设计与实现" class="headerlink" title="依照学校教学安排，第四章为数据库设计与实现"></a>依照学校教学安排，第四章为数据库设计与实现</h1><h1 id="本帖仅供个人学习使用"><a href="#本帖仅供个人学习使用" class="headerlink" title="本帖仅供个人学习使用"></a>本帖仅供个人学习使用</h1><h1 id="使用软件-pgAdmin4-Power-Designer"><a href="#使用软件-pgAdmin4-Power-Designer" class="headerlink" title="使用软件 pgAdmin4, Power Designer"></a>使用软件 pgAdmin4, Power Designer</h1><hr>
+<p>（更新中）</p>
+<h1 id="4-1-数据库设计概述"><a href="#4-1-数据库设计概述" class="headerlink" title="4.1 数据库设计概述"></a>4.1 数据库设计概述</h1><h2 id="4-1-1-数据库设计方案"><a href="#4-1-1-数据库设计方案" class="headerlink" title="4.1.1 数据库设计方案"></a>4.1.1 数据库设计方案</h2><p>数据库设计是数据库应用系统开发的重要内容。在实现数据库之前，必须有明确的设计方案。数据库设计方案主要体现为数据库设计报告及其设计模型。在数据库设计报告中，需要明确：</p>
+<ul>
+<li>数据库设计目标</li>
+<li>数据库设计思路</li>
+<li>数据库设计约束</li>
+<li>数据库命名规则</li>
+<li>数据库应用结构</li>
+<li>数据库应用访问方式</li>
+<li>数据库设计模型<br>…</li>
+</ul>
+<p><strong>数据库设计方案的核心内容有数据库应用架构设计、数据库结构模型设计、数据库应用访问方法设计</strong></p>
+<h3 id="数据库应用架构设计"><a href="#数据库应用架构设计" class="headerlink" title="数据库应用架构设计"></a>数据库应用架构设计</h3><p>在不同应用需求场景中，数据库的应用架构方式是不同的。数据库应用架构可分为<strong>单用户结构、集中式结构、客户-服务器结构和分布式结构</strong>。</p>
+<h3 id="数据库结构模型设计"><a href="#数据库结构模型设计" class="headerlink" title="数据库结构模型设计"></a>数据库结构模型设计</h3><p>数据库结构模型设计一般分为<strong>概念层设计、逻辑层设计、物理层设计</strong>，它们的设计模型分别为<strong>概念数据模型、逻辑数据模型和物理数据模型</strong>。</p>
+<h3 id="数据库应用访问方法设计"><a href="#数据库应用访问方法设计" class="headerlink" title="数据库应用访问方法设计"></a>数据库应用访问方法设计</h3><p>数据库应用对数据库访问可以有多种方式，如<strong>直接本地接口连接访问、基于标准结构连接访问、基于数据访问层框架连接访问</strong></p>
+<h2 id="4-1-2-数据库结构模型"><a href="#4-1-2-数据库结构模型" class="headerlink" title="4.1.2 数据库结构模型"></a>4.1.2 数据库结构模型</h2><ul>
+<li><strong>概念数据模型</strong>是一种面向用户的系统数据模型，它用来描述现实世界的系统概念化数据结构。使数据库设计人员在系统设计的初始阶段摆脱计算机系统及DBMS的具体技术问题，集中精力分析业务数据以及数据之间的联系等，描述系统的数据对象及其组成关系。</li>
+<li><strong>逻辑数据模型</strong>是在概念数据模型的基础上，从系统设计角度描述系统的数据对象组成及其关联结构，并考虑这些数据对象符合数据库对象的逻辑表示。</li>
+<li><strong>物理数据模型</strong>是在逻辑数据模型基础上，针对具体DBMS所设计的数据模型。它用于描述系统数据模型在具体DBMS中的数据对象组织、存储方式、索引方式、访问路径等实现信息。<h2 id="4-1-3-数据库开发过程及设计策略"><a href="#4-1-3-数据库开发过程及设计策略" class="headerlink" title="4.1.3 数据库开发过程及设计策略"></a>4.1.3 数据库开发过程及设计策略</h2><h3 id="数据库开发过程"><a href="#数据库开发过程" class="headerlink" title="数据库开发过程"></a>数据库开发过程</h3></li>
+<li><strong>数据需求分析阶段</strong><ul>
+<li>从现实业务获取数据表单、报表、查询、业务规则、数据更新的说明</li>
+<li>分析系统的数据特征、数据类型、数据取值约束</li>
+<li>描述系统的数据关系、数据处理要求</li>
+<li>建立系统的数据字典</li>
+</ul>
+</li>
+<li><strong>数据库设计阶段</strong><ul>
+<li>数据库模型结构设计（概念数据模型、逻辑数据模型、物理数据模型）</li>
+<li>数据库索引、视图、查询设计</li>
+<li>数据库表约束设计</li>
+<li>数据库触发器、存储过程设计</li>
+</ul>
+</li>
+<li><strong>数据库实现阶段</strong><ul>
+<li>数据库创建</li>
+<li>数据模型物理实现</li>
+</ul>
+</li>
+<li><strong>数据库测试阶段</strong><ul>
+<li>数据库数据上线</li>
+<li>数据库系统测试</li>
+</ul>
+</li>
+</ul>
+<h3 id="设计策略"><a href="#设计策略" class="headerlink" title="设计策略"></a>设计策略</h3><ul>
+<li>自底向上设计：首先具体分析各业务数据需求，并抽象各业务的数据实体及其关系，然后设计各个业务的数据模型。在设计过程中，不断地概括、分类与规范数据模型，并建立反应整个组织的全局数据模型。</li>
+<li>自顶向下设计：首先从组织机构全局角度规划设计组织机构顶层的数据模型，然后分别对各部门所涉及的业务数据进行实体联系建模。在设计过程中，自顶向下逐步细化数据模型设计。</li>
+<li>自内向外设计策略：首先确定组织机构的核心业务，对核心业务数据进行建模设计，然后逐步扩散到其它外围业务的数据模型设计。</li>
+<li>混合策略设计：融合以上设计策略，对组织机构数据库进行建模设计，同时应用多种设计策略进行数据建模，避免单一设计策略导致的数据库建模设计局限。</li>
+</ul>
+<h2 id="4-1-4-主流数据库建模工具Power-Designer"><a href="#4-1-4-主流数据库建模工具Power-Designer" class="headerlink" title="4.1.4 主流数据库建模工具Power Designer"></a>4.1.4 主流数据库建模工具Power Designer</h2><p>当今，数据库设计都必须借助系统建模工具来实现模型设计，此处介绍Power Designer。<br>Power Designer 是一种面向软件开发生命周期的建模工具，它提供软件需求模型、业务流程模型、数据库模型、面向对象模型、自定义模型的开发支持。</p>
+<h2 id="4-1-5-Power-Designer各个数据模型之间的关系"><a href="#4-1-5-Power-Designer各个数据模型之间的关系" class="headerlink" title="4.1.5 Power Designer各个数据模型之间的关系"></a>4.1.5 Power Designer各个数据模型之间的关系</h2><p><img src="../photos/DataBaseCourse/4_1.png" title="Power Designer各个数据模型之间的关系示意图 "><br>在通常数据库设计中，首先设计概念数据模型，然后将其转换设计为逻辑数据模型，最后针对选型的数据库DBMS将逻辑数据模型转化为支持该DBMS的物理数据模型。若设计中不考虑规范化问题，可以将概念数据模型直接转换设计为物理数据模型。当完成PDM物理数据模型设计后，便可将其在DBMS系统中进行数据库实现。</p>
+<h1 id="4-2-E-R模型方法"><a href="#4-2-E-R模型方法" class="headerlink" title="4.2 E-R模型方法"></a>4.2 E-R模型方法</h1><hr>
+<h1 id="4-3-数据库建模设计"><a href="#4-3-数据库建模设计" class="headerlink" title="4.3 数据库建模设计"></a>4.3 数据库建模设计</h1><hr>
+<h1 id="4-4-数据库规范化设计"><a href="#4-4-数据库规范化设计" class="headerlink" title="4.4 数据库规范化设计"></a>4.4 数据库规范化设计</h1><hr>
+<h1 id="4-5-数据库设计模型SQL实现"><a href="#4-5-数据库设计模型SQL实现" class="headerlink" title="4.5 数据库设计模型SQL实现"></a>4.5 数据库设计模型SQL实现</h1><hr>
+<h1 id="4-6-基于Power-Designer的数据库设计建模实践（略）"><a href="#4-6-基于Power-Designer的数据库设计建模实践（略）" class="headerlink" title="4.6 基于Power Designer的数据库设计建模实践（略）"></a>4.6 基于Power Designer的数据库设计建模实践（略）</h1> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" rel="tag">数据库原理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">课程笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-数据库原理笔记3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B03/"
+    >数据库原理笔记3</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B03/" class="article-date">
+  <time datetime="2022-03-24T14:40:43.000Z" itemprop="datePublished">2022-03-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/">课程笔记_数据库原理</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="依照学校教学安排，第三章为数据库操作SQL语言"><a href="#依照学校教学安排，第三章为数据库操作SQL语言" class="headerlink" title="依照学校教学安排，第三章为数据库操作SQL语言"></a>依照学校教学安排，第三章为数据库操作SQL语言</h1><h1 id="本帖仅供个人学习使用"><a href="#本帖仅供个人学习使用" class="headerlink" title="本帖仅供个人学习使用"></a>本帖仅供个人学习使用</h1><h1 id="使用软件-pgAdmin4-Power-Designer"><a href="#使用软件-pgAdmin4-Power-Designer" class="headerlink" title="使用软件 pgAdmin4, Power Designer"></a>使用软件 pgAdmin4, Power Designer</h1><hr>
+<h1 id="3-1-SQL语言概述"><a href="#3-1-SQL语言概述" class="headerlink" title="3.1 SQL语言概述"></a>3.1 SQL语言概述</h1><h2 id="3-1-1-SQL简介"><a href="#3-1-1-SQL简介" class="headerlink" title="3.1.1 SQL简介"></a>3.1.1 SQL简介</h2><p>结构化查询语言SQL是一种对关系数据库进行访问的数据操作语言，于上世纪70年代由SEQUEL语言演变而来。当下主流关系型数据库管理系统均支持SQL标准语言实现数据库操作。<br>SQL的语言特点：</p>
+<ul>
+<li>一体化：SQL语言命令集可以完成关系数据库的数据查询、数据定义、数据操纵、数据库管理、数据库控制等操作。</li>
+<li>使用方式灵活：既可以以交互命令方式操作访问数据库，也可以嵌入到程序语言中编程访问数据库。</li>
+<li>非过程化：SQL对数据库的操作只需告诉DBMS做什么而不需要告诉它怎么做。</li>
+<li>语言语法简单：语句少且简洁。</li>
+</ul>
+<h2 id="3-1-2-SQL对关系数据库的操作原理"><a href="#3-1-2-SQL对关系数据库的操作原理" class="headerlink" title="3.1.2 SQL对关系数据库的操作原理"></a>3.1.2 SQL对关系数据库的操作原理</h2><p>用户（数据库应用程序）对关系数据库进行任何操作，都需要将SQL语句提交给DBMS执行，DBMS执行时将SQL语句转为对数据库文件的输入输出操作，并将读取的数据组装为<strong>操作结果集</strong>返回给用户（数据库应用程序）<br>SQL主要操作功能：</p>
+<ul>
+<li>数据库对象创建、修改、删除</li>
+<li>数据库表的数据插入、修改、删除、查询、统计</li>
+<li>存储过程、触发器、函数等程序执行</li>
+<li>数据库权限、角色、用户等管理</li>
+</ul>
+<h2 id="3-1-3-SQL语言语句类型"><a href="#3-1-3-SQL语言语句类型" class="headerlink" title="3.1.3 SQL语言语句类型"></a>3.1.3 SQL语言语句类型</h2><ul>
+<li>数据定义语句DDL：是SQL语言中用于创建、修改或删除数据库对象的语句，DDL不但可以用于数据库对象的管理，也可以定义数据库对象约束<ul>
+<li>CREATE DATABASE - 创建新数据库 </li>
+<li>DROP DATABASE - 删除数据库</li>
+<li>ALTER DATABASE - 修改数据库属性</li>
+<li>CREATE TABLE - 创建新表</li>
+<li>ALTER TABLE - 修改数据库表结构</li>
+<li>DROP TABLE - 删除表</li>
+<li>CREATE INDEX - 创建索引</li>
+<li>DROP INDEX - 删除索引</li>
+</ul>
+</li>
+<li>数据操纵语句DML：是SQL语言中用于增加、修改、删除的语句<ul>
+<li>INSERT - 向数据库表中插入语句</li>
+<li>UPDATE - 更新数据库表中的数据</li>
+<li>DELETE - 从数据库表中删除数据</li>
+</ul>
+</li>
+<li>数据查询语句DQL：是SQL语言中用于对数据库进行数据查询的语句<ul>
+<li>SELECT - 对表的内容进行查询</li>
+<li>DESC - 查看关系表结构</li>
+</ul>
+</li>
+<li>数据控制语句DCL：是SQL语言中用于对数据库对象访问权进行控制的语句<ul>
+<li>GRANT - 授予用户对数据库对象的权限</li>
+<li>DENY - 拒绝授予用户对数据库对象的权限</li>
+<li>REVOKE - 撤销用户对数据库对象的权限</li>
+</ul>
+</li>
+<li>事务处理语句TPL：是SQL语言中用于数据库内部事务处理的语句<ul>
+<li>BEGIN TRANSACTION - 开始事务</li>
+<li>COMMIT - 提交事务</li>
+<li>ROLLBACK - 回滚事务</li>
+</ul>
+</li>
+<li>游标控制语言CCL：是SQL语言中用于数据库游标操作的语句，游标是是一个存储在MySQL服务器上的数据库查询，它不是一条SELECT语句，而是被该语句检索出来的结果集。在存储了游标之后，应用程序可以根据需要滚动或浏览其中的数据<ul>
+<li>DECLARE CURSOR - 定义游标 </li>
+<li>FETCH INTO - 提交游标数据</li>
+<li>CLOSE CURSOR - 关闭游标</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-4-SQL语言的数据类型"><a href="#3-1-4-SQL语言的数据类型" class="headerlink" title="3.1.4 SQL语言的数据类型"></a>3.1.4 SQL语言的数据类型</h2><ul>
+<li>SQL语言基本数据类型<ul>
+<li>字符：CHAR\VARCHAR\TEXT…</li>
+<li>整数：SMALLINT\INTEGER…</li>
+<li>浮点数：NUMBER\FLOAT…</li>
+<li>日期：DATE\DATETIME…</li>
+<li>货币：MONEY…<br><img src="../photos/DataBaseCourse/3_1.png" title="PostgreSQL主要数据类型"><br><img src="../photos/DataBaseCourse/3_2.png" title="SQL Server数据类型"><br><img src="../photos/DataBaseCourse/3_3.png" title="MySQL数据类型"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="3-2-数据定义SQL语句"><a href="#3-2-数据定义SQL语句" class="headerlink" title="3.2 数据定义SQL语句"></a>3.2 数据定义SQL语句</h1><h2 id="3-2-1-数据库创建SQL语句"><a href="#3-2-1-数据库创建SQL语句" class="headerlink" title="3.2.1 数据库创建SQL语句"></a>3.2.1 数据库创建SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句创建数据库</li>
+</ul>
+<h2 id="3-2-2-数据库、关系表修改SQL语句"><a href="#3-2-2-数据库、关系表修改SQL语句" class="headerlink" title="3.2.2 数据库、关系表修改SQL语句"></a>3.2.2 数据库、关系表修改SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//修改方式语句类型</span><br><span class="line">//ADD修改方式，用于添加新列或列完整性约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新列名称&gt; &lt;数据类型&gt; 完整性约束;</span><br><span class="line"></span><br><span class="line">//DROP修改方式，用于删除指定列或列的完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP COLUMN &lt;列名&gt;;</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP CONSTRAINT;&lt;完整性约束名&gt;;</span><br><span class="line"></span><br><span class="line">//RENAME修改方式，用于修改表名称、列名称</span><br><span class="line">ALTER TABLE &lt;表名&gt; RENAME TO &lt;新表名&gt;;</span><br><span class="line">ALTER TABLE &lt;表名&gt; RENAME &lt;原列名&gt; TO &lt;新列名&gt;;</span><br><span class="line"></span><br><span class="line">//ALTER修改方式，用于修改数据库名、表名、列的数据类型</span><br><span class="line">ALTER DATABASE &lt;数据库名&gt; &lt;修改内容&gt;;</span><br><span class="line">ALTER TABLE &lt;表名&gt; 修改方式;</span><br><span class="line">ALTER TABLE &lt;表名&gt; ALTER COLUMN &lt;列名&gt; TYPE &lt;新的数据类型&gt;;</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句修改数据库或数据库内容</li>
+</ul>
+<h2 id="3-2-3-数据库、关系表删除SQL语句"><a href="#3-2-3-数据库、关系表删除SQL语句" class="headerlink" title="3.2.3 数据库、关系表删除SQL语句"></a>3.2.3 数据库、关系表删除SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE &lt;数据库名&gt;;</span><br><span class="line">DROP TABLE &lt;表名&gt;;</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句删除数据库或数据库内容</li>
+</ul>
+<h2 id="3-2-4-数据库表创建SQL语句"><a href="#3-2-4-数据库表创建SQL语句" class="headerlink" title="3.2.4 数据库表创建SQL语句"></a>3.2.4 数据库表创建SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;列名1&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   ...</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句创建数据库关系表</li>
+</ul>
+<h2 id="3-2-5-列完整性约束"><a href="#3-2-5-列完整性约束" class="headerlink" title="3.2.5 列完整性约束"></a>3.2.5 列完整性约束</h2><ul>
+<li>约束类型<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PRIMARY KEY //主键</span><br><span class="line">NOT NULL //非空值</span><br><span class="line">NULL //空值</span><br><span class="line">UNIQUE //值唯一</span><br><span class="line">CHECK //有效性检查</span><br><span class="line">DEFAULT //缺省值</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句添加列完整性约束</li>
+</ul>
+<h2 id="3-2-6-表约束定义主键"><a href="#3-2-6-表约束定义主键" class="headerlink" title="3.2.6 表约束定义主键"></a>3.2.6 表约束定义主键</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//PRIMARY KEY定义表的主键列只能定义单列主键，若要定义由多个列构成的复合主键，则需要使用表约束方式来定义</span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;列名1&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">...</span><br><span class="line">   CONSTRAINT &lt;约束名&gt; PRIMARY Key (主键列名1,主键列名2)</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句定义主键、复合主键</li>
+<li>使用表约束定义主键的优点：<ul>
+<li>便于定义复合主键</li>
+<li>可命名主键约束</li>
+<li>便于定义代理键</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-7-表约束定义代理键"><a href="#3-2-7-表约束定义代理键" class="headerlink" title="3.2.7 表约束定义代理键"></a>3.2.7 表约束定义代理键</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//在一些关系表中，为了方便数据处理，可以使用代理键去替代复合主键。在SQL语句中，关系表的代理键采用表约束方式来定义</span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;代理键列名&gt; &lt;Serial数据类型&gt; NOT NULL,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">...</span><br><span class="line">   CONSTRAINT &lt;约束名&gt; PRIMARY Key (代理键列名)</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句定义代理键</li>
+</ul>
+<h2 id="3-2-8-表约束定义外键"><a href="#3-2-8-表约束定义外键" class="headerlink" title="3.2.8 表约束定义外键"></a>3.2.8 表约束定义外键</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//在数据库中，一些关系表之间存在关联，在一个表中作为主键的列，在另外的关联表中则作为外键</span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;列名1&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">...</span><br><span class="line">   CONSTRAINT &lt;约束名&gt; FOREIGN Key (外键列名)</span><br><span class="line">       REFERENCES  外键列所在表名(外键列名)</span><br><span class="line">     ON DELETE CASCADE//联级删除，如果主表中的一个列被删除了，那么应用该列的从表中的所有记录也被删除</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句定义外键</li>
+</ul>
+<h2 id="3-2-9-数据库索引操作语句、"><a href="#3-2-9-数据库索引操作语句、" class="headerlink" title="3.2.9 数据库索引操作语句、"></a>3.2.9 数据库索引操作语句、</h2><h3 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引"></a>什么是索引</h3><ul>
+<li>索引是一种按照关系表中指定列的取值顺序组织元组数据存储的数据结构，使用它可以加快表中数据的查询访问</li>
+<li>在索引数据结构中，采用树结构的各个结点存储索引值及其指针，索引叶结点的指针指向数据库文件中的元组数据块地址<br><img src="../photos/DataBaseCourse/3_4.png" title="B树索引结构图"></li>
+<li>索引作用及其特点<ul>
+<li>索引作用：支持对数据库表中数据快速查找</li>
+<li>索引优点<ul>
+<li>提高数据检索速度</li>
+<li>可快速连接关联表</li>
+<li>减少分组和排序时间</li>
+</ul>
+</li>
+<li>索引开销<ul>
+<li>创建和维护索引都需要较大开销</li>
+<li>索引会占用额外存储空间</li>
+<li>数据操纵困难因维护索引带来系统性能开销</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据库索引创建、修改、删除语句"><a href="#数据库索引创建、修改、删除语句" class="headerlink" title="数据库索引创建、修改、删除语句"></a>数据库索引创建、修改、删除语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 数据库索引创建语句</span><br><span class="line">CREATE INDEX &lt;索引名&gt; ON &lt;表名&gt; &lt;(列名)&gt;;</span><br><span class="line"></span><br><span class="line">// 数据库索引修改语句</span><br><span class="line">ALTER INDEX &lt;索引名&gt; 修改项;//具体修改语法见3.2.2</span><br><span class="line"></span><br><span class="line">// 数据库索引删除语句</span><br><span class="line">DROP INDEX &lt;索引名&gt;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="3-3-数据操纵SQL语句"><a href="#3-3-数据操纵SQL语句" class="headerlink" title="3.3 数据操纵SQL语句"></a>3.3 数据操纵SQL语句</h1><h2 id="3-3-1-数据插入SQL语句"><a href="#3-3-1-数据插入SQL语句" class="headerlink" title="3.3.1 数据插入SQL语句"></a>3.3.1 数据插入SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//插入一个元组语法如下，插入几个元组就写几行</span><br><span class="line">INSERT INTO 表名或视图名    如果元组只有个别列有数据，这里可以再写一个列名表表示要给哪几个列赋值，不写的话缺省值默认为NULL并自动补全 VALUES (该元组的所有数据从左到右排列，之间用逗号隔开);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-3-2-数据修改SQL语句"><a href="#3-3-2-数据修改SQL语句" class="headerlink" title="3.3.2 数据修改SQL语句"></a>3.3.2 数据修改SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPDATE 表名或视图名 //UPDATE关键字指定修改的是哪个表或视图</span><br><span class="line">SET 列名1=新数据 //SET关键字指定对哪些列设定新值，注意字符串要给单引号</span><br><span class="line">WHERE 条件表达式;//WHERE关键字给出修改的前提条件，比如需要指定行用到的 xxx=xxx</span><br><span class="line">//看不懂的见下图</span><br></pre></td></tr></table></figure>
+<img src="../photos/DataBaseCourse/3_5.png" title="数据更新实例"></li>
+</ul>
+<h2 id="3-3-3-数据删除SQL语句"><a href="#3-3-3-数据删除SQL语句" class="headerlink" title="3.3.3 数据删除SQL语句"></a>3.3.3 数据删除SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//一次删除一个元组，删几个元组写几遍</span><br><span class="line">DELETE</span><br><span class="line">FROM 表名或视图名</span><br><span class="line">WHERE 条件表达式</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="3-4-数据查询SQL语句"><a href="#3-4-数据查询SQL语句" class="headerlink" title="3.4 数据查询SQL语句"></a>3.4 数据查询SQL语句</h1><h2 id="3-4-1-单表数据查询"><a href="#3-4-1-单表数据查询" class="headerlink" title="3.4.1 单表数据查询"></a>3.4.1 单表数据查询</h2><h3 id="数据查询SQL语句格式"><a href="#数据查询SQL语句格式" class="headerlink" title="数据查询SQL语句格式"></a>数据查询SQL语句格式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT ALL或DISTINCT 目标列 //选ALL就是有啥输出啥，有DISTINCT就是去掉重复的数据行，如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">INTO 新表</span><br><span class="line">FROM 表名或视图名 //多个表名或视图名可以用逗号隔开，往后续</span><br><span class="line">//如果是条件查询 就写 &quot;WHERE 条件表达式&quot;</span><br><span class="line">//如果是分组统计查询就写 &quot;GROUP BY 列名&quot;,如果有条件接着写 &quot;HAVING 条件表达式&quot;</span><br><span class="line">//如果查询结果需要排序输出就写 &quot;ORDER BY 列名&quot;这个子句要放在WHERE后面（如果有的话）,如果接着写&quot;ASC或DESC&quot;, ASC是升序排列，DESC是降序排列</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h3 id="从单个表读取指定列"><a href="#从单个表读取指定列" class="headerlink" title="从单个表读取指定列"></a>从单个表读取指定列</h3><p>在关系数据库中，最简单的数据查询操作就是从单个关系表中读取指定列的数据，即关系的投影操作 <em>（说白了就是把列拎出来组成结果集）</em></p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT 目标列//如果有多个目标列可以用逗号隔开，接着往后续，如果要查询所有列数据，就写个 *</span><br><span class="line">FROM 关系表名;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="从单个表读取指定行"><a href="#从单个表读取指定行" class="headerlink" title="从单个表读取指定行"></a>从单个表读取指定行</h3><p>SQL查询语句也可以从一个关系表中读取满足条件的指定行数据，即完成关系数据的元组选择操作</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM 关系表</span><br><span class="line">WHERE 条件表达式;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="从单个表读取指定行和列"><a href="#从单个表读取指定行和列" class="headerlink" title="从单个表读取指定行和列"></a>从单个表读取指定行和列</h3><p>在SQL查询语句中，还可以从一个关系表中读取指定行与指定列范围内的数据。既完成关系的行选择，又完成关系的列投影操作。</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT 目标列//如果有多个目标列可以用逗号隔开，接着往后续，如果要查询所有列数据，就写个 *</span><br><span class="line">FROM 关系表</span><br><span class="line">WHERE 条件表达式;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="WHERE条件子句"><a href="#WHERE条件子句" class="headerlink" title="WHERE条件子句"></a>WHERE条件子句</h3><p>使用WHERE子句中可以使用如下方式，指定范围数据</p>
+<ul>
+<li>使用<strong>BETWEEN…AND</strong>关键词来限定列值范围，还可以使用关键词LIKE与通配符来限定查询条件</li>
+<li>使用通配符来限定字符串数据范围。_通配符用于代表一个未指定的字符，%通配符用于代表一个或多个未指定的字符<br>在SQL查询WHERE子句中，还可以使用多个条件表达式，并通过逻辑运算符AND\OR\NOT连接操作，以及使用IN\NOT IN关键词，进一步限定结果集的数据范围</li>
+</ul>
+<h3 id="对结果集进行排序"><a href="#对结果集进行排序" class="headerlink" title="对结果集进行排序"></a>对结果集进行排序</h3><p>在SELECT查询语句返回的结果集中，行的顺序是任意的。如果需要结果集排序，可以在SELECT语句中加入ORDER BY 关键字<br>在ORDER子句中可以使用ASC和DESC指定排序是升序还是降序，也可以ASC和DESC搭配使用，若要先按某列数据升序\降序排列元组，再对其中数据相同的元组以别的列的数据升序\降序排列元组，则在ORDER BY后的这几个列之间用逗号隔开。</p>
+<h2 id="3-4-2-内置函数与分组统计"><a href="#3-4-2-内置函数与分组统计" class="headerlink" title="3.4.2 内置函数与分组统计"></a>3.4.2 内置函数与分组统计</h2><h3 id="SQL内置函数类型"><a href="#SQL内置函数类型" class="headerlink" title="SQL内置函数类型"></a>SQL内置函数类型</h3><p>SQL语言提供了大量内置函数，支持对SELECT查询结果数据进行处理<br>典型SQL内置函数类型如下：</p>
+<ul>
+<li>聚合函数</li>
+<li>算术函数</li>
+<li>字符串函数</li>
+<li>日期时间函数</li>
+<li>数据类型转换函数</li>
+</ul>
+<h3 id="SQL聚合函数"><a href="#SQL聚合函数" class="headerlink" title="SQL聚合函数"></a>SQL聚合函数</h3><p>聚合函数是一些对关系表中数值属性列进行计算并以表的形式返回查询结果的函数<br>AVG() 计算结果集指定列数据的平均值<br>COUNT() 计算结果集行数<br>MIN() 找出结果集指定列数据的最小值<br>MAX() 找出结果集指定列数据的最大值<br>SUM() 计算结果集指定列数据的总和</p>
+<h3 id="SQL内置函数与分组统计"><a href="#SQL内置函数与分组统计" class="headerlink" title="SQL内置函数与分组统计"></a>SQL内置函数与分组统计</h3><p>在SQL语言中，可使用内置函数对查询结果集进行分组数据统计。这是通过在SELECT语句中加入Group By子语句来实现。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//分组统计SQL语句基本格式：</span><br><span class="line">SELECT 统计函数/目标列</span><br><span class="line">FROM 表名</span><br><span class="line">//如果需要添加条件就写&quot;WHERE 条件表达式&quot;</span><br><span class="line">GROUP BY 目标列</span><br><span class="line">//HAVING字句 是对GROUP BY的结果进行限制，如要添加，则写&quot;HAVING 条件表达式&quot;</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-3-多表关联查询"><a href="#3-4-3-多表关联查询" class="headerlink" title="3.4.3 多表关联查询"></a>3.4.3 多表关联查询</h2><h3 id="子查询与多表关联"><a href="#子查询与多表关联" class="headerlink" title="子查询与多表关联"></a>子查询与多表关联</h3><p>在实际应用中，通常需要关联多表才能获得所需的信息。在SELECT查询语句中，可使用子查询方式实现多表关联查询。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//子查询SQL语句基本格式：</span><br><span class="line">SELECT 目标列 //如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">FROM 表名</span><br><span class="line">WHERE 条件中嵌套另一关系表的SELECT查询结果集</span><br><span class="line">;</span><br><span class="line">//例子见下表</span><br></pre></td></tr></table></figure>
+<p><img src="../photos/DataBaseCourse/3_6.png" title="子查询示例"></p>
+<h3 id="使用连接关联多表查询"><a href="#使用连接关联多表查询" class="headerlink" title="使用连接关联多表查询"></a>使用连接关联多表查询</h3><p>在使用多个表查询时，子查询只有在结果数据均来自一个表的情况下才有用。但如果需要从两个或多个表中获取结果数据，就不能使用子查询，而需要采用连接关联多表查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//关联多表查询SQL语句基本格式：</span><br><span class="line">SELECT 目标列 //如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">FROM 表名  //如果数据来自多个表可以用逗号隔开，接着往后续</span><br><span class="line">WHERE 关系表之间的连接关联条件</span><br><span class="line">;</span><br><span class="line">//例子见下表</span><br></pre></td></tr></table></figure>
+<p><img src="../photos/DataBaseCourse/3_7.png" title="关联多表查询示例"></p>
+<h3 id="SQL-JOIN…ON连接查询语句"><a href="#SQL-JOIN…ON连接查询语句" class="headerlink" title="SQL JOIN…ON连接查询语句"></a>SQL JOIN…ON连接查询语句</h3><p>在SQL语言中，实现多表连接关联查询还可以使用JOIN…ON关键词的语句格式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//两表连接关联查询的JOIN...ON语句格式：</span><br><span class="line">SELECT 目标列 //如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">FROM 表名1 JOIN 表名2 ON 连接条件</span><br><span class="line">//有具体排序需要可以添加ORDER BY子句;</span><br><span class="line">//例子见下表</span><br></pre></td></tr></table></figure>
+<p><img src="../photos/DataBaseCourse/3_8.png" title="使用JOIN...ON语句进行关联多表查询示例"></p>
+<h3 id="外部连接"><a href="#外部连接" class="headerlink" title="外部连接"></a>外部连接</h3><p>在一些特殊情况下，如关联表中的一些行的主键与外键不匹配（比如某个属性作为主键时的行数和在其它表中做外键时的行数不同），查询结果集就会丢失部分数据，此时就不能找出在某表中存在但在其它表没有的元组。在SQL应用中，有时候也希望输出那些不满足连接条件的元组数据。此时，可使用JOIN…ON外连接方式实现。其实现方式有三种形式，具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//搭配2.2.5食用风味更佳</span><br><span class="line">LEFT JOIN //即使没有与右表关联列值匹配，也从左表返回所有的行</span><br><span class="line">RIGHT JOIN //即使没有与左表关联列值匹配，也从右表返回所有的行</span><br><span class="line">FULL JOIN //全外连接，同时进行左连接和右连接，返回所有行</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="3-5-数据控制SQL语句"><a href="#3-5-数据控制SQL语句" class="headerlink" title="3.5 数据控制SQL语句"></a>3.5 数据控制SQL语句</h1><h2 id="3-5-1-什么是数据控制SQL语句"><a href="#3-5-1-什么是数据控制SQL语句" class="headerlink" title="3.5.1 什么是数据控制SQL语句"></a>3.5.1 什么是数据控制SQL语句</h2><p>在SQL语言中，数据控制SQL语句是一种可对用户数据访问权进行控制的操作语句，它可以控制特定用户或角色对数据表、视图、存储过程、触发器等数据库对象的访问权限</p>
+<ul>
+<li>数据控制SQL语句分类<ul>
+<li>GRANT授权语句：是一种由数据库对象创建者或管理员执行的权限授予语句，它可以把访问数据库对象权限赋予给其他用户或角色</li>
+<li>REVOKE收权语句：是一种由数据库对象创建或管理员赋予其它用户或角色的权限进行收回的语句，它可以收回原赋予给其他用户或角色的权限</li>
+<li>DENY拒绝权限语句：是一种用于拒绝给当前数据库内的用户或者角色授予权限并防止用户或角色通过其组或角色成员继承权限的语句</li>
+</ul>
+</li>
+</ul>
+<h3 id="GRANT授权语句"><a href="#GRANT授权语句" class="headerlink" title="GRANT授权语句"></a>GRANT授权语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT 权限列表  ON 数据库对象 TO 用户或角色</span><br><span class="line">//若后面接&quot;WITH GRANT OPTION&quot;子句，则被授权角色或用户还可将这些权限赋给其他用户或角色</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h3 id="REVOKE收权语句"><a href="#REVOKE收权语句" class="headerlink" title="REVOKE收权语句"></a>REVOKE收权语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REVOKE 权限列表 ON 数据库对象 FROM 用户或角色</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h3 id="DENY拒绝权限语句"><a href="#DENY拒绝权限语句" class="headerlink" title="DENY拒绝权限语句"></a>DENY拒绝权限语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DENY 权限列表 ON 数据库对象 TO 用户或角色</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="3-6-视图SQL语句"><a href="#3-6-视图SQL语句" class="headerlink" title="3.6 视图SQL语句"></a>3.6 视图SQL语句</h1><h2 id="3-6-1-什么是视图"><a href="#3-6-1-什么是视图" class="headerlink" title="3.6.1 什么是视图"></a>3.6.1 什么是视图</h2><p><strong>视图</strong>是一种通过基础表或其它视图构建的虚拟表，它本身没有自己的数据，而是使用了存储在基础表中的数据</p>
+<h2 id="3-6-2-视图创建SQL语句"><a href="#3-6-2-视图创建SQL语句" class="headerlink" title="3.6.2 视图创建SQL语句"></a>3.6.2 视图创建SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW 视图名 AS SELECT查询//SELECT语句用于指定目标列</span><br><span class="line">FROM 表名</span><br><span class="line">//如果有条件限制 就加上 &quot;WHERE 条件表达式&quot;</span><br><span class="line">;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-6-3-视图调用SQL语句"><a href="#3-6-3-视图调用SQL语句" class="headerlink" title="3.6.3 视图调用SQL语句"></a>3.6.3 视图调用SQL语句</h2><p>当视图在数据库中创建后，用户可以像访问关系表一样去操作访问视图</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列名表/*</span><br><span class="line">FROM 视图名</span><br><span class="line">//如果要特殊排列，则添加&quot;ORDER BY 列名&quot;子句</span><br><span class="line">;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-6-4-视图删除SQL语句"><a href="#3-6-4-视图删除SQL语句" class="headerlink" title="3.6.4 视图删除SQL语句"></a>3.6.4 视图删除SQL语句</h2><p>当数据库不再需要某视图时，可以在数据库中删除该视图</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW 视图名//</span><br><span class="line">;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-6-5-视图应用"><a href="#3-6-5-视图应用" class="headerlink" title="3.6.5 视图应用"></a>3.6.5 视图应用</h2><h3 id="使用视图简化复杂SQL查询操作"><a href="#使用视图简化复杂SQL查询操作" class="headerlink" title="使用视图简化复杂SQL查询操作"></a>使用视图简化复杂SQL查询操作</h3><p>数据库开发人员可以将复杂的SQL查询语句封装在视图内，外部程序只需使用简单的试图访问方式，便可获取所需要的数据<br><img src="../photos/DataBaseCourse/3_9.png" title="创建关联表语句写法"><br><img src="../photos/DataBaseCourse/3_10.png" title="创建视图语句写法"><br><del>Emm…感觉视图写法更复杂了…</del><br>当视图被创建完成后，外部程序就可以通过SELECT语句查询视图数据 <em>(具体写法见3.6.3)</em></p>
+<h3 id="使用视图提高数据访问安全性"><a href="#使用视图提高数据访问安全性" class="headerlink" title="使用视图提高数据访问安全性"></a>使用视图提高数据访问安全性</h3><p>通过视图可以将数据表内敏感数据隐藏起来，外部用户无法得知数据表的完整数据，降低数据库被攻击的风险，还可以保护用户隐私数据</p>
+<h3 id="提供一定程度的数据逻辑独立性"><a href="#提供一定程度的数据逻辑独立性" class="headerlink" title="提供一定程度的数据逻辑独立性"></a>提供一定程度的数据逻辑独立性</h3><p>通过视图，可提供一定程度的数据逻辑独立性。当数据表结构发生改变，只要视图结构不变，应用程序可以不作修改</p>
+<h3 id="集中展示用户所感兴趣的特定数据"><a href="#集中展示用户所感兴趣的特定数据" class="headerlink" title="集中展示用户所感兴趣的特定数据"></a>集中展示用户所感兴趣的特定数据</h3><p>通过视图，可以将用户不关心的部分数据进行过滤</p>
+<hr>
+<h1 id="3-7-PostgreSQL数据库实践（略）"><a href="#3-7-PostgreSQL数据库实践（略）" class="headerlink" title="3.7 PostgreSQL数据库实践（略）"></a>3.7 PostgreSQL数据库实践（略）</h1> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" rel="tag">数据库原理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">课程笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-论文翻译1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/24/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%911/"
+    >论文翻译1_粒子系统</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/24/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%911/" class="article-date">
+  <time datetime="2022-03-24T04:11:11.000Z" itemprop="datePublished">2022-03-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%BF%BB%E8%AF%91/">个人翻译</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p><strong>原文作者：William T.Reeves, Lucasfilm.Ltd</strong><br><strong>原文题目：Particle Systems-A Technique for Modeling a Class of Fuzzy Objects</strong>(Computer Graphics, Volume 17, Number 3, July 1983)<br><strong>翻译仅供个人学习，勿做他用</strong><br><strong>部分地方为了语义通顺，在尊重原文意思的同时使用了意译</strong><br><strong>翻译限于个人水平，敬请见谅</strong></p>
+<hr>
+<h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h1><ul>
+<li>  当下的计算机图像合成技术对诸如云、雾、水和火等自然事物进行建模已经被证明是困难的。这些“模糊”的物体并没有平滑、界限清晰、闪闪发亮的表面，而是拥有不平整、复杂、界限模糊的表面。我们对这些事物形体的动态、流动变化深感兴趣。它们的动作既不一成不变也不能被计算机图像中的常见简单仿射变换所描绘。</li>
+<li>  本文提供了一种对模糊物体的建模方法，称为“粒子系统”。粒子系统在图像合成方面与一般使用的呈现方式有三个基本的不同点。第一， 物体并不由一系列基本的面元素如多面形或色块所呈现，且它的边界也不为这些元素所定义，而是借助基本粒子组成的云团来定义它的体积；第二，粒子系统并不是确切的实体，它的粒子随着时间的变化而改变外观，粒子新旧更替。第三，由粒子系统所呈现的物体的外形并不被明确规定，因此其不具确定性。此外，随机处理被用于生成和改变物体的外观。</li>
+<li>  在模糊物体的建模过程中，相较于传统以面为导向的技术，粒子系统方法有几个重要的优势。首先，粒子（目前将其想象为三维空间的一个点）是比多边形更加原始和简易的，是表面呈现方式中最为简化的。因此，在相同的计算时间内采用粒子系统可以处理更多的基元并产生更加复杂的图像。由于粒子是简易的，所以它也易于运动模糊。时态混叠效应下快速运动的物体导致的运动模糊现象在计算机图像合成中已经被长久地忽视了；第二个优势是模型定义是程序性的，并且由随机数控制。因此，相比于通常使用现有的基于表面的系统，使用粒子系统获得一个十分精细的模型并不一定需要人们长时间设计。由于它是程序性的，所以粒子系统可以调整其细节级别以适应特定的一组查看参数。使用分形曲面，使用粒子系统放大可以显示越来越多的细节；第三，使用粒子系统建模的物体是“活的”，也就是说，它们会在一段时间内改变外观。而这种复杂的动力学形式使用基于曲面的建模技术则难以实现。</li>
+<li>  建模时将物体做成粒子的集合并非新想法。十五年前，最早的电脑磁带游戏将太空飞船的爆炸描绘成充满屏幕的许多光点。尽管在文献中很少提及它们，但在许多三维建模系统中，点源被用作图形数据类型。俄亥俄州的Roger Wilson使用粒子来建模从烟囱中冒出的烟雾。在他的模型中既没有随机控制，也没有动力学。Alvy Ray Smith和Jim Blinn在他们的系列节目《宇宙》（Cosmos）中使用粒子来给恒星消亡建模。Alan Norton使用粒子生成和显示三维分形形状。Jim Blinn讨论过模拟光通过和被粒子层反射的光反射函数。他的技术被用于生成土星环的图片。Blinn并没有解决模糊物体的建模问题，这也是他论文的主题。体积表示法也被认为是曲面表示的可行替代方案。实体建模是体积表示的一种，就如Norm Badler和Joe O’Rourke的《泡泡人》（Bubble-man）的一样。在分形建模中，随机建模的使用将我们的工作和最新的进展联系起来。</li>
+<li>  第二部分更加详尽地描述了粒子系统的基本框架。第三部分研究了在《星际迷航2：可汗之怒》中粒子系统是怎样用于在“创世纪演示”中生成火，第四部分展现了粒子系统的另外几个应用，第五部分讨论了该领域未来的进一步研究。</li>
+</ul>
+<hr>
+<h1 id="2-粒子系统的基本模型"><a href="#2-粒子系统的基本模型" class="headerlink" title="2 粒子系统的基本模型"></a>2 粒子系统的基本模型</h1><ul>
+<li>  粒子系统是许多微小粒子的集合，它们共同表示一个模糊的物体。在一段时间内，许多粒子将被生成为一个系统、在这个系统内移动和改变外观，最后随着这个系统销毁。</li>
+<li>  为了在动态演示中计算每一帧，需要进行以下步骤：(1)新粒子被生成到系统内，（2）每个粒子都被分配独立的属性，（3）系统中任何存在时间超过预定寿命的粒子都会被销毁，（4）剩余的粒子根据它们的动力学属性被移动和转化，（5）最后在帧缓存器中渲染活动粒子的图像。粒子系统可通过编程被设定为在每一步执行任何一组指令。由于它是程序性的，所以这种方法可以结合任何描述物体外观或动力学的计算模型。举个例子，粒子的运动和变换能够与一组偏微分方程的解联系在一起，或者粒子的属性能够基于统计力学被分配。因此，我们能利用那些已经在其它科学或工程学科中被开发的模型。</li>
+<li>  在本文的研究中，我们是用简易的随机过程作为帧生成的每个步骤的程序性要素。为了在粒子系统中控制粒子的形状、外观和动力学特性，模型设计者需要用到一组参数。一般来说，每组参数表明了粒子属性值的范围。我们通常使用平均值和最大方差来指定这些范围。</li>
+<li>  后续小节更加详尽地描述了粒子系统的基本模型和在我们编写的软件中这些粒子是如何被控制和规定的。</li>
+</ul>
+<h2 id="2-1-粒子生成"><a href="#2-1-粒子生成" class="headerlink" title="2.1 粒子生成"></a>2.1 粒子生成</h2><ul>
+<li>  粒子在系统中以受控随机过程生成。该过程确定在每个时间间隔（给定帧）内进入系统的粒子数。生成的粒子数目很重要，因为它强烈影响模糊物体的密度。</li>
+<li>  模型设计者可以在下面两种方法中选择一种来控制新粒子的数目。第一种方法是，设计者控制每帧内生成的粒子的平均数量及其方差。在帧f上生成的实际粒子数为：<center>NParts<sub>f</sub> = MeanParts<sub>f</sub> + Rand( ) × VarParts<sub>f</sub>，</center>
+其中Rand是一个程序过程，它返回一个在-1.0和+1.0之间概率均匀分布的随机数，MeanParts<sub>f</sub>是粒子数量的平均数，VarParts<sub>f</sub>是粒子数量的方差。</li>
+<li>  第二种方法是新粒子的数量取决于物体在屏幕上的大小。模型设计者控制每个屏幕单位面积内生成粒子的平均数及其方差。程序化粒子系统可以决定每一个特定帧的视图参数，计算其覆盖的大致区域，并相应地设定新粒子的数量。对应的方程为：<center>NParts<sub>f</sub> = (MeanParts<sub>sa<sub>f</sub></sub> + Rand( ) × VarParts<sub>sa<sub>f</sub></sub>) x ScreenArea，</center>
+其中MeanParts<sub>sa</sub>是每单位屏幕面积粒子数的平均值，MeanParts<sub>sa<sub>f</sub></sub>是其方差，ScreenArea则是粒子系统在屏幕上所占的面积。这个方法
+控制了粒子系统细节的级别，从而控制渲染其图像所需的时间。举个例子，我们没必要在屏幕上4个像素大小的区域生成100000个粒子。</li>
+<li>  为了使粒子系统能够在密度上增减，设计者可以随时间去改变每帧生成的粒子的平均数量（即，MeanParts<sub>f</sub>和MeanParts<sub>sa<sub>f</sub></sub>是如上所述的帧数函数）。目前，我们使用一个简单的线性函数：<center>MeanParts<sub>f</sub> = InitialMeanParts + DeltaMeanParts<sub>sa<sub>f</sub></sub> x (f - f<sub>0</sub>) </center>
+或
+<center>MeanParts<sub>sa<sub>f</sub></sub>= InitialMeanParts<sub>sa</sub> + DeltaMeanParts<sub>sa</sub> x ( f - f<sub>0</sub>), </center>
+其中f是当前帧，f<sub>0</sub>是粒子系统处于活动状态的第一帧，InitialMeanParts<sub>sa</sub>表示该第一帧的粒子平均数，VarParts<sub>sa<sub>f</sub></sub>表示其变化率，方差约束量VarParts<sub>sa<sub>f</sub></sub>和VarParts<sub>f</sub>目前在所有帧上都是常量。更复杂的二次型、三次型甚至随机变化在均值和方差参数中都很容易添加。</li>
+<li>  为了控制粒子系统中的粒子生成，设计者指定f<sub>0</sub>和参数InitialMeanParts、DeltaMeanParts和VarParts，或和参数InitialMeanParts<sub>sa</sub>、DeltaMeanParts<sub>sa</sub>和VarParts<sub>sa</sub>。</li>
+</ul>
+<h2 id="2-2-粒子属性"><a href="#2-2-粒子属性" class="headerlink" title="2.2 粒子属性"></a>2.2 粒子属性</h2><ul>
+<li>  对于每个被生成的新粒子，粒子系统必须指定其以下属性值：</li>
+<li>初始位置</li>
+<li>初始速度（包含速率和方向）</li>
+<li>初始大小</li>
+<li>初始颜色</li>
+<li>初始透明度</li>
+<li>形状</li>
+<li>寿命</li>
+<li>  粒子系统的几个参数控制着粒子的初始位置。粒子系统在三维空间内有一个用于定义原点的位置，通过原点绕坐标系旋转的两个角度得出其方向 <em>（球坐标系）</em>。粒子系统也有一个 <em>生成形状</em>，它定义了一个关于其原点的区域，新产生的粒子被随机放置在该区域内。我们已经实现的生成形状有：半径为r的球体，坐标系内xoy平面上的半径为r的圆形，以及坐标系内xoy平面上的长l宽w的矩形。图1展示了一个典型的球形生成形状的粒子系统。基于物理系统或混沌吸引子的更复杂的生成形状已被构思出来但仍未实现。<br>（插图）</li>
+<li>  粒子系统的生成形状也描述了新粒子移动的初始方向。在一个球形生成形状内，粒子从粒子系统的原点向外移动。在圆形或矩形形状中，粒子从x-y平面向上移动，但被允许根据另一个参数——“放射”角度——偏移垂直方向。粒子的初始速度由该公式决定：<center>InitialSpeed = MeanSpeed + Rand( ) x VarSpeed，</center>
+其中MeanSpeed和VarSpeed是粒子系统的另外两个参数，它们分别表示平均速度和速度的方差。</li>
+<li>  为了确定一个粒子的初始颜色，粒子系统需要一个平均颜色和与该颜色的最大偏差。粒子透明度和粒子大小也由平均值和最大变化范围决定。这些方程与上面给出的初速公式类似。</li>
+<li>  粒子系统有一个用于明确每个被生成粒子的形状的参数。目前已实现的粒子形状有球形、矩形和条纹球形。后者被用于运动态模糊化粒子——一个在给快速移动物体建模时十分重要的特性。我们在2.5小节和3小节更加详细地探讨了条纹粒子。</li>
+<li>  可能的属性控制参数及其变体的数量是无限的。我们目前呈现的是已经找到的最有用和最有趣的。</li>
+</ul>
+<h2 id="2-3-粒子动力学"><a href="#2-3-粒子动力学" class="headerlink" title="2.3 粒子动力学"></a>2.3 粒子动力学</h2><ul>
+<li>  在粒子系统内的单个粒子在三维空间内随着时间移动，并改变颜色、透明度和尺寸。</li>
+<li>  将粒子从一帧移动到下一帧（的位置）易如反掌，只需将它的速度矢量加到它的位置矢量上即可。更复杂一些，粒子系统也使用加速度在帧与帧之间修改黎姿的速度。通过这个参数，模型设计师能够模拟重力并让粒子以抛物线轨迹而不是直线轨迹运动。</li>
+<li>  粒子随着时间的颜色变化是由颜色变化率这一参数所规定的。粒子的透明度和尺寸也是这么被控制的。在我们的实现方案中，这些变化率在粒子系统中的影响对所有粒子而言是全局的，我们也很容易想到将这个参数也做成随机变化的。</li>
+</ul>
+<h2 id="2-4-粒子销毁"><a href="#2-4-粒子销毁" class="headerlink" title="2.4 粒子销毁"></a>2.4 粒子销毁</h2><ul>
+<li>  粒子在被生成时赋予了一个以帧为衡量单位的寿命。随着每一帧被计算，（剩余）寿命也逐渐减少。当粒子的（剩余）寿命减为0时，粒子就被销毁了。</li>
+<li>  只要粒子对图像没有任何贡献，也可以用其它机制来安排粒子的销毁。如果根据颜色和透明度计算的粒子强度低于指定阈值，则该粒子将被销毁。从其父粒子系统的原点沿指定方向移动的距离超过规定值的粒子也会被销毁。这一机制能够被用于去除在关注区域以外的粒子。</li>
+</ul>
+<h2 id="2-5-粒子渲染"><a href="#2-5-粒子渲染" class="headerlink" title="2.5 粒子渲染"></a>2.5 粒子渲染</h2><ul>
+<li>  一旦一帧内所有粒子的位置和外形参数都被计算了，渲染算法就会生成一张图片。一般的粒子渲染问题与更常见的图元（如多边形和曲面）组成的物体对象的渲染一样复杂。粒子可以在屏幕深度上遮挡其它粒子。它们既能变得透明也能在其它粒子上投射阴影。此外，粒子可以在场景中与基于曲面的建模基元的物体共存，而且这些物体能够和粒子交合。</li>
+<li>  在我们已有的系统中，有两个假设允许我们简化渲染算法。第一个假设是，我们假设粒子系统不与其它基于曲面的建模基元交合，因此我们的渲染算法只需处理粒子。使用其它技术建模的对象将在渲染后的合成阶段与粒子系统对象合成在一起。为了让粒子系统和其它物体交合或在它们后面，渲染系统将基于在模型坐标空间中定义的剪裁平面使粒子系统图像分为多个子图像，然后在合成阶段将这些子图像与其它图像混合。</li>
+<li>  另外一个在目前的渲染系统中做出的假设是每个粒子能够被显示为一个点光源。借助这个假设，确定隐藏曲面不再是一个问题。每个粒子都向它覆盖的像素增加一点光强。一个在其它粒子后面的粒子不再被遮挡，而是给其覆盖的像素添加更多光强。添加的光强及其颜色取决于粒子的透明度和颜色。目前，增加光强的数值不再取决于粒子间距和观察位置，但这些是简单的拓展。观察到的变化、粒子的尺寸和它的形状决定了哪个像素要被遮挡。为了防止时间混叠和残影（的出现），所有粒子的形状都进行反锯齿绘制处理。许多粒子的光可能叠加到一个像素上，因此渲染算法固定红、绿、蓝通道的强度值固定在帧缓存器的最大强度值处，而不是让它们任意溢出。</li>
+<li>  借助上述算法和假设，我们不再需要给粒子排序，它们以任意生成顺序渲染到帧缓存器。阴影不再是问题，因为粒子不再反射光而是发光。</li>
+</ul>
+<h2 id="2-6-粒子层级"><a href="#2-6-粒子层级" class="headerlink" title="2.6 粒子层级"></a>2.6 粒子层级</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D%E5%BB%BA%E6%A8%A1/" rel="tag">3D建模</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E6%A8%A1%E6%8B%9F/" rel="tag">物理模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/" rel="tag">粒子系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" rel="tag">论文翻译</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-FinalIK和Ragdoll(2)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/22/FinalIK%E5%92%8CRagdoll(2)/"
+    >FinalIK和Ragdoll(2)：FullyBodyBipedIK</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/22/FinalIK%E5%92%8CRagdoll(2)/" class="article-date">
+  <time datetime="2022-03-22T14:15:30.000Z" itemprop="datePublished">2022-03-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Unity/">Unity</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1CW411N7ri?spm_id_from=333.999.0.0">教程视频</a><br>本文仅供个人学习和知识点记录用。<br>Unity版本：2021.2.15f1c1<br>Final IK版本：2.1<del>（工作室群文件里有）</del><br>Low Poly模型素材包：Heist<br>状态机来源：Unity Standard Assets</p>
+<hr>
+<h1 id="2-1-FullyBodyBipedIK介绍"><a href="#2-1-FullyBodyBipedIK介绍" class="headerlink" title="2.1 FullyBodyBipedIK介绍"></a>2.1 FullyBodyBipedIK介绍</h1><h2 id="FullyBodyBipedIK还是BipedIK？"><a href="#FullyBodyBipedIK还是BipedIK？" class="headerlink" title="FullyBodyBipedIK还是BipedIK？"></a>FullyBodyBipedIK还是BipedIK？</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ddcd668345b5">分析链接</a></p>
+<h2 id="FullyBodyBipedIK提供了哪些功能？"><a href="#FullyBodyBipedIK提供了哪些功能？" class="headerlink" title="FullyBodyBipedIK提供了哪些功能？"></a>FullyBodyBipedIK提供了哪些功能？</h2><p>FullyBodyBipedIK自动将模型的骨骼点添加入Reference内，可以通过FullyBodyBipedIK调整骨骼各个结点位置、旋转角度、扭曲程度受IK影响的权重和计算中结点的位置，由于你可以更改这些结点的位置（比如用一个别的什么物体的位置来替代它们），因此可以做出各种效果，比如躯体的扭曲。你也可以通过更改这些替代者的位置来改变模型的姿态。</p>
+<h2 id="2-1-1-来看看FullyBodyBipedIK里面有些啥"><a href="#2-1-1-来看看FullyBodyBipedIK里面有些啥" class="headerlink" title="2.1.1 来看看FullyBodyBipedIK里面有些啥"></a>2.1.1 来看看FullyBodyBipedIK里面有些啥</h2><p><img src="../photos/Unity/FinalIK/2_1.png" title="FullyBodyBipedIK"></p>
+<ul>
+<li>Fix Transforms：勾选则每一帧刷新一次结点状态（对算力消耗大）。</li>
+<li>References：IK计算时需要的各个结点位置。<ul>
+<li>Root Node：</li>
+<li>Weight：一切Weight的权重基数，1为完全受IK影响，0为完全受状态机影响（本处及下文所提到的所有Weight都具有该共性，故仅提一次），它和后面各个结点的Weight是相乘关系（若某结点的Weight是0而References的Weight是1则该结点不受IK影响，若References的Weight是0则无论如何所有结点都不受IK影响。</li>
+<li>Iterations：</li>
+</ul>
+</li>
+<li>Target：</li>
+<li>Position Weight：结点位置受IK影响的权重。</li>
+<li>Rotation Weight：结点旋转受IK影响的权重。</li>
+<li>Use Thighs：</li>
+<li>Spine Stiffness：</li>
+<li>Pull Body Vertical：</li>
+<li>Pull Body Horizontal：</li>
+<li>Spine Iterations：</li>
+<li>Spine Twist Weight：结点扭曲受IK影响的权重。</li>
+<li>Maintain Head Rot：</li>
+<li>Maintain Relative Position：</li>
+<li>Pull：</li>
+<li>Push：</li>
+<li>Push Parent：</li>
+<li>Reach：</li>
+<li>Bend Goal：</li>
+<li>Bend Goal Weight：</li>
+<li>Mapping Weight：</li>
+</ul>
+<h1 id="2-1-x-问题解决方案"><a href="#2-1-x-问题解决方案" class="headerlink" title="2.1.x 问题解决方案"></a>2.1.x 问题解决方案</h1><ul>
+<li>如果有红色/黄色的骨骼点，首先锁住模型的Inspector（在Inspector的右上角）以方便在你调整出错位置时骨骼点仍然显示,对问题骨骼点进行调整直至为蓝点。</li>
+<li>如果运动时发现模型的某个部位没有随着模型一起运动（越远离根结点模型的该部位越朝起点倾斜），则要检查FullyBodyBipedIK内的该部位的<strong>Body Effector的Target</strong>是否绑定了该结点。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Final-IK/" rel="tag">Final IK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ragdoll/" rel="tag">Ragdoll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-FinalIK和Ragdoll(1)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/22/FinalIK%E5%92%8CRagdoll(1)/"
+    >FinalIK和Ragdoll(1)：准备工作</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/22/FinalIK%E5%92%8CRagdoll(1)/" class="article-date">
+  <time datetime="2022-03-22T11:34:03.000Z" itemprop="datePublished">2022-03-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Unity/">Unity</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1CW411N7ri?spm_id_from=333.999.0.0">教程视频</a><br>本文仅供个人学习和知识点记录用。<br>Unity版本：2021.2.15f1c1<br>Final IK版本：2.1<del>（工作室群文件里有）</del><br>Low Poly模型素材包：Heist<br>状态机来源：Unity Standard Assets</p>
+<hr>
+<h1 id="1-1-一些问题的解决方案"><a href="#1-1-一些问题的解决方案" class="headerlink" title="1.1 一些问题的解决方案"></a>1.1 一些问题的解决方案</h1><h2 id="1-1-1-导入Final-IK如果报错："><a href="#1-1-1-导入Final-IK如果报错：" class="headerlink" title="1.1.1 导入Final IK如果报错："></a>1.1.1 导入Final IK如果报错：</h2><p><img src="../photos/Unity/FinalIK/1_1.png" title="error"><br><strong>解决方案</strong>：双击error进入问题所在脚本，在最上面写“using UnityEngine，UI”,然后把“GUIText”改为“Text”</p>
+<h2 id="1-1-2-挂了ThirdPersonAnimatorController但按WASD角色没反应"><a href="#1-1-2-挂了ThirdPersonAnimatorController但按WASD角色没反应" class="headerlink" title="1.1.2 挂了ThirdPersonAnimatorController但按WASD角色没反应"></a>1.1.2 挂了ThirdPersonAnimatorController但按WASD角色没反应</h2><p><strong>解决方案</strong>：<strong>Project Settings-&gt;Player-&gt;Other Settings-&gt;Configuration-&gt;Active Input Handing-&gt;Both</strong></p>
+<h1 id="1-2-简要了解Final-IK"><a href="#1-2-简要了解Final-IK" class="headerlink" title="1.2 简要了解Final IK"></a>1.2 简要了解Final IK</h1><h2 id="1-2-1-什么是IK"><a href="#1-2-1-什么是IK" class="headerlink" title="1.2.1 什么是IK"></a>1.2.1 什么是IK</h2><ul>
+<li>正向动力学（Forward Kinematics）：每一个子关节的位置、方向由父关节支配（父关节动，子关节跟着动，子关节动，父关节未必动）的动力学模型，比如走路。使用FK做这类动作比较简单（你自己走几下就知道如何设计游戏人物的走路动作）<strong>计算速度快</strong>，但<strong>工作效率低</strong>（因为<strong>几乎所有的父关节都要人工调整</strong>）。</li>
+<li>反向动力学（Inverse Kinematics）：依据某些子关节的最终位置、角度反求出整个骨架形态的动力学模型，比如在战斗中挥剑抵挡攻击，让剑去抵挡，也就是依据剑或者持剑的手的状态来调整手的父节点（手腕、肘部、上臂、肩膀和脊柱等）的位置的时候，使用IK能够让格挡动作易于实现，<strong>不必人工调整父节点，交由计算机计算</strong>减少了工作量，但是这么做会<strong>占用计算机资源</strong>，使用IK的关节越多，这种负面效果越明显。</li>
+<li>一般的做法：<ul>
+<li>FPS游戏（骨骼动画+IK）：在跑动、走路、跳跃、匍匐这类姿势比较单一的动作中使用骨骼动画，而在角色和环境互动的部分（主要是手、脚）使用IK，使得人在上坡时脚面贴着斜坡，可以跨过不同高度的障碍物，拿取不同高度的物品等，充分利用<strong>IK的灵活性</strong>和<strong>IK受物理环境影响</strong>的特性。</li>
+<li>需要夸大肢体动作，夸大物理效果的动作类游戏（比如人类一败涂地）：借助IK<strong>依据子关节调整父关节</strong>的特性，做出一些搞笑的效果。</li>
+<li>VR：由于VR世界中可以供玩家输入的设备只有头戴显示器和手柄，对应虚拟世界中的头和手，如果我们需要通过手柄和头的动作让虚拟形象其他部位的动作贴近真实，我们可以借助IK技术。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-2-为什么是Final-IK"><a href="#1-2-2-为什么是Final-IK" class="headerlink" title="1.2.2 为什么是Final IK"></a>1.2.2 为什么是Final IK</h2><ul>
+<li>易于上手，便于学习（在Inspector内就可以做出大部分调整，不用一遍遍回到脚本里改）</li>
+<li>可视界面，较为友好（早期甚至不用接触代码）</li>
+<li>可以调整的部位比Unity IK多</li>
+</ul>
+<hr>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Final-IK/" rel="tag">Final IK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ragdoll/" rel="tag">Ragdoll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Daniel Qi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.svg" alt="Welcome to DanielQi&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/photos/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2022/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/1.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/2.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=139774&auto=0&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

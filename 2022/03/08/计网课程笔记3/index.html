@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>计网课程笔记3 |  Welcome to DanielQi&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <script src="https://mermaid-js.github.io/mermaid/"></script>
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-计网课程笔记3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  计网课程笔记3
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/08/%E8%AE%A1%E7%BD%91%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B03/" class="article-date">
+  <time datetime="2022-03-08T06:54:04.000Z" itemprop="datePublished">2022-03-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E8%AE%A1%E7%BD%91/">课程笔记_计网</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">7.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">26 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gu411D7QB?p=40">课程链接</a><br>本文仅供个人预习和知识点记录<del>你这不就是抄了一遍PPT吗</del>用。</p>
+<hr>
+<h1 id="依照学校教学安排，第三章为应用层（即网课第五章）"><a href="#依照学校教学安排，第三章为应用层（即网课第五章）" class="headerlink" title="依照学校教学安排，第三章为应用层（即网课第五章）"></a>依照学校教学安排，第三章为应用层（即网课第五章）</h1><h1 id="3-1-运输层协议概述"><a href="#3-1-运输层协议概述" class="headerlink" title="3.1 运输层协议概述"></a>3.1 运输层协议概述</h1><h2 id="3-1-1-进程之间的通信"><a href="#3-1-1-进程之间的通信" class="headerlink" title="3.1.1 进程之间的通信"></a>3.1.1 进程之间的通信</h2><ul>
+<li><strong>运输层属于面向通信部分的最高层，同时也是用户功能中的最底层</strong>，运输层向它上面的应用提供通信服务</li>
+<li>当网络的边缘部分中的两个主机使用网络的核心部分的功能进行端到端的通信时，<strong>只有位于网络边缘部分的主机的协议栈才有运输层</strong>，而网络核心部分中的路由器在转发分组时都只用到下三层的功能<br><img src="../photos/ComputerNetworkCourse/3_1.png" title="传输过程中各层与进程示意图"></li>
+<li><strong>IP协议的作用范围是两个主机之间的所有链路和路由器</strong> <em>（提供主机之间的逻辑通信）</em></li>
+<li><strong>运输层协议TCP和UDP的作用范围是从一台主机的某个进程到另一台主机的进程之间</strong> <em>（为相互通信的应用进程提供了逻辑通信）</em></li>
+</ul>
+<h2 id="3-1-2-运输层的两个主要协议"><a href="#3-1-2-运输层的两个主要协议" class="headerlink" title="3.1.2 运输层的两个主要协议"></a>3.1.2 运输层的两个主要协议</h2><ul>
+<li>在一台主机中经常有多个应用进程同时分别和另一台主机中的多个应用进程通信</li>
+<li>运输层的两个重要功能：<strong>复用</strong>和<strong>分用</strong></li>
+<li>根据应用程序的不同需求，运输层需要有两种不同的运输协议：<strong>面向连接的传输控制协议TCP</strong>和<strong>无连接的用户数据报UDP</strong><h3 id="基于端口的复用和分用功能"><a href="#基于端口的复用和分用功能" class="headerlink" title="基于端口的复用和分用功能"></a>基于端口的复用和分用功能</h3></li>
+<li><strong>向下复用和向上分用</strong><ul>
+<li>发送方应用层的多个应用进程通过各自端口传入运输层并在运输层中<strong>重复使用</strong>TCP和UDP协议，对应转化为TCP报文段和UDP用户数据报，随后在网络层中<strong>重复使用</strong>IP协议，转换为IP数据报传送至接收方。</li>
+<li>接收方在网络层中<strong>分开使用</strong>IP协议，转化为TCP报文段和UDP用户数据报，在运输层中<strong>分开使用</strong>TCP协议和UDP协议，最后通过各自端口发给应用进程<br><img src="../photos/ComputerNetworkCourse/3_2.png" title="基于端口的复用和分用功能示意图"></li>
+</ul>
+</li>
+<li>运输层向高层用户<strong>屏蔽</strong>了下面网络核心的细节，它使应用进程“看见”的仿佛是一条<strong>在两个运输层实体间的端到端的逻辑通信信道</strong>，但这条通信信道对上层的表现却因运输层使用的不同协议而有很大的差别<ul>
+<li>当运输层采用<strong>面向连接的TCP协议</strong>时 <em>（对可靠性要求高）</em>，即使下面的网络不可靠，但逻辑通信信道相当于一条<strong>全双工的可靠信道</strong></li>
+<li>当运输层采用<strong>无连接的UDP协议</strong>时 <em>（对效率要求高）</em>，这种逻辑通信信道是一条<strong>不可靠信道</strong></li>
+</ul>
+</li>
+<li>TCP和UDP<ul>
+<li><strong>运输协议数据单元</strong>：两个对等实体在通信时传送的数据单位</li>
+<li><strong>TCP报文段</strong>：TCP传送的运输协议数据单元</li>
+<li><strong>UDP报文/用户数据报</strong>：UDP传送的运输协议数据单元</li>
+<li><strong>UDP：一种无连接协议</strong><ul>
+<li>提供无连接服务</li>
+<li><strong>在传输数据之前不需要先建立连接</strong></li>
+<li>传送的数据单位是UDP报文/用户数据报</li>
+<li>对方的运输层在收到UDP报文后，<strong>不需要给出任何确认</strong></li>
+<li>虽然UDP不提供可靠交付，但在某些情况下UDP是一种最有效的工作方式 <em>（因为要求少）</em></li>
+</ul>
+</li>
+<li><strong>TCP：一种面向连接的协议</strong><ul>
+<li>提供面向连接的服务</li>
+<li>传送的数据单位协议是TCP报文段</li>
+<li><strong>TCP不提供广播或多播服务</strong></li>
+<li>由于TCP要提供<strong>可靠的、面向连接的运输服务</strong>，因此不可避免地增加了许多的开销，这不仅使数据单元的首部增大很多，还要占用许多的处理机资源</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>补充：运输层的UDP用户数据报与网际/网络层的IP数据报有很大区别<ul>
+<li>IP数据报要经过互连网中许多路由器的存储转发</li>
+<li>UDP用户数据报是在运输层的端到端<strong>抽象的</strong>逻辑信道中传送的</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-3-运输层的端口"><a href="#3-1-3-运输层的端口" class="headerlink" title="3.1.3 运输层的端口"></a>3.1.3 运输层的端口</h2><ul>
+<li>运行在计算机中的进程是用<strong>进程标识符</strong>来标识的</li>
+<li><strong>运行在应用层的各种应用进程不应当让计算机操作系统指派它的进程标识符</strong>，这是因为互连网上使用的计算机的操作系统种类很多而不同的操作系统又使用不同格式的进程操作符</li>
+<li>为了使运行不同操作系统的计算机的应用进程能够互相通信，就必须使用<strong>统一的方法</strong>对TCP/IP体系的应用进程进行标识<h3 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h3></li>
+<li>为了解决不同操作系统下的应用进程在互连网上相互通信时进程标识符不统一的问题，我们在运输层使用<strong>协议端口号/端口</strong></li>
+<li>虽然通信的终点是应用进程，但我们可以把端口想象为通信的终点，因为我们只要把统一格式的报文交到目的主机的一个合适的目的端口，剩下交付给进程的过程就交由TCP完成<h3 id="硬件端口与软件端口"><a href="#硬件端口与软件端口" class="headerlink" title="硬件端口与软件端口"></a>硬件端口与软件端口</h3></li>
+<li><strong>软件端口</strong>：协议栈层间的抽象的协议端口</li>
+<li><strong>硬件端口</strong>：路由器或交换机上的端口</li>
+<li>硬件端口是不同硬件设备进行交互的端口，而软件端口是应用层的各种协议进程与运输实体进行层间交互的一种地址<h3 id="TCP-IP运输层端口"><a href="#TCP-IP运输层端口" class="headerlink" title="TCP/IP运输层端口"></a>TCP/IP运输层端口</h3></li>
+<li>端口用一个16位端口号进行标志 <em>（意味着最多可以有2的16次方个软件端口）</em></li>
+<li>端口号只具有本地意义 <em>（两个主机的端口号可以相同）</em>，即端口号只是为了标识<strong>本计算机应用层中的各进程</strong></li>
+<li>在互连网中，不同计算机的相同端口号是没有联系的</li>
+<li>两个计算机中的进程要互相通信，不仅必须知道对方的IP地址 <em>（找计算机）</em>，而且还要知道对方的端口号 <em>（找进程）</em><h3 id="两大类端口"><a href="#两大类端口" class="headerlink" title="两大类端口"></a>两大类端口</h3></li>
+<li><strong>服务器端使用的端口号</strong><ul>
+<li>熟知端口：一般为1-1023</li>
+<li>登记端口号：为1024-49151，供没有熟知端口号的应用程序使用的，使用这个范围的端口号必须在互联网数字分配机构IANA登记以防止重复</li>
+</ul>
+</li>
+<li><strong>客户端使用的端口号</strong><ul>
+<li>又称短暂端口号，为49152-65535，留给客户进程选择暂时使用</li>
+<li>当服务器进程收到客户进程的报文时，就知道了客户进程所使用的动态端口号，通信结束后这个端口号可供其他客户进程以后使用<br><img src="../photos/ComputerNetworkCourse/3_3.png" title="常用的熟知端口"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="3-2-用户数据报协议UDP"><a href="#3-2-用户数据报协议UDP" class="headerlink" title="3.2 用户数据报协议UDP"></a>3.2 用户数据报协议UDP</h1><h2 id="3-2-1-UDP概述"><a href="#3-2-1-UDP概述" class="headerlink" title="3.2.1 UDP概述"></a>3.2.1 UDP概述</h2><ul>
+<li>UDP只在IP的数据报服务之上增加了一点功能：<ul>
+<li>复用和分用的功能</li>
+<li>差错检测的功能</li>
+</ul>
+</li>
+<li>虽然UDP用户数据报只能提供不可靠的交付，但UDP在某些方面有特殊的优点</li>
+<li>UDP的主要特点<ul>
+<li><strong>UDP是无连接的</strong>：发送数据之前不需要建立连接，因此减少了开销和发送数据之前的时延</li>
+<li><strong>UDP使用尽最大努力交付</strong>：UDP的尽最大努力是在IP的基础上的，即不保证可靠交付，因此主机不需要维持复杂的连接状态表</li>
+<li><strong>UDP是面向报文的</strong><ul>
+<li>发送方UDP对应用层交下来的报文，在添加首部后就向下交付IP层，<strong>既不合并，也不拆分</strong>，而是保留这些报文的边界</li>
+<li>发送时应用层交给UDP多长的报文，UDP就照样发送，<strong>一次发送一个完整的报文</strong></li>
+<li>接收方UDP对IP层交上来的UDP用户数据报，在去除首部后就原封不动地交付上层的应用进程，<strong>一次交付一个完整的报文</strong></li>
+<li>应用程序必须选择合适大小的报文<ul>
+<li>若报文太长，UDP交给IP层后在传输时可能要进行<strong>分片</strong>，这会<strong>降低IP层的效率</strong></li>
+<li>若报文太短，UDP交给IP层后在传输时IP数据报中<strong>首部的相对长度太大</strong>，这会<strong>降低IP层的效率</strong></li>
+</ul>
+</li>
+<li>UDP发送的报文长度是应用进程给出的</li>
+</ul>
+</li>
+<li><strong>UDP没有拥塞控制</strong>：：由于UDP不用实现可靠传送网络出现额拥塞不会使源主机发送速率降低，这对某些实时应用很重要，很适合多媒体通信的要求</li>
+<li><strong>UDP支持一对一、一对多、多对一和多对多的交互通信</strong></li>
+<li><strong>UDP的首部开销小</strong>：只有8字节，比TCP20个字节的首部要短，<strong>同时也意味着UDP的功能比TCP少</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-2-UDP的首部格式"><a href="#3-2-2-UDP的首部格式" class="headerlink" title="3.2.2 UDP的首部格式"></a>3.2.2 UDP的首部格式</h2><ul>
+<li>UDP用户数据报有两个字段：<strong>数据字段</strong>和<strong>首部字段</strong>，首部字段只有8个字节</li>
+<li>8个字节的首部构成：<strong>源端口(2字节)+目的端口(2字节)+数据长度(伪首部+有效数据的字节长度)(2字节)+校验和(2字节)</strong></li>
+<li>12个字节的伪首部 <em>（不占报文的地址空间，但在计算校验和的时候会临时把伪首部和UDP用户数据报连接在一起）</em>构成：<strong>源IP地址(4字节)+目的IP地址(4字节)+8位全0(1字节)+8位协议（17）(1字节)+UDP长度(2字节)</strong></li>
+<li><strong>UDP校验和的计算</strong>：将数据报空余的部分填0，将伪首部、首部、数据以一字节为一段，两字节为一行从上到下排列，进行加法计算，产生的进位溢出加到结果的末位，然后将结果取反即得到校验和。<br><img src="../photos/ComputerNetworkCourse/3_4.png" title="UDP首部、伪首部构成示意图"><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/roccoshi/p/13033014.html">UDP校验和计算教程</a></li>
+</ul>
+<hr>
+<h1 id="3-3-传输控制协议TCP概述"><a href="#3-3-传输控制协议TCP概述" class="headerlink" title="3.3 传输控制协议TCP概述"></a>3.3 传输控制协议TCP概述</h1><h2 id="3-3-1-TCP最主要的特点"><a href="#3-3-1-TCP最主要的特点" class="headerlink" title="3.3.1 TCP最主要的特点"></a>3.3.1 TCP最主要的特点</h2><ul>
+<li><strong>TCP是面向连接的运输层协议</strong>：先建立连接再传输</li>
+<li>每一条TCP连接<strong>只能有两个端点</strong>，每一条TCP连接<strong>只能是点对点的、一对一的</strong></li>
+<li>TCP提供<strong>可靠交付</strong>的服务：不重复、不丢失、不失序</li>
+<li>TCP提供<strong>全双工通信</strong>：双方都可以发送和接收</li>
+<li><strong>面向字节流</strong><ul>
+<li>TCP中的“流”指的是流入或流出进程的字节序列</li>
+<li>“面向字节流”的含义：虽然应用程序和TCP的交互时一次一个数据块，但TCP把应用程序交下来的数据看成仅仅是一连串无结构的字节流</li>
+<li>TCP不保证接收方应用程序所收到的数据块和发送方应用程序所发出的数据块具有对应大小的关系，但接收方接收到的字节流必须和发送方应用程序发出的字节流完全一样：<strong>TCP不管你数据怎么分的块，但要求数据内容必须是一样的</strong></li>
+<li>TCP不关心应用进程一次把多长的报文发送到TCP缓存</li>
+<li>TCP对连续的字节流进行分段，形成TCP报文段，但<strong>分段是不定的</strong>，TCP<strong>根据对方给出的窗口值和当前网络拥塞的程度</strong>来决定一个报文段应包含多少字节</li>
+</ul>
+</li>
+<li><strong>注意</strong>，TCP连接是运输层间的<strong>需连接</strong>，是逻辑上的通信信道<br><img src="../photos/ComputerNetworkCourse/3_5.png" title="TCP字节流发送、传输示意图"><h2 id="3-3-2-TCP的连接"><a href="#3-3-2-TCP的连接" class="headerlink" title="3.3.2 TCP的连接"></a>3.3.2 TCP的连接</h2></li>
+<li>TCP把连接作为<strong>最基本的工作/功能的抽象</strong>：所有的工作都要以连接建立为根本前提</li>
+<li>每一条TCP连接<strong>有两个端点</strong></li>
+<li>TCP连接的端点不是主机，不是主机的IP地址，不是应用进程，也不是运输层的协议接口，<strong>TCP连接的端点叫做套接字或插口</strong></li>
+<li><strong>套接字就是IP后面加上端口号</strong>，socket=（ip地址：端口号），每一条TCP连接唯一地被通信两端的两个套接字所确定 TCP连接={socket1，socket2}={(ip:port1),(ip:port2)}</li>
+<li>同一个IP地址可以有多个不同的TCP连接，同一个端口号也可以出现在多个不同的TCP连接中</li>
+</ul>
+<hr>
+<h1 id="3-4-可靠传输的工作原理"><a href="#3-4-可靠传输的工作原理" class="headerlink" title="3.4 可靠传输的工作原理"></a>3.4 可靠传输的工作原理</h1><h2 id="3-4-1-停止等待协议"><a href="#3-4-1-停止等待协议" class="headerlink" title="3.4.1 停止等待协议"></a>3.4.1 停止等待协议</h2><h3 id="理想的传输条件有两个特点"><a href="#理想的传输条件有两个特点" class="headerlink" title="理想的传输条件有两个特点"></a>理想的传输条件有两个特点</h3><ul>
+<li>传输信道不产生差错</li>
+<li>不管发送方以多快的速度发送数据，接收方总是来得及处理收到的数据</li>
+</ul>
+<p><strong>然而实际的网络都不具备以上两个理想条件</strong>，故必须使用一些可靠传输协议，在不可靠的传输信道实现可靠传输</p>
+<h3 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h3><ul>
+<li>“停止等待”的思路：每发送完一个分组就停止发送，等待对方确认，在收到确认后再发送下一个分组</li>
+<li><strong>全双工通信的双方既是发送方也是接收方</strong> <em>（发送/接收数据和确认）</em></li>
+</ul>
+<h3 id="传输情况"><a href="#传输情况" class="headerlink" title="传输情况"></a>传输情况</h3><ul>
+<li>无差错情况：A向B发送组1，发完暂停发送，等待B接收组1并传回确认后再发送组2</li>
+<li>接收方B出现差错情况<ul>
+<li>第一种：B接收组1时出现了差错，就丢弃组1，其它什么也不做（不传回确认）</li>
+<li>第二种：组1在传输过程中丢失了，B当然什么都不知道，因此也什么都不做</li>
+<li>在这两种情况下，B都不会发送信息</li>
+</ul>
+</li>
+<li>确认出现差错情况：确认信息在传输过程中丢失了</li>
+<li>解决方案：超时重传<ul>
+<li>A为每个已经发送的组都设置了一个<strong>超时计时器</strong></li>
+<li>A只要在超时计时器到期之前收到了确认就撤销该超时计时器，继续发送组2</li>
+<li>如果超时计时器到期，就重新发送组1</li>
+<li>由此可见<strong>传输过程中的问题都由发送方解决</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="确认丢失和确认迟到"><a href="#确认丢失和确认迟到" class="headerlink" title="确认丢失和确认迟到"></a>确认丢失和确认迟到</h3><ul>
+<li>确认丢失<ul>
+<li>若B所发送的对M1的确认丢失了，那么A在设定的超时重传时间内不能收到确认，但A无法知道是上述三种情况的哪种，因此<strong>A在超时计时器到期后就要重传组1</strong></li>
+<li>假定B又收到了重传的组1（即确认信息丢失），此时B要采取两个行动<ul>
+<li>丢弃这个重复的组1，不向上层交付</li>
+<li>向A发送确认：就算给A发送过确认信息也要再发送，正是因为A没有收到确认信息所以才重发组1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>确认迟到<ul>
+<li>若B所发送的对组1的确认传到A的时间过长（在超时计时器到期后送达），则A将重新发送组1，以第二次发送组1收到的确认和第一次发送收到的确认中较早者为时间点发送组2，第二次收到的对组1确认将丢弃</li>
+</ul>
+</li>
+<li><strong>注意</strong><ul>
+<li>在发送完一个分组后，必须暂时保留已发送的分组的副本已备重发</li>
+<li><strong>分组和确认分组都必须进行编号</strong></li>
+<li>超时计时器的重传时间应当比数据在分组传输的平均往返时间<strong>更长一些</strong>，以减少重发次数<h2 id="3-4-2-连续ARQ协议"><a href="#3-4-2-连续ARQ协议" class="headerlink" title="3.4.2 连续ARQ协议"></a>3.4.2 连续ARQ协议</h2></li>
+</ul>
+</li>
+<li><strong>通常A最终总是可以收到对所有发出的分组的确认</strong>，如果A不断重发却收不到确认，则说明通信线路太差，不能进行通信</li>
+<li><strong>使用停止等待协议的确认和重传机制，我们就可以在不可靠的传输网络上实现可靠的通信</strong></li>
+<li>像上述的这种可靠传输协议常称为<strong>自动重传请求ARQ</strong>,即重传请求是自动进行的，不需要接收方发送重传请求</li>
+</ul>
+<h3 id="信道利用率"><a href="#信道利用率" class="headerlink" title="信道利用率"></a>信道利用率</h3><ul>
+<li><strong>停止等待协议的优点是简单，缺点是信道利用率太低</strong></li>
+<li>设分组发送所需时间为Td，确认发送所需时间为Ta（均不包含传送时间），两者的传送时间与分组确认接收时间总和为RTT，则信道利用率<strong>U=Td/(Td+RTT+Ta)</strong></li>
+<li>可以看出，当往返时间RTT远大于分组发送时间Td时，信道的利用率就会非常低，若出现重传，则对传送有用的数据信息而言，信道的利用率还要降低、</li>
+</ul>
+<h3 id="连续ARQ协议-流水线传输"><a href="#连续ARQ协议-流水线传输" class="headerlink" title="连续ARQ协议/流水线传输"></a>连续ARQ协议/流水线传输</h3><ul>
+<li>为了提高传输效率，发送方采用流水线传输</li>
+<li>流水线传输就是发送方<strong>可连续发送多个分组，不必每发完一个分组就停下来等待对方确认</strong>，这样可以使信道上一直有数据不间断地传送</li>
+<li>由于信道上一直有数据不间断地传送，这种传输方式可以获得很高的信道利用率</li>
+<li><strong>仍然需要设置超时计时器</strong></li>
+<li><strong>滑动窗口协议比较复杂，是TCP协议的精髓所在</strong><ul>
+<li>发送方维持的<strong>发送窗口</strong>：位于发送窗口内的分组都可连续发送出去而不需要等待对方的确认</li>
+<li>连续ARQ协议规定，<strong>发送方每收到一个确认，就把发送窗口（缓存中的一块区域）向前滑动一个分组的位置</strong><br><img src="../photos/ComputerNetworkCourse/3_6.png" title="连续ARQ协议发送窗口工作原理示意图"></li>
+</ul>
+</li>
+</ul>
+<h3 id="累计确认"><a href="#累计确认" class="headerlink" title="累计确认"></a>累计确认</h3><ul>
+<li>接收方一般采用<strong>累计确认</strong>的方式，即不必对收到的分组逐个发送确认，而是对<strong>按序到达的最后一个分组发送确认</strong>，表示到这个分组之前的所有分组都已经正确收到了</li>
+<li>优点：容易实现，即使确认丢失也不必重传</li>
+<li>缺点：不能向发送方反映出接收方已经正确收到的所有分组的信息</li>
+<li>对于缺点的补充：<strong>Go-back-N(回退N)</strong><ul>
+<li>如果发送方发送了x个分组，而其中第N个分组丢失了，此时接收方只能对<strong>第N个分组之前的所有分组发出确认</strong>，发送方无法得知第N个分组后其他分组的接收情况，只能<strong>将从第N个分组起的所有分组重新发送</strong>，即<strong>表示需要再退回来重传已发送过的分组</strong></li>
+<li>可见当通信信道质量不好时，连续ARQ协议会带来不好的影响</li>
+</ul>
+</li>
+</ul>
+<h3 id="TCP可靠通信的具体实现"><a href="#TCP可靠通信的具体实现" class="headerlink" title="TCP可靠通信的具体实现"></a>TCP可靠通信的具体实现</h3><ul>
+<li><strong>TCP连接的每一端都必须设有一个发送窗口和一个接收窗口</strong></li>
+<li>TCP的可靠传输机制用字节的序号进行控制，TCP所有的确认都是基于序号而不是基于报文</li>
+<li>TCP两端的四个窗口经常处于<strong>动态变化</strong>之中</li>
+<li>TCP连接的往返时间RTT也不是固定不变的，需要使用特定的算法估算较为合理的时间</li>
+</ul>
+<hr>
+<h1 id="3-5-TCP报文段的首部格式"><a href="#3-5-TCP报文段的首部格式" class="headerlink" title="3.5 TCP报文段的首部格式"></a>3.5 TCP报文段的首部格式</h1><ul>
+<li>TCP虽然是面向字节流的，但TCP传送的数据单元确是报文段</li>
+<li>一个TCP报文段分为首部和数据两部分，而TCP的全部功能体现在它首部中各字段的作用</li>
+<li>TCP报文段首部的前20个字节是固定的，后面有4n（n为自然数）字节是根据需要而增加的选项，因此**TCP首部的最小长度是20字节)<br><img src="../photos/ComputerNetworkCourse/3_7.png" title="TCP首部格式示意图"></li>
+<li>源端口和目的端口字段各占2字节，端口是运输层和应用层的服务接口，运输层的复用和分用功能都要通过端口才能实现</li>
+<li>序号字段占4字节，TCP连接传送的数据流中的每一个字节都编上一个序号，序号字段的值则指的是本报文段所发送的数据的第一个字节的编号</li>
+<li>确认号字段占4字节，是期望收到对方的下一个报文段的数据的第一个字节的编号</li>
+<li>数据偏移（即首部长度）占4位，它指出TCP报文段的<strong>数据起始处</strong>距离TCP报文段的起始处有多远，数据偏移的单位是32位字（以4字节为计算单位）</li>
+<li>保留字段占6位，保留为今后使用，但目前应置为0</li>
+<li>六个标志位占六位<ul>
+<li>紧急URG：当URG=1时，表明紧急指针字段有效，告诉系统此报文段中有紧急数据，应尽快传送</li>
+<li>确认ACK：当ACK=1时，确认号字段有效，0则无效</li>
+<li>推送PSH：当PSH=1时，就尽快的交付给接收应用进程，而不再等到整个缓存都填满后再向上交付</li>
+<li>复位RST：当RST=1时，表明TCP连接中出现严重差错（如主机崩溃），必须释放连接，然后再重新建立运输连接</li>
+<li>同步SYN：SYN=1表明这是一个连接请求或连接接受报文（确认连接）</li>
+<li>终止FIN：用于释放连接，FIN=1表示此报文段的发送端的数据已发送完毕，并要求释放运输连接</li>
+</ul>
+</li>
+<li>窗口字段占2字节，用来让对方设置发送窗口的依据 <em>（告诉对方自己的接收窗口的大小）</em>，单位为字节</li>
+<li>校验和占2字节，检验和字段检验的范围包括首部和数据两部分，计算检验和具体见3.2.2</li>
+<li>紧急指针字段占2字节，指出在本报文段中紧急数据有多少个字节 *（紧急数据放在本报文段数据的最前面）</li>
+<li>选项字段：长度可变。TCP最初只规定了一种选项，即<strong>最大报文段长度MSS</strong>，MSS高速对方TCP己方缓存能接收的报文段的数据字段（TCP报文段长度减去TCP首部长度）的最大长度是多少字节，字节数存储在MSS中。其他选项如下：<ul>
+<li>窗口扩大选项占3字节，其中有一个字节表示移位S，新的2窗口值等于TCP首部中的窗口位数增大到16+S，相当于把窗口值向左移动S位后获得的实际的窗口大小</li>
+<li>时间戳选项占10字节，其中最主要的字段<strong>时间戳值字段</strong>占4字节，<strong>时间戳回送回答字段</strong>占4字节</li>
+<li>选择确认选项，见3.6.3</li>
+</ul>
+</li>
+<li>规定MSS的原因<ul>
+<li>MSS与接收窗口值没有关系</li>
+<li><strong>若选择较小的MSS长度，网络的利用率就降低</strong>，因为TCP报文段越少，首部占比就越大，传输效率就越低，开销就显得大</li>
+<li><strong>若TCP报文段很长，会使得开销增大</strong>，在IP层传输时就有可能要分解成多个端数据报片，在终点要把收到的各个短数据报片装配成原来的TCP报文段，当传输出错时还要进行重传，进而增大开销</li>
+<li>综上，<strong>MSS应尽可能大些，只要在IP层传输时不需要再分片就行</strong></li>
+<li>由于IP数据报的路径是动态变化的，因此在这条路径上确定的不需要分片的MSS，如果改走另一条路径就可能需要进行分片</li>
+<li>综上，<strong>最佳的MSS很难确定</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="3-6-TCP可靠传输的实现"><a href="#3-6-TCP可靠传输的实现" class="headerlink" title="3.6 TCP可靠传输的实现"></a>3.6 TCP可靠传输的实现</h1><h2 id="3-6-1-以字节为单位的滑动窗口"><a href="#3-6-1-以字节为单位的滑动窗口" class="headerlink" title="3.6.1 以字节为单位的滑动窗口"></a>3.6.1 以字节为单位的滑动窗口</h2><ul>
+<li>TCP的滑动窗口是以字节为单位的</li>
+<li>先假定A收到了B发来的确认报文段，其中窗口（接收能力）是20字节，而确认号（下一个报文段开头的序号）是31（表明序号30为止的数据已经收到了），根据窗口和确认号，A就构造出自己的发送窗口。<ul>
+<li>发送窗口表示：<strong>在没有收到B的确认的情况下，A可以连续把窗口内的数据都发送出去</strong></li>
+<li>发送窗口里面的序号表示允许发送的序号</li>
+<li>显然，窗口越大，发送方就可以在收到对方确认之前连续发送更多的数据，因而可能获得更高的传输效率</li>
+<li><strong>TCP标准强烈不赞成发送窗口前沿向后收缩</strong><br><img src="../photos/ComputerNetworkCourse/3_8.png" title="发送窗口示意图"></li>
+</ul>
+</li>
+<li>发送时遇到字节未按序收到的解决方案<ul>
+<li>当一部分字节未收到确认时，重新从未收到字节中序号最靠前的那个字节开始重新发送</li>
+<li>若发送窗口内的序号都已用完但还没有收到确认，必须停止发送 <em>（不再发送后续字节）</em></li>
+</ul>
+</li>
+<li>发送方的应用进程把字节流写入TCP的发送缓存，发送缓存一般都比发送窗口大<br><img src="../photos/ComputerNetworkCourse/3_9.png" title="发送缓存、发送窗口关系示意图"></li>
+<li>接收方的应用进程从TCP的接收缓存中读取字节流，接收缓存一般都比接收窗口大<br><img src="../photos/ComputerNetworkCourse/3_10.png" title="接收缓存、接收窗口关系示意图"></li>
+<li><strong>需要注意</strong><ul>
+<li>A的发送窗口并不总是和B的接收窗口一样大（因为有一定的时间滞后）</li>
+<li>TCP标准没有规定对不按序到达的数据如何处理，通常是先临时放在接收窗口中，等到字节流中所缺少的字节收到后，再按序交付上层的应用进程</li>
+<li>TCP要求接收方必须有累计确认的功能，这样可以减少传输开销<h3 id="接收方发送确认"><a href="#接收方发送确认" class="headerlink" title="接收方发送确认"></a>接收方发送确认</h3></li>
+</ul>
+</li>
+<li>接收方可以在合适的时候发送确认，也可以在自己有数据要发送时把确认信息顺便捎带上</li>
+<li><strong>需要注意</strong>：<ul>
+<li>接收方不应过分推迟发送确认，否则会导致发送方不必要的重传，浪费了网络的资源</li>
+<li>捎带确认实际上并不经常发生，因为大多数应用程序很少同时在两个方向上发送数据<h2 id="3-6-2-超时重传时间的选择"><a href="#3-6-2-超时重传时间的选择" class="headerlink" title="3.6.2 超时重传时间的选择"></a>3.6.2 超时重传时间的选择</h2></li>
+</ul>
+</li>
+<li>重传机制是TCP中最重要和最复杂的问题之一</li>
+<li>TCP每发送一个报文段，就对这个报文段设置一次计时器</li>
+<li>只要计时器设置的重传时间已到但还没有收到确认，就要重传这一报文段</li>
+<li><strong>重传时间的选择是TCP最复杂的问题之一</strong><ul>
+<li>如果把超时重传时间设置得太短，就会引起很多报文段的不必要的重传，使网络负荷增大</li>
+<li>但若把超时重传时间设置得过长，则又使网络的空闲时间增大，降低了传输效率</li>
+</ul>
+</li>
+<li><strong>TCP采用了一种自适应算法</strong>，它记录一个报文段发出的时间，以及收到相应的确认的时间，这两个时间之差就是报文段的往返时间RTT</li>
+<li><strong>往返时延的方差很大</strong>:由于TCP的下层是一个互联网环境，IP数据报所选择的路由变化很大，因而运输层的往返时间的方差也很大<h3 id="加权平均往返时间"><a href="#加权平均往返时间" class="headerlink" title="加权平均往返时间"></a>加权平均往返时间</h3></li>
+<li>TCP保留了RTT的一个加权平均往返时间RTT<sub>S</sub>（这又称为<strong>平滑的往返时间</strong>）</li>
+<li>第一次测量到RTT样本时，RTT<sub>S</sub>值就取为所测量到的RTT样本值，以后每测量到一个新的RTT样本，就按下式重新计算一次RTT<sub>S</sub><br><img src="../photos/ComputerNetworkCourse/3_11.png" title="RTT&lt;sub&gt;S&lt;/sub&gt;迭代计算公式"></li>
+<li>其中，0≤α≤1，若α很接近于0，表示RTT值更新较慢，若α接近于1，则表示RTT更新较快</li>
+<li>RFC2988推荐的α值为0.125<h3 id="超时重传时间"><a href="#超时重传时间" class="headerlink" title="超时重传时间"></a>超时重传时间</h3></li>
+<li><strong>RTO应略大于上面得出的加权平均往返时间RTT<sub>S</sub></strong></li>
+<li>RFC2988建议使用<strong>RTO=RTT<sub>S</sub>+4xRTT<sub>D</sub><strong>计算RTO，其中RTT<sub>D</sub>是</strong>RTT的偏差的加权平均值</strong></li>
+<li>RFC2988计算RTT<sub>D</sub>的计算方法：第一次测量时，RTT<sub>D</sub>值取为测量到的RTT样本值的一半，在以后的测量中，使用下式计算加权平均的RTT<sub>D</sub><br><img src="../photos/ComputerNetworkCourse/3_12.png" title="RTT&lt;sub&gt;D&lt;/sub&gt;迭代计算公式"></li>
+<li>其中β是一个小于1的系数，推荐值为0.25<h3 id="往返时间RTT的测量相当复杂"><a href="#往返时间RTT的测量相当复杂" class="headerlink" title="往返时间RTT的测量相当复杂"></a>往返时间RTT的测量相当复杂</h3></li>
+<li>问题描述：TCP报文段1没有收到确认，重传后收到了确认报文段ACK，<strong>如何判定ACK是对第一次发出的报文段的确认还是对重传的报文段的确认？</strong></li>
+<li>解决方案：Karn算法<ul>
+<li>思想：<strong>在计算平均往返时间RTT时，只要报文段重传了就不采用其往返时间样本</strong></li>
+<li>优点：得出的加权平均往返时间RTT<sub>S</sub>和超时重传时间RTO就比较准确</li>
+<li>缺点：当报文段的时延突然增大很多时，在原来得出的重传时间内不会收到确认报文段，导致需要重传的报文段占比增加，但根据Karn算法，这些报文段的往返时间样本将不予考虑，因此导致<strong>超时重传时间无法更新</strong></li>
+<li><strong>修正的Karn算法</strong><ul>
+<li>报文段每重传一次，就把RTO增大一些：<strong>新RTO=γx旧的RTO</strong></li>
+<li>其中γ的典型值是2</li>
+<li>当不再发生报文段的重传时，才根据报文段的往返时延更新平均往返时延RTT和超时重传时间RTO的数值</li>
+<li>实践证明，这种策略较为合理<h2 id="3-6-3-选择确认SACK"><a href="#3-6-3-选择确认SACK" class="headerlink" title="3.6.3 选择确认SACK"></a>3.6.3 选择确认SACK</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>针对的问题：若收到的报文段无差错，只是未按序号，中间还缺少一些序号的数据，那么<strong>能否设法只传送缺少的数据而不重传已经准确到达接收方的数据？</strong></li>
+<li>接收方收到和前面字节流不连续的两个字节块，如果这些字节的序号都在接收窗口内，那么接收方就先收下这些数据，但**要把这些信息准确地高速发送方，使发送方不要再重复发送这些已收到的数据<h3 id="RFC2018的规定"><a href="#RFC2018的规定" class="headerlink" title="RFC2018的规定"></a>RFC2018的规定</h3></li>
+<li>如果要使用SACK，那么在建立TCP连接时，就要在TCP首部的选项中加上“允许SACK”的选项，而双方都必须事先商定好</li>
+<li>如果使用SACK，那么原来首部中的确认号字段的用法仍然不变，只是以后在TCP报文段的首部中都增加了SACK选项，以便报告收到的不连续的字节块的边界</li>
+<li>由于首部选项的长度最多只有40字节，而指明一个边界就要用到4字节，因此在选项中<strong>最多只能指明4个字节块的边界信息</strong> </li>
+</ul>
+<hr>
+<h1 id="3-7-TCP的流量控制"><a href="#3-7-TCP的流量控制" class="headerlink" title="3.7 TCP的流量控制"></a>3.7 TCP的流量控制</h1><h2 id="3-7-1-利用滑动窗口实现流量控制"><a href="#3-7-1-利用滑动窗口实现流量控制" class="headerlink" title="3.7.1 利用滑动窗口实现流量控制"></a>3.7.1 利用滑动窗口实现流量控制</h2><h2 id="3-7-2-TCP的传输效率"><a href="#3-7-2-TCP的传输效率" class="headerlink" title="3.7.2 TCP的传输效率"></a>3.7.2 TCP的传输效率</h2><hr>
+<h1 id="3-8-TCP的拥塞控制"><a href="#3-8-TCP的拥塞控制" class="headerlink" title="3.8 TCP的拥塞控制"></a>3.8 TCP的拥塞控制</h1><hr>
+<h1 id="3-9-TCP的运输连接管理"><a href="#3-9-TCP的运输连接管理" class="headerlink" title="3.9 TCP的运输连接管理"></a>3.9 TCP的运输连接管理</h1><hr>
+<h1 id="3-10-补充"><a href="#3-10-补充" class="headerlink" title="3.10 补充"></a>3.10 补充</h1><ul>
+<li>使用TCP的网络应用：HTTP\FTP\TELNET\SMTP</li>
+<li>使用UDP的网络应用：流媒体\视频会议\DNS\Internet电话</li>
+</ul>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/03/08/%E8%AE%A1%E7%BD%91%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B03/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">课程笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/03/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B01/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            数据库原理笔记1
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/03/06/%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">需求文档(v4.1)</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Daniel Qi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.svg" alt="Welcome to DanielQi&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/photos/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2022/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/1.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/2.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=139774&auto=0&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>操作系统笔记1 |  Welcome to DanielQi&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <script src="https://mermaid-js.github.io/mermaid/"></script>
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-操作系统笔记1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  操作系统笔记1
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B01/" class="article-date">
+  <time datetime="2022-04-03T12:05:35.000Z" itemprop="datePublished">2022-04-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">课程笔记_操作系统</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">12 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="依照学校教学安排，第一章为操作系统引论"><a href="#依照学校教学安排，第一章为操作系统引论" class="headerlink" title="依照学校教学安排，第一章为操作系统引论"></a>依照学校教学安排，第一章为操作系统引论</h1><h1 id="本帖仅供个人学习使用"><a href="#本帖仅供个人学习使用" class="headerlink" title="本帖仅供个人学习使用"></a>本帖仅供个人学习使用</h1><h1 id="使用虚拟机平台VMware-Workstation"><a href="#使用虚拟机平台VMware-Workstation" class="headerlink" title="使用虚拟机平台VMware Workstation"></a>使用虚拟机平台VMware Workstation</h1><hr>
+<h1 id="1-1-操作系统的目标和作用"><a href="#1-1-操作系统的目标和作用" class="headerlink" title="1.1 操作系统的目标和作用"></a>1.1 操作系统的目标和作用</h1><h2 id="1-1-1-操作系统的目标（考点）"><a href="#1-1-1-操作系统的目标（考点）" class="headerlink" title="1.1.1 操作系统的目标（考点）"></a>1.1.1 操作系统的目标（考点）</h2><ul>
+<li><strong>方便性</strong>：没有OS的计算机是极难使用的，只能使用机器语言，OS对计算机操作进行了抽象化，使计算机便于易学易用。</li>
+<li><strong>有效性</strong>：OS可以通过合理地组织计算机的工作流程，加速程序的运行，缩短程序的运行周期，提高系统的吞吐量。</li>
+<li><strong>可扩充性</strong>：为适应计算机硬件、体系结构以及计算机应用发展的要求，OS必须具有很好的可扩充性，这与OS的结构有十分紧密的联系，由此推动OS从早期的无结构发展为模块化结构，进而又发展为层次化结构，近年来OS已广泛采用微内核结构。</li>
+<li><strong>开放性</strong>：为适应计算机应用日益普及的要求和互联网时代的发展，使OS的应用环境从单机转向网络环境，其使用环境必须更为开放，要求OS必须能遵循世界标准规范，从而兼容以相同标准开发的硬件软件。</li>
+</ul>
+<h2 id="1-1-2-操作系统的作用（考点）（见1-4）"><a href="#1-1-2-操作系统的作用（考点）（见1-4）" class="headerlink" title="1.1.2 操作系统的作用（考点）（见1.4）"></a>1.1.2 操作系统的作用（考点）（见1.4）</h2><ul>
+<li><strong>OS是用户与计算机硬件系统之间的接口</strong></li>
+<li><strong>OS是计算机系统资源的管理者</strong></li>
+<li><strong>OS实现了对计算机资源的抽象</strong></li>
+<li><strong>OS/虚拟机是计算机硬件平台上的虚拟机器</strong></li>
+</ul>
+<h2 id="1-1-3-推动操作系统发展的主要动力（考点）"><a href="#1-1-3-推动操作系统发展的主要动力（考点）" class="headerlink" title="1.1.3 推动操作系统发展的主要动力（考点）"></a>1.1.3 推动操作系统发展的主要动力（考点）</h2><ul>
+<li><strong>不断提高计算机资源利用率</strong></li>
+<li><strong>方便用户</strong></li>
+<li><strong>硬件的不断更新换代</strong></li>
+<li><strong>计算机体系结构的不断发展</strong></li>
+<li><strong>不断提出新的应用需求</strong></li>
+</ul>
+<h1 id="1-2-操作系统的发展过程"><a href="#1-2-操作系统的发展过程" class="headerlink" title="1.2 操作系统的发展过程"></a>1.2 操作系统的发展过程</h1><ul>
+<li>人工操作方式：卡带I/O，一个程序运行完毕并取走计算结果（卡带）后下一个人/程序才能上机，效率极低，人工读带（参考《功勋》里面于敏那集，人工读机器语言，属实是黑客帝国现实版了）。</li>
+<li>脱机I/O方式：事先将装有用户程序和数据的纸带装入纸带输入及，在一台外围机的控制下将卡带上的数据或程序输入到磁带上，当CPU需要这些程序或数据时再从磁带上高速地调入内存。输出时先从内存高速输送到磁带上，然后在外围机控制下通过相应输出设备输出。（个人理解是用磁带来当一个缓存），减少了CPU的空闲时间，I/O操作均由外围机操作，提高了I/O速度。</li>
+<li>单道批处理系统：处理完一个作业后紧接着处理下一个作业以减少机器的空闲等待时间，旨在提高系统资源利用率，但缺点也在用提高的不够充分，这是因为在内存中仅有一道程序，必须在I/O完成后才能运行，又因为I/O设备的低速性，更使CPU的利用率显著降低。若通过增大内存来提高效率，则会因为实际中80%以上的作业都属于中小型而造成在单道程序环境下对内存的浪费。</li>
+<li><strong>多道批处理系统</strong>：用户所提交的作业先存放在外存上，并排成一个队列称为“后备队列”然后由作业调度程序按一定的算法，从后备队列中选择若干个作业调入内存，使它们共享CPU和系统中的各种资源，让它们<strong>交替在CPU上运行</strong><ul>
+<li><strong>多道性、调度性、无序性</strong></li>
+<li>优点：<strong>资源利用率高、系统吞吐量大</strong></li>
+<li>缺点：<strong>平均周转时间长（作业要排队依次进行处理），无交互能力（用户不能与自己的程序交互直至作业完成）</strong></li>
+<li>要解决的问题：处理机争用问题、内存分配和保护问题、I/O设备分配问题、文件的组织和管理问题、作业管理问题、用户与系统的接口问题…（后续都会进一步讨论）</li>
+</ul>
+</li>
+<li><strong>分时系统</strong><ul>
+<li>需求：人机交互、共享主机（支持多设备同时I/O，多用户共享计算机资源）</li>
+<li>关键问题：及时接收、及时处理</li>
+<li>特征：<strong>多路性（允许多台终端同时连接到一台主机上，并按分时原则为每个用户服务）、独立性（每个用户彼此之间互不干扰）、及时性（用户请求短时间内获得响应）、交互性（用户可通过终端与系统进行广泛的人机对话）</strong></li>
+</ul>
+</li>
+<li><strong>实时系统</strong><ul>
+<li>任务类型：周期性实时任务和非周期性实时任务、硬实时任务和软实时任务</li>
+<li>实时系统与分时系统特征的比较<br>区别|实时系统|分时系统</li>
+</ul>
+</li>
+</ul>
+<p>–:|:–:|:–<br>多路性|系统周期性地对多路现场信息进行采集、对多个对象进行控制|系统按分时原则为多个终端用户服务<br>独立性|信息采集和对对象控制互不干扰，多用户与系统交互互不干扰|多用户与系统交互互不干扰<br>及时性|以控制对象所要求的的截止时间来决定对实时性的要求|对实时性的要求（延迟）是依据人能所接受的等待时间决定的<br>交互性|交互性仅限于访问系统中某些特定的专用服务程序|能向终端用户提供数据处理、资源共享等服务，实现广泛的人机对话<br>可靠性|要求系统高度可靠，采用多级容错措施| 要求系统可靠</p>
+<ul>
+<li><strong>多道批处理系统、分时系统、实时系统是三种基本操作系统</strong></li>
+<li>微机操作系统的发展（略）</li>
+</ul>
+<h1 id="1-3-操作系统的基本特性（考点）"><a href="#1-3-操作系统的基本特性（考点）" class="headerlink" title="1.3 操作系统的基本特性（考点）"></a>1.3 操作系统的基本特性（考点）</h1><ul>
+<li><strong>操作系统的四个基本特征</strong>：<strong>并发、共享、虚拟、异步</strong></li>
+</ul>
+<h2 id="1-3-1-并发"><a href="#1-3-1-并发" class="headerlink" title="1.3.1 并发"></a>1.3.1 并发</h2><h3 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h3><ul>
+<li><strong>并行</strong>：在同一<strong>时刻</strong>发生多个事件</li>
+<li><strong>并发</strong>：在同一<strong>时间间隔</strong>内发生多个事件</li>
+<li><strong>并行有并发，并发无并行</strong></li>
+</ul>
+<h3 id="进程的引入"><a href="#进程的引入" class="headerlink" title="进程的引入"></a>进程的引入</h3><ul>
+<li>进程：<strong>在系统中能独立运行并作为资源分配的基本单位</strong>，由<strong>机器指令、数据和堆栈等组成</strong>，是一个<strong>能独立运行的活动实体</strong>，多个进程之间可以并发执行和交换信息，是<strong>操作系统运行的基础</strong></li>
+<li>进程将程序的<strong>执行分段化</strong>，使得多个程序可以并发执行，大大提高资源系统的利用率，增加系统的吞吐量</li>
+</ul>
+<h2 id="1-3-2-共享"><a href="#1-3-2-共享" class="headerlink" title="1.3.2 共享"></a>1.3.2 共享</h2><ul>
+<li><strong>共享</strong>：系统中的资源可供内存中多并发作业共同使用</li>
+<li>互斥共享方式：<strong>一个进程访问资源时其他进程需要等待</strong>，我们将这种一段时间内只允许一个进程访问的资源称为 <em>临界资源</em>，系统中给的绝大多数物理设备以及栈、变量和表格都属于临界资源，只能被互斥地共享。</li>
+<li>同时访问方式：这里的“同时”在单处理机环境下是宏观意义上的，而在微观上，这些进程<strong>对资源的访问是交替进行的</strong>。</li>
+<li><strong>并发和共享是多用户OS的两个最基本特征</strong></li>
+</ul>
+<h2 id="1-3-3-虚拟-无中生有"><a href="#1-3-3-虚拟-无中生有" class="headerlink" title="1.3.3 虚拟 无中生有"></a>1.3.3 虚拟 <em>无中生有</em></h2><ul>
+<li>时分复用技术（时间）：<strong>多个用户交替使用处理机/物理IO设备</strong><ul>
+<li>虚拟处理机技术：为每道程序建立至少一个进程，让多个程序并发执行，虽然微观上系统只有一台处理机，但通过分时复用方法在宏观将处理机虚拟为多台逻辑上的处理机</li>
+<li>虚拟设备技术：将一台物理I/O设备在宏观上虚拟为多台逻辑上的I/O设备，在微观上让不同应用的进程交替使用I/O设备</li>
+<li>虚拟设备处理速度≤V/n，n为虚拟设备/并发应用个数，V为处理机处理速度</li>
+</ul>
+</li>
+<li>空分复用技术（空间）：<strong>每次只向内存中导入程序中被需要的部分，实现程序在比它小的内存中运行，并实现多个程序对内存的同时使用。</strong>，空分复用体现在将内存分为多个小部分供多个应用同时使用，时分复用体现在每个应用每次只导入当前需要的部分，用完就置换，让应用的每个部分分时进入内存。<ul>
+<li>虚拟设备占用空间≤S/N，n为虚拟设备/并发应用个数，S为内存大小</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-4-异步"><a href="#1-3-4-异步" class="headerlink" title="1.3.4 异步"></a>1.3.4 异步</h2><ul>
+<li><strong>异步</strong>：<strong>每个程序不知何时执行何时结束。</strong></li>
+<li>由于资源等因素的限制，进程在发出资源请求时通常不能及时得到满足，因此进程的执行通常不是一气呵成而是以停停走走的方式运行，导致了程序的执行时间是不可知的。</li>
+</ul>
+<h1 id="1-4-操作系统的主要功能"><a href="#1-4-操作系统的主要功能" class="headerlink" title="1.4 操作系统的主要功能"></a>1.4 操作系统的主要功能</h1><h2 id="1-4-1-处理机管理功能（考点）"><a href="#1-4-1-处理机管理功能（考点）" class="headerlink" title="1.4.1 处理机管理功能（考点）"></a>1.4.1 处理机管理功能（考点）</h2><ul>
+<li><strong>进程控制</strong></li>
+<li><strong>进程同步</strong></li>
+<li><strong>进程通信</strong></li>
+<li><strong>处理机调度</strong><h2 id="1-4-2-存储器管理功能（考点）"><a href="#1-4-2-存储器管理功能（考点）" class="headerlink" title="1.4.2 存储器管理功能（考点）"></a>1.4.2 存储器管理功能（考点）</h2></li>
+<li><strong>内存分配</strong>：<ul>
+<li>为每道程序分配内存空间</li>
+<li>提高存储器的利用率</li>
+<li>允许正在运行的程序申请附加的内存空间</li>
+<li>分配方式：<ul>
+<li>静态分配方式：每个作业的内存空间是在作业装入时确定的</li>
+<li>动态分配方式：每个作业的内存空间在作业装入是基本确定，反允许作业在运行过程中继续申请添加新的附加内存空间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>内存保护</strong>：<ul>
+<li>确保每道用户程序都互不干扰，仅在各自内存中运行</li>
+<li>绝不允许用户程序访问操作系统的程序和数据，也不允许用户程序转到非共享的其它用户程序中去执行</li>
+</ul>
+</li>
+<li><strong>地址映射</strong>：使各程序段的逻辑地址转换为内存空间中与之相对应的物理地址</li>
+<li><strong>内存扩充</strong>：借助虚拟存储技术从逻辑上扩充内存容量（比如1.3.3提到的空分复用技术）<h2 id="1-4-3-设备管理功能（知道有就行）"><a href="#1-4-3-设备管理功能（知道有就行）" class="headerlink" title="1.4.3 设备管理功能（知道有就行）"></a>1.4.3 设备管理功能（知道有就行）</h2></li>
+<li>缓冲管理</li>
+<li>设备分配</li>
+<li>设备处理<h2 id="1-4-4-文件管理功能（知道有就行）"><a href="#1-4-4-文件管理功能（知道有就行）" class="headerlink" title="1.4.4 文件管理功能（知道有就行）"></a>1.4.4 文件管理功能（知道有就行）</h2></li>
+<li>文件存储空间的管理</li>
+<li>目录管理</li>
+<li>文件的读写管理与保护<h2 id="1-4-5-操作系统与用户之间的接口（知道有就行）"><a href="#1-4-5-操作系统与用户之间的接口（知道有就行）" class="headerlink" title="1.4.5 操作系统与用户之间的接口（知道有就行）"></a>1.4.5 操作系统与用户之间的接口（知道有就行）</h2></li>
+<li>用户接口：让用户直接或间接地控制自己的作业</li>
+<li>程序接口：让程序方便地使用系统调用<h2 id="1-4-6-现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体"><a href="#1-4-6-现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体" class="headerlink" title="1.4.6 现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体"></a>1.4.6 现代操作系统的新功能：系统安全、网络功能和服务、支持多媒体</h2><h1 id="1-5-OS结构设计"><a href="#1-5-OS结构设计" class="headerlink" title="1.5 OS结构设计"></a>1.5 OS结构设计</h1><h2 id="1-5-1-传统操作系统结构"><a href="#1-5-1-传统操作系统结构" class="headerlink" title="1.5.1 传统操作系统结构"></a>1.5.1 传统操作系统结构</h2></li>
+<li>古早的无结构操作系统：单人设计，规模小，缺乏首尾一致的设计思想，复杂又混乱</li>
+<li>模块化结构OS：有较为清晰的结构，由若干个具有一定独立性和大小的模块构成，每个模块分工不同，模块内又划分为若干个小模块，规定好各子模块之间的接口和模块间的接口<ul>
+<li>优点：提高了OS设计的准确性、可理解性和可维护性、增强了OS的可适应性、加速了OS的开发过程</li>
+<li>缺点：设计时对各模块间的接口规定很难满足在模块设计完成后对接口的实际需求，设计者的决策必须基于上一个决策，造成可靠性的难以保障</li>
+</ul>
+</li>
+<li>分层式结构OS：目标系统An和裸机系统（物理硬件）A0之间铺设若干个层次的软件，使An通过这些层次的软件最终在A0上运行，在OS中通常采用自底向上法来铺设这些中间层<ul>
+<li>优点：由于自底向上保证了决策的顺序性，从而易于保证系统的正确性；在系统中增加、修改、替换一个层次中的模块或整个层次只要不改变相应层次间的接口就不会影响其他层次，这使系统维护和扩充更加容易</li>
+<li>缺点：OS每执行一个功能，通常要自上而下地穿越多个层次，增加了系统的通信开销，导致系统效率的降低<h2 id="1-5-2-客户服务器模式-（详情请见计网笔记第一章）"><a href="#1-5-2-客户服务器模式-（详情请见计网笔记第一章）" class="headerlink" title="1.5.2 客户服务器模式 （详情请见计网笔记第一章）"></a>1.5.2 客户服务器模式 <em>（详情请见计网笔记第一章）</em></h2></li>
+</ul>
+</li>
+<li>客户服务器系统的三个部分：客户机、服务器、网络系统</li>
+<li>过程：客户机发送请求——服务器接收消息——服务器回送消息——客户机接收消息</li>
+<li>优点：数据分布处理和存储提升了可靠性、缓解了处理能力瓶颈；便于集中管理；具有灵活性和可扩充性；支持且易于改编应用软件</li>
+<li>缺点：若系统只有一个服务器，则一旦服务器故障，将导致整个网络瘫痪，也存在处理瓶颈，可通过增加网络中服务器数量来缓解该问题<h2 id="1-5-3-面向对象程序设计技术"><a href="#1-5-3-面向对象程序设计技术" class="headerlink" title="1.5.3 面向对象程序设计技术"></a>1.5.3 面向对象程序设计技术</h2></li>
+<li>啊这……就是抽象，将数据类型、数据结构、数据文件等进行抽象，方便调用，具体不细说了x</li>
+<li>优点：通过重用提高产品质量和生产率、使系统具有更好的易修改性和易扩展性、更易于保证系统的正确性和可靠性<h2 id="1-5-4-微内核OS结构"><a href="#1-5-4-微内核OS结构" class="headerlink" title="1.5.4 微内核OS结构"></a>1.5.4 微内核OS结构</h2><h3 id="什么是微内核"><a href="#什么是微内核" class="headerlink" title="什么是微内核"></a>什么是微内核</h3></li>
+<li>内核：能实现现代OS最基本核心功能的小型内核，微内核并非是一个完整的OS，只是具有OS最基本的部分，通常包含：与硬件处理紧密相关的部分、一些较为基本的功能、客户和服务器之间的通信<h3 id="微内核的基本功能"><a href="#微内核的基本功能" class="headerlink" title="微内核的基本功能"></a>微内核的基本功能</h3></li>
+<li>进程管理</li>
+<li>低级存储器管理</li>
+<li>中断和陷入处理<h3 id="微内核操作系统的优点"><a href="#微内核操作系统的优点" class="headerlink" title="微内核操作系统的优点"></a>微内核操作系统的优点</h3></li>
+<li>提高了系统的可扩展性</li>
+<li>增强了系统的可靠性</li>
+<li>可移植性强</li>
+<li>提供了对分布式系统的支持</li>
+<li>融入了面向对象技术，提高系统正确性、可靠性、易修改性、易扩展性，同时减少开发系统的开销</li>
+</ul>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B01/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">课程笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/04/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B02/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            操作系统笔记2
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B04/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">数据库原理笔记4</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Daniel Qi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.svg" alt="Welcome to DanielQi&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/photos/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2022/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/1.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/2.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=139774&auto=0&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

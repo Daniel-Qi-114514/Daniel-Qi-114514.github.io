@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>数据库原理笔记3 |  Welcome to DanielQi&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <script src="https://mermaid-js.github.io/mermaid/"></script>
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-数据库原理笔记3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  数据库原理笔记3
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B03/" class="article-date">
+  <time datetime="2022-03-24T14:40:43.000Z" itemprop="datePublished">2022-03-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/">课程笔记_数据库原理</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">5.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">19 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="依照学校教学安排，第三章为数据库操作SQL语言"><a href="#依照学校教学安排，第三章为数据库操作SQL语言" class="headerlink" title="依照学校教学安排，第三章为数据库操作SQL语言"></a>依照学校教学安排，第三章为数据库操作SQL语言</h1><h1 id="本帖仅供个人学习使用"><a href="#本帖仅供个人学习使用" class="headerlink" title="本帖仅供个人学习使用"></a>本帖仅供个人学习使用</h1><h1 id="使用软件-pgAdmin4-Power-Designer"><a href="#使用软件-pgAdmin4-Power-Designer" class="headerlink" title="使用软件 pgAdmin4, Power Designer"></a>使用软件 pgAdmin4, Power Designer</h1><hr>
+<h1 id="3-1-SQL语言概述"><a href="#3-1-SQL语言概述" class="headerlink" title="3.1 SQL语言概述"></a>3.1 SQL语言概述</h1><h2 id="3-1-1-SQL简介"><a href="#3-1-1-SQL简介" class="headerlink" title="3.1.1 SQL简介"></a>3.1.1 SQL简介</h2><p>结构化查询语言SQL是一种对关系数据库进行访问的数据操作语言，于上世纪70年代由SEQUEL语言演变而来。当下主流关系型数据库管理系统均支持SQL标准语言实现数据库操作。<br>SQL的语言特点：</p>
+<ul>
+<li>一体化：SQL语言命令集可以完成关系数据库的数据查询、数据定义、数据操纵、数据库管理、数据库控制等操作。</li>
+<li>使用方式灵活：既可以以交互命令方式操作访问数据库，也可以嵌入到程序语言中编程访问数据库。</li>
+<li>非过程化：SQL对数据库的操作只需告诉DBMS做什么而不需要告诉它怎么做。</li>
+<li>语言语法简单：语句少且简洁。</li>
+</ul>
+<h2 id="3-1-2-SQL对关系数据库的操作原理"><a href="#3-1-2-SQL对关系数据库的操作原理" class="headerlink" title="3.1.2 SQL对关系数据库的操作原理"></a>3.1.2 SQL对关系数据库的操作原理</h2><p>用户（数据库应用程序）对关系数据库进行任何操作，都需要将SQL语句提交给DBMS执行，DBMS执行时将SQL语句转为对数据库文件的输入输出操作，并将读取的数据组装为<strong>操作结果集</strong>返回给用户（数据库应用程序）<br>SQL主要操作功能：</p>
+<ul>
+<li>数据库对象创建、修改、删除</li>
+<li>数据库表的数据插入、修改、删除、查询、统计</li>
+<li>存储过程、触发器、函数等程序执行</li>
+<li>数据库权限、角色、用户等管理</li>
+</ul>
+<h2 id="3-1-3-SQL语言语句类型"><a href="#3-1-3-SQL语言语句类型" class="headerlink" title="3.1.3 SQL语言语句类型"></a>3.1.3 SQL语言语句类型</h2><ul>
+<li>数据定义语句DDL：是SQL语言中用于创建、修改或删除数据库对象的语句，DDL不但可以用于数据库对象的管理，也可以定义数据库对象约束<ul>
+<li>CREATE DATABASE - 创建新数据库 </li>
+<li>DROP DATABASE - 删除数据库</li>
+<li>ALTER DATABASE - 修改数据库属性</li>
+<li>CREATE TABLE - 创建新表</li>
+<li>ALTER TABLE - 修改数据库表结构</li>
+<li>DROP TABLE - 删除表</li>
+<li>CREATE INDEX - 创建索引</li>
+<li>DROP INDEX - 删除索引</li>
+</ul>
+</li>
+<li>数据操纵语句DML：是SQL语言中用于增加、修改、删除的语句<ul>
+<li>INSERT - 向数据库表中插入语句</li>
+<li>UPDATE - 更新数据库表中的数据</li>
+<li>DELETE - 从数据库表中删除数据</li>
+</ul>
+</li>
+<li>数据查询语句DQL：是SQL语言中用于对数据库进行数据查询的语句<ul>
+<li>SELECT - 对表的内容进行查询</li>
+<li>DESC - 查看关系表结构</li>
+</ul>
+</li>
+<li>数据控制语句DCL：是SQL语言中用于对数据库对象访问权进行控制的语句<ul>
+<li>GRANT - 授予用户对数据库对象的权限</li>
+<li>DENY - 拒绝授予用户对数据库对象的权限</li>
+<li>REVOKE - 撤销用户对数据库对象的权限</li>
+</ul>
+</li>
+<li>事务处理语句TPL：是SQL语言中用于数据库内部事务处理的语句<ul>
+<li>BEGIN TRANSACTION - 开始事务</li>
+<li>COMMIT - 提交事务</li>
+<li>ROLLBACK - 回滚事务</li>
+</ul>
+</li>
+<li>游标控制语言CCL：是SQL语言中用于数据库游标操作的语句，游标是是一个存储在MySQL服务器上的数据库查询，它不是一条SELECT语句，而是被该语句检索出来的结果集。在存储了游标之后，应用程序可以根据需要滚动或浏览其中的数据<ul>
+<li>DECLARE CURSOR - 定义游标 </li>
+<li>FETCH INTO - 提交游标数据</li>
+<li>CLOSE CURSOR - 关闭游标</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-4-SQL语言的数据类型"><a href="#3-1-4-SQL语言的数据类型" class="headerlink" title="3.1.4 SQL语言的数据类型"></a>3.1.4 SQL语言的数据类型</h2><ul>
+<li>SQL语言基本数据类型<ul>
+<li>字符：CHAR\VARCHAR\TEXT…</li>
+<li>整数：SMALLINT\INTEGER…</li>
+<li>浮点数：NUMBER\FLOAT…</li>
+<li>日期：DATE\DATETIME…</li>
+<li>货币：MONEY…<br><img src="../photos/DataBaseCourse/3_1.png" title="PostgreSQL主要数据类型"><br><img src="../photos/DataBaseCourse/3_2.png" title="SQL Server数据类型"><br><img src="../photos/DataBaseCourse/3_3.png" title="MySQL数据类型"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="3-2-数据定义SQL语句"><a href="#3-2-数据定义SQL语句" class="headerlink" title="3.2 数据定义SQL语句"></a>3.2 数据定义SQL语句</h1><h2 id="3-2-1-数据库创建SQL语句"><a href="#3-2-1-数据库创建SQL语句" class="headerlink" title="3.2.1 数据库创建SQL语句"></a>3.2.1 数据库创建SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句创建数据库</li>
+</ul>
+<h2 id="3-2-2-数据库、关系表修改SQL语句"><a href="#3-2-2-数据库、关系表修改SQL语句" class="headerlink" title="3.2.2 数据库、关系表修改SQL语句"></a>3.2.2 数据库、关系表修改SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//修改方式语句类型</span><br><span class="line">//ADD修改方式，用于添加新列或列完整性约束</span><br><span class="line">ALTER TABLE &lt;表名&gt; ADD &lt;新列名称&gt; &lt;数据类型&gt; 完整性约束;</span><br><span class="line"></span><br><span class="line">//DROP修改方式，用于删除指定列或列的完整性约束条件</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP COLUMN &lt;列名&gt;;</span><br><span class="line">ALTER TABLE &lt;表名&gt; DROP CONSTRAINT;&lt;完整性约束名&gt;;</span><br><span class="line"></span><br><span class="line">//RENAME修改方式，用于修改表名称、列名称</span><br><span class="line">ALTER TABLE &lt;表名&gt; RENAME TO &lt;新表名&gt;;</span><br><span class="line">ALTER TABLE &lt;表名&gt; RENAME &lt;原列名&gt; TO &lt;新列名&gt;;</span><br><span class="line"></span><br><span class="line">//ALTER修改方式，用于修改数据库名、表名、列的数据类型</span><br><span class="line">ALTER DATABASE &lt;数据库名&gt; &lt;修改内容&gt;;</span><br><span class="line">ALTER TABLE &lt;表名&gt; 修改方式;</span><br><span class="line">ALTER TABLE &lt;表名&gt; ALTER COLUMN &lt;列名&gt; TYPE &lt;新的数据类型&gt;;</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句修改数据库或数据库内容</li>
+</ul>
+<h2 id="3-2-3-数据库、关系表删除SQL语句"><a href="#3-2-3-数据库、关系表删除SQL语句" class="headerlink" title="3.2.3 数据库、关系表删除SQL语句"></a>3.2.3 数据库、关系表删除SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE &lt;数据库名&gt;;</span><br><span class="line">DROP TABLE &lt;表名&gt;;</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句删除数据库或数据库内容</li>
+</ul>
+<h2 id="3-2-4-数据库表创建SQL语句"><a href="#3-2-4-数据库表创建SQL语句" class="headerlink" title="3.2.4 数据库表创建SQL语句"></a>3.2.4 数据库表创建SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;列名1&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   ...</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句创建数据库关系表</li>
+</ul>
+<h2 id="3-2-5-列完整性约束"><a href="#3-2-5-列完整性约束" class="headerlink" title="3.2.5 列完整性约束"></a>3.2.5 列完整性约束</h2><ul>
+<li>约束类型<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PRIMARY KEY //主键</span><br><span class="line">NOT NULL //非空值</span><br><span class="line">NULL //空值</span><br><span class="line">UNIQUE //值唯一</span><br><span class="line">CHECK //有效性检查</span><br><span class="line">DEFAULT //缺省值</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句添加列完整性约束</li>
+</ul>
+<h2 id="3-2-6-表约束定义主键"><a href="#3-2-6-表约束定义主键" class="headerlink" title="3.2.6 表约束定义主键"></a>3.2.6 表约束定义主键</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//PRIMARY KEY定义表的主键列只能定义单列主键，若要定义由多个列构成的复合主键，则需要使用表约束方式来定义</span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;列名1&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">...</span><br><span class="line">   CONSTRAINT &lt;约束名&gt; PRIMARY Key (主键列名1,主键列名2)</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句定义主键、复合主键</li>
+<li>使用表约束定义主键的优点：<ul>
+<li>便于定义复合主键</li>
+<li>可命名主键约束</li>
+<li>便于定义代理键</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-7-表约束定义代理键"><a href="#3-2-7-表约束定义代理键" class="headerlink" title="3.2.7 表约束定义代理键"></a>3.2.7 表约束定义代理键</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//在一些关系表中，为了方便数据处理，可以使用代理键去替代复合主键。在SQL语句中，关系表的代理键采用表约束方式来定义</span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;代理键列名&gt; &lt;Serial数据类型&gt; NOT NULL,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">...</span><br><span class="line">   CONSTRAINT &lt;约束名&gt; PRIMARY Key (代理键列名)</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句定义代理键</li>
+</ul>
+<h2 id="3-2-8-表约束定义外键"><a href="#3-2-8-表约束定义外键" class="headerlink" title="3.2.8 表约束定义外键"></a>3.2.8 表约束定义外键</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//在数据库中，一些关系表之间存在关联，在一个表中作为主键的列，在另外的关联表中则作为外键</span><br><span class="line">CREATE TABLE &lt;表名&gt;</span><br><span class="line"> ( &lt;列名1&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名2&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">   &lt;列名3&gt; &lt;数据类型&gt; 列完整性约束,</span><br><span class="line">...</span><br><span class="line">   CONSTRAINT &lt;约束名&gt; FOREIGN Key (外键列名)</span><br><span class="line">       REFERENCES  外键列所在表名(外键列名)</span><br><span class="line">     ON DELETE CASCADE//联级删除，如果主表中的一个列被删除了，那么应用该列的从表中的所有记录也被删除</span><br><span class="line"> );</span><br></pre></td></tr></table></figure></li>
+<li>语句执行：在PostgreSQL服务器中，执行SQL语句定义外键</li>
+</ul>
+<h2 id="3-2-9-数据库索引操作语句、"><a href="#3-2-9-数据库索引操作语句、" class="headerlink" title="3.2.9 数据库索引操作语句、"></a>3.2.9 数据库索引操作语句、</h2><h3 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引"></a>什么是索引</h3><ul>
+<li>索引是一种按照关系表中指定列的取值顺序组织元组数据存储的数据结构，使用它可以加快表中数据的查询访问</li>
+<li>在索引数据结构中，采用树结构的各个结点存储索引值及其指针，索引叶结点的指针指向数据库文件中的元组数据块地址<br><img src="../photos/DataBaseCourse/3_4.png" title="B树索引结构图"></li>
+<li>索引作用及其特点<ul>
+<li>索引作用：支持对数据库表中数据快速查找</li>
+<li>索引优点<ul>
+<li>提高数据检索速度</li>
+<li>可快速连接关联表</li>
+<li>减少分组和排序时间</li>
+</ul>
+</li>
+<li>索引开销<ul>
+<li>创建和维护索引都需要较大开销</li>
+<li>索引会占用额外存储空间</li>
+<li>数据操纵困难因维护索引带来系统性能开销</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据库索引创建、修改、删除语句"><a href="#数据库索引创建、修改、删除语句" class="headerlink" title="数据库索引创建、修改、删除语句"></a>数据库索引创建、修改、删除语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 数据库索引创建语句</span><br><span class="line">CREATE INDEX &lt;索引名&gt; ON &lt;表名&gt; &lt;(列名)&gt;;</span><br><span class="line"></span><br><span class="line">// 数据库索引修改语句</span><br><span class="line">ALTER INDEX &lt;索引名&gt; 修改项;//具体修改语法见3.2.2</span><br><span class="line"></span><br><span class="line">// 数据库索引删除语句</span><br><span class="line">DROP INDEX &lt;索引名&gt;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="3-3-数据操纵SQL语句"><a href="#3-3-数据操纵SQL语句" class="headerlink" title="3.3 数据操纵SQL语句"></a>3.3 数据操纵SQL语句</h1><h2 id="3-3-1-数据插入SQL语句"><a href="#3-3-1-数据插入SQL语句" class="headerlink" title="3.3.1 数据插入SQL语句"></a>3.3.1 数据插入SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//插入一个元组语法如下，插入几个元组就写几行</span><br><span class="line">INSERT INTO 表名或视图名    如果元组只有个别列有数据，这里可以再写一个列名表表示要给哪几个列赋值，不写的话缺省值默认为NULL并自动补全 VALUES (该元组的所有数据从左到右排列，之间用逗号隔开);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-3-2-数据修改SQL语句"><a href="#3-3-2-数据修改SQL语句" class="headerlink" title="3.3.2 数据修改SQL语句"></a>3.3.2 数据修改SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPDATE 表名或视图名 //UPDATE关键字指定修改的是哪个表或视图</span><br><span class="line">SET 列名1=新数据 //SET关键字指定对哪些列设定新值，注意字符串要给单引号</span><br><span class="line">WHERE 条件表达式;//WHERE关键字给出修改的前提条件，比如需要指定行用到的 xxx=xxx</span><br><span class="line">//看不懂的见下图</span><br></pre></td></tr></table></figure>
+<img src="../photos/DataBaseCourse/3_5.png" title="数据更新实例"></li>
+</ul>
+<h2 id="3-3-3-数据删除SQL语句"><a href="#3-3-3-数据删除SQL语句" class="headerlink" title="3.3.3 数据删除SQL语句"></a>3.3.3 数据删除SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//一次删除一个元组，删几个元组写几遍</span><br><span class="line">DELETE</span><br><span class="line">FROM 表名或视图名</span><br><span class="line">WHERE 条件表达式</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="3-4-数据查询SQL语句"><a href="#3-4-数据查询SQL语句" class="headerlink" title="3.4 数据查询SQL语句"></a>3.4 数据查询SQL语句</h1><h2 id="3-4-1-单表数据查询"><a href="#3-4-1-单表数据查询" class="headerlink" title="3.4.1 单表数据查询"></a>3.4.1 单表数据查询</h2><h3 id="数据查询SQL语句格式"><a href="#数据查询SQL语句格式" class="headerlink" title="数据查询SQL语句格式"></a>数据查询SQL语句格式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT ALL或DISTINCT 目标列 //选ALL就是有啥输出啥，有DISTINCT就是去掉重复的数据行，如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">INTO 新表</span><br><span class="line">FROM 表名或视图名 //多个表名或视图名可以用逗号隔开，往后续</span><br><span class="line">//如果是条件查询 就写 &quot;WHERE 条件表达式&quot;</span><br><span class="line">//如果是分组统计查询就写 &quot;GROUP BY 列名&quot;,如果有条件接着写 &quot;HAVING 条件表达式&quot;</span><br><span class="line">//如果查询结果需要排序输出就写 &quot;ORDER BY 列名&quot;这个子句要放在WHERE后面（如果有的话）,如果接着写&quot;ASC或DESC&quot;, ASC是升序排列，DESC是降序排列</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h3 id="从单个表读取指定列"><a href="#从单个表读取指定列" class="headerlink" title="从单个表读取指定列"></a>从单个表读取指定列</h3><p>在关系数据库中，最简单的数据查询操作就是从单个关系表中读取指定列的数据，即关系的投影操作 <em>（说白了就是把列拎出来组成结果集）</em></p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT 目标列//如果有多个目标列可以用逗号隔开，接着往后续，如果要查询所有列数据，就写个 *</span><br><span class="line">FROM 关系表名;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="从单个表读取指定行"><a href="#从单个表读取指定行" class="headerlink" title="从单个表读取指定行"></a>从单个表读取指定行</h3><p>SQL查询语句也可以从一个关系表中读取满足条件的指定行数据，即完成关系数据的元组选择操作</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM 关系表</span><br><span class="line">WHERE 条件表达式;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="从单个表读取指定行和列"><a href="#从单个表读取指定行和列" class="headerlink" title="从单个表读取指定行和列"></a>从单个表读取指定行和列</h3><p>在SQL查询语句中，还可以从一个关系表中读取指定行与指定列范围内的数据。既完成关系的行选择，又完成关系的列投影操作。</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT 目标列//如果有多个目标列可以用逗号隔开，接着往后续，如果要查询所有列数据，就写个 *</span><br><span class="line">FROM 关系表</span><br><span class="line">WHERE 条件表达式;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="WHERE条件子句"><a href="#WHERE条件子句" class="headerlink" title="WHERE条件子句"></a>WHERE条件子句</h3><p>使用WHERE子句中可以使用如下方式，指定范围数据</p>
+<ul>
+<li>使用<strong>BETWEEN…AND</strong>关键词来限定列值范围，还可以使用关键词LIKE与通配符来限定查询条件</li>
+<li>使用通配符来限定字符串数据范围。_通配符用于代表一个未指定的字符，%通配符用于代表一个或多个未指定的字符<br>在SQL查询WHERE子句中，还可以使用多个条件表达式，并通过逻辑运算符AND\OR\NOT连接操作，以及使用IN\NOT IN关键词，进一步限定结果集的数据范围</li>
+</ul>
+<h3 id="对结果集进行排序"><a href="#对结果集进行排序" class="headerlink" title="对结果集进行排序"></a>对结果集进行排序</h3><p>在SELECT查询语句返回的结果集中，行的顺序是任意的。如果需要结果集排序，可以在SELECT语句中加入ORDER BY 关键字<br>在ORDER子句中可以使用ASC和DESC指定排序是升序还是降序，也可以ASC和DESC搭配使用，若要先按某列数据升序\降序排列元组，再对其中数据相同的元组以别的列的数据升序\降序排列元组，则在ORDER BY后的这几个列之间用逗号隔开。</p>
+<h2 id="3-4-2-内置函数与分组统计"><a href="#3-4-2-内置函数与分组统计" class="headerlink" title="3.4.2 内置函数与分组统计"></a>3.4.2 内置函数与分组统计</h2><h3 id="SQL内置函数类型"><a href="#SQL内置函数类型" class="headerlink" title="SQL内置函数类型"></a>SQL内置函数类型</h3><p>SQL语言提供了大量内置函数，支持对SELECT查询结果数据进行处理<br>典型SQL内置函数类型如下：</p>
+<ul>
+<li>聚合函数</li>
+<li>算术函数</li>
+<li>字符串函数</li>
+<li>日期时间函数</li>
+<li>数据类型转换函数</li>
+</ul>
+<h3 id="SQL聚合函数"><a href="#SQL聚合函数" class="headerlink" title="SQL聚合函数"></a>SQL聚合函数</h3><p>聚合函数是一些对关系表中数值属性列进行计算并以表的形式返回查询结果的函数<br>AVG() 计算结果集指定列数据的平均值<br>COUNT() 计算结果集行数<br>MIN() 找出结果集指定列数据的最小值<br>MAX() 找出结果集指定列数据的最大值<br>SUM() 计算结果集指定列数据的总和</p>
+<h3 id="SQL内置函数与分组统计"><a href="#SQL内置函数与分组统计" class="headerlink" title="SQL内置函数与分组统计"></a>SQL内置函数与分组统计</h3><p>在SQL语言中，可使用内置函数对查询结果集进行分组数据统计。这是通过在SELECT语句中加入Group By子语句来实现。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//分组统计SQL语句基本格式：</span><br><span class="line">SELECT 统计函数/目标列</span><br><span class="line">FROM 表名</span><br><span class="line">//如果需要添加条件就写&quot;WHERE 条件表达式&quot;</span><br><span class="line">GROUP BY 目标列</span><br><span class="line">//HAVING字句 是对GROUP BY的结果进行限制，如要添加，则写&quot;HAVING 条件表达式&quot;</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-3-多表关联查询"><a href="#3-4-3-多表关联查询" class="headerlink" title="3.4.3 多表关联查询"></a>3.4.3 多表关联查询</h2><h3 id="子查询与多表关联"><a href="#子查询与多表关联" class="headerlink" title="子查询与多表关联"></a>子查询与多表关联</h3><p>在实际应用中，通常需要关联多表才能获得所需的信息。在SELECT查询语句中，可使用子查询方式实现多表关联查询。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//子查询SQL语句基本格式：</span><br><span class="line">SELECT 目标列 //如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">FROM 表名</span><br><span class="line">WHERE 条件中嵌套另一关系表的SELECT查询结果集</span><br><span class="line">;</span><br><span class="line">//例子见下表</span><br></pre></td></tr></table></figure>
+<p><img src="../photos/DataBaseCourse/3_6.png" title="子查询示例"></p>
+<h3 id="使用连接关联多表查询"><a href="#使用连接关联多表查询" class="headerlink" title="使用连接关联多表查询"></a>使用连接关联多表查询</h3><p>在使用多个表查询时，子查询只有在结果数据均来自一个表的情况下才有用。但如果需要从两个或多个表中获取结果数据，就不能使用子查询，而需要采用连接关联多表查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//关联多表查询SQL语句基本格式：</span><br><span class="line">SELECT 目标列 //如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">FROM 表名  //如果数据来自多个表可以用逗号隔开，接着往后续</span><br><span class="line">WHERE 关系表之间的连接关联条件</span><br><span class="line">;</span><br><span class="line">//例子见下表</span><br></pre></td></tr></table></figure>
+<p><img src="../photos/DataBaseCourse/3_7.png" title="关联多表查询示例"></p>
+<h3 id="SQL-JOIN…ON连接查询语句"><a href="#SQL-JOIN…ON连接查询语句" class="headerlink" title="SQL JOIN…ON连接查询语句"></a>SQL JOIN…ON连接查询语句</h3><p>在SQL语言中，实现多表连接关联查询还可以使用JOIN…ON关键词的语句格式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//两表连接关联查询的JOIN...ON语句格式：</span><br><span class="line">SELECT 目标列 //如果有多个目标列可以用逗号隔开，接着往后续</span><br><span class="line">FROM 表名1 JOIN 表名2 ON 连接条件</span><br><span class="line">//有具体排序需要可以添加ORDER BY子句;</span><br><span class="line">//例子见下表</span><br></pre></td></tr></table></figure>
+<p><img src="../photos/DataBaseCourse/3_8.png" title="使用JOIN...ON语句进行关联多表查询示例"></p>
+<h3 id="外部连接"><a href="#外部连接" class="headerlink" title="外部连接"></a>外部连接</h3><p>在一些特殊情况下，如关联表中的一些行的主键与外键不匹配（比如某个属性作为主键时的行数和在其它表中做外键时的行数不同），查询结果集就会丢失部分数据，此时就不能找出在某表中存在但在其它表没有的元组。在SQL应用中，有时候也希望输出那些不满足连接条件的元组数据。此时，可使用JOIN…ON外连接方式实现。其实现方式有三种形式，具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//搭配2.2.5食用风味更佳</span><br><span class="line">LEFT JOIN //即使没有与右表关联列值匹配，也从左表返回所有的行</span><br><span class="line">RIGHT JOIN //即使没有与左表关联列值匹配，也从右表返回所有的行</span><br><span class="line">FULL JOIN //全外连接，同时进行左连接和右连接，返回所有行</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="3-5-数据控制SQL语句"><a href="#3-5-数据控制SQL语句" class="headerlink" title="3.5 数据控制SQL语句"></a>3.5 数据控制SQL语句</h1><h2 id="3-5-1-什么是数据控制SQL语句"><a href="#3-5-1-什么是数据控制SQL语句" class="headerlink" title="3.5.1 什么是数据控制SQL语句"></a>3.5.1 什么是数据控制SQL语句</h2><p>在SQL语言中，数据控制SQL语句是一种可对用户数据访问权进行控制的操作语句，它可以控制特定用户或角色对数据表、视图、存储过程、触发器等数据库对象的访问权限</p>
+<ul>
+<li>数据控制SQL语句分类<ul>
+<li>GRANT授权语句：是一种由数据库对象创建者或管理员执行的权限授予语句，它可以把访问数据库对象权限赋予给其他用户或角色</li>
+<li>REVOKE收权语句：是一种由数据库对象创建或管理员赋予其它用户或角色的权限进行收回的语句，它可以收回原赋予给其他用户或角色的权限</li>
+<li>DENY拒绝权限语句：是一种用于拒绝给当前数据库内的用户或者角色授予权限并防止用户或角色通过其组或角色成员继承权限的语句</li>
+</ul>
+</li>
+</ul>
+<h3 id="GRANT授权语句"><a href="#GRANT授权语句" class="headerlink" title="GRANT授权语句"></a>GRANT授权语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT 权限列表  ON 数据库对象 TO 用户或角色</span><br><span class="line">//若后面接&quot;WITH GRANT OPTION&quot;子句，则被授权角色或用户还可将这些权限赋给其他用户或角色</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h3 id="REVOKE收权语句"><a href="#REVOKE收权语句" class="headerlink" title="REVOKE收权语句"></a>REVOKE收权语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REVOKE 权限列表 ON 数据库对象 FROM 用户或角色</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<h3 id="DENY拒绝权限语句"><a href="#DENY拒绝权限语句" class="headerlink" title="DENY拒绝权限语句"></a>DENY拒绝权限语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DENY 权限列表 ON 数据库对象 TO 用户或角色</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="3-6-视图SQL语句"><a href="#3-6-视图SQL语句" class="headerlink" title="3.6 视图SQL语句"></a>3.6 视图SQL语句</h1><h2 id="3-6-1-什么是视图"><a href="#3-6-1-什么是视图" class="headerlink" title="3.6.1 什么是视图"></a>3.6.1 什么是视图</h2><p><strong>视图</strong>是一种通过基础表或其它视图构建的虚拟表，它本身没有自己的数据，而是使用了存储在基础表中的数据</p>
+<h2 id="3-6-2-视图创建SQL语句"><a href="#3-6-2-视图创建SQL语句" class="headerlink" title="3.6.2 视图创建SQL语句"></a>3.6.2 视图创建SQL语句</h2><ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW 视图名 AS SELECT查询//SELECT语句用于指定目标列</span><br><span class="line">FROM 表名</span><br><span class="line">//如果有条件限制 就加上 &quot;WHERE 条件表达式&quot;</span><br><span class="line">;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-6-3-视图调用SQL语句"><a href="#3-6-3-视图调用SQL语句" class="headerlink" title="3.6.3 视图调用SQL语句"></a>3.6.3 视图调用SQL语句</h2><p>当视图在数据库中创建后，用户可以像访问关系表一样去操作访问视图</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列名表/*</span><br><span class="line">FROM 视图名</span><br><span class="line">//如果要特殊排列，则添加&quot;ORDER BY 列名&quot;子句</span><br><span class="line">;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-6-4-视图删除SQL语句"><a href="#3-6-4-视图删除SQL语句" class="headerlink" title="3.6.4 视图删除SQL语句"></a>3.6.4 视图删除SQL语句</h2><p>当数据库不再需要某视图时，可以在数据库中删除该视图</p>
+<ul>
+<li>语句基本格式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP VIEW 视图名//</span><br><span class="line">;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-6-5-视图应用"><a href="#3-6-5-视图应用" class="headerlink" title="3.6.5 视图应用"></a>3.6.5 视图应用</h2><h3 id="使用视图简化复杂SQL查询操作"><a href="#使用视图简化复杂SQL查询操作" class="headerlink" title="使用视图简化复杂SQL查询操作"></a>使用视图简化复杂SQL查询操作</h3><p>数据库开发人员可以将复杂的SQL查询语句封装在视图内，外部程序只需使用简单的试图访问方式，便可获取所需要的数据<br><img src="../photos/DataBaseCourse/3_9.png" title="创建关联表语句写法"><br><img src="../photos/DataBaseCourse/3_10.png" title="创建视图语句写法"><br><del>Emm…感觉视图写法更复杂了…</del><br>当视图被创建完成后，外部程序就可以通过SELECT语句查询视图数据 <em>(具体写法见3.6.3)</em></p>
+<h3 id="使用视图提高数据访问安全性"><a href="#使用视图提高数据访问安全性" class="headerlink" title="使用视图提高数据访问安全性"></a>使用视图提高数据访问安全性</h3><p>通过视图可以将数据表内敏感数据隐藏起来，外部用户无法得知数据表的完整数据，降低数据库被攻击的风险，还可以保护用户隐私数据</p>
+<h3 id="提供一定程度的数据逻辑独立性"><a href="#提供一定程度的数据逻辑独立性" class="headerlink" title="提供一定程度的数据逻辑独立性"></a>提供一定程度的数据逻辑独立性</h3><p>通过视图，可提供一定程度的数据逻辑独立性。当数据表结构发生改变，只要视图结构不变，应用程序可以不作修改</p>
+<h3 id="集中展示用户所感兴趣的特定数据"><a href="#集中展示用户所感兴趣的特定数据" class="headerlink" title="集中展示用户所感兴趣的特定数据"></a>集中展示用户所感兴趣的特定数据</h3><p>通过视图，可以将用户不关心的部分数据进行过滤</p>
+<hr>
+<h1 id="3-7-PostgreSQL数据库实践（略）"><a href="#3-7-PostgreSQL数据库实践（略）" class="headerlink" title="3.7 PostgreSQL数据库实践（略）"></a>3.7 PostgreSQL数据库实践（略）</h1> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B03/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" rel="tag">数据库原理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">课程笔记</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/03/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B04/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            数据库原理笔记4
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/03/24/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%911/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">论文翻译1_粒子系统</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Daniel Qi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.svg" alt="Welcome to DanielQi&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/photos/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2022/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/1.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/2.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=139774&auto=0&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

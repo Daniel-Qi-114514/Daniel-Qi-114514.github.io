@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>论文翻译1_粒子系统 |  Welcome to DanielQi&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <script src="https://mermaid-js.github.io/mermaid/"></script>
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-论文翻译1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  论文翻译1_粒子系统
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/24/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%911/" class="article-date">
+  <time datetime="2022-03-24T04:11:11.000Z" itemprop="datePublished">2022-03-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%BF%BB%E8%AF%91/">个人翻译</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">13 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p><strong>原文作者：William T.Reeves, Lucasfilm.Ltd</strong><br><strong>原文题目：Particle Systems-A Technique for Modeling a Class of Fuzzy Objects</strong>(Computer Graphics, Volume 17, Number 3, July 1983)<br><strong>翻译仅供个人学习，勿做他用</strong><br><strong>部分地方为了语义通顺，在尊重原文意思的同时使用了意译</strong><br><strong>翻译限于个人水平，敬请见谅</strong></p>
+<hr>
+<h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h1><ul>
+<li>  当下的计算机图像合成技术对诸如云、雾、水和火等自然事物进行建模已经被证明是困难的。这些“模糊”的物体并没有平滑、界限清晰、闪闪发亮的表面，而是拥有不平整、复杂、界限模糊的表面。我们对这些事物形体的动态、流动变化深感兴趣。它们的动作既不一成不变也不能被计算机图像中的常见简单仿射变换所描绘。</li>
+<li>  本文提供了一种对模糊物体的建模方法，称为“粒子系统”。粒子系统在图像合成方面与一般使用的呈现方式有三个基本的不同点。第一， 物体并不由一系列基本的面元素如多面形或色块所呈现，且它的边界也不为这些元素所定义，而是借助基本粒子组成的云团来定义它的体积；第二，粒子系统并不是确切的实体，它的粒子随着时间的变化而改变外观，粒子新旧更替。第三，由粒子系统所呈现的物体的外形并不被明确规定，因此其不具确定性。此外，随机处理被用于生成和改变物体的外观。</li>
+<li>  在模糊物体的建模过程中，相较于传统以面为导向的技术，粒子系统方法有几个重要的优势。首先，粒子（目前将其想象为三维空间的一个点）是比多边形更加原始和简易的，是表面呈现方式中最为简化的。因此，在相同的计算时间内采用粒子系统可以处理更多的基元并产生更加复杂的图像。由于粒子是简易的，所以它也易于运动模糊。时态混叠效应下快速运动的物体导致的运动模糊现象在计算机图像合成中已经被长久地忽视了；第二个优势是模型定义是程序性的，并且由随机数控制。因此，相比于通常使用现有的基于表面的系统，使用粒子系统获得一个十分精细的模型并不一定需要人们长时间设计。由于它是程序性的，所以粒子系统可以调整其细节级别以适应特定的一组查看参数。使用分形曲面，使用粒子系统放大可以显示越来越多的细节；第三，使用粒子系统建模的物体是“活的”，也就是说，它们会在一段时间内改变外观。而这种复杂的动力学形式使用基于曲面的建模技术则难以实现。</li>
+<li>  建模时将物体做成粒子的集合并非新想法。十五年前，最早的电脑磁带游戏将太空飞船的爆炸描绘成充满屏幕的许多光点。尽管在文献中很少提及它们，但在许多三维建模系统中，点源被用作图形数据类型。俄亥俄州的Roger Wilson使用粒子来建模从烟囱中冒出的烟雾。在他的模型中既没有随机控制，也没有动力学。Alvy Ray Smith和Jim Blinn在他们的系列节目《宇宙》（Cosmos）中使用粒子来给恒星消亡建模。Alan Norton使用粒子生成和显示三维分形形状。Jim Blinn讨论过模拟光通过和被粒子层反射的光反射函数。他的技术被用于生成土星环的图片。Blinn并没有解决模糊物体的建模问题，这也是他论文的主题。体积表示法也被认为是曲面表示的可行替代方案。实体建模是体积表示的一种，就如Norm Badler和Joe O’Rourke的《泡泡人》（Bubble-man）的一样。在分形建模中，随机建模的使用将我们的工作和最新的进展联系起来。</li>
+<li>  第二部分更加详尽地描述了粒子系统的基本框架。第三部分研究了在《星际迷航2：可汗之怒》中粒子系统是怎样用于在“创世纪演示”中生成火，第四部分展现了粒子系统的另外几个应用，第五部分讨论了该领域未来的进一步研究。</li>
+</ul>
+<hr>
+<h1 id="2-粒子系统的基本模型"><a href="#2-粒子系统的基本模型" class="headerlink" title="2 粒子系统的基本模型"></a>2 粒子系统的基本模型</h1><ul>
+<li>  粒子系统是许多微小粒子的集合，它们共同表示一个模糊的物体。在一段时间内，许多粒子将被生成为一个系统、在这个系统内移动和改变外观，最后随着这个系统销毁。</li>
+<li>  为了在动态演示中计算每一帧，需要进行以下步骤：(1)新粒子被生成到系统内，（2）每个粒子都被分配独立的属性，（3）系统中任何存在时间超过预定寿命的粒子都会被销毁，（4）剩余的粒子根据它们的动力学属性被移动和转化，（5）最后在帧缓存器中渲染活动粒子的图像。粒子系统可通过编程被设定为在每一步执行任何一组指令。由于它是程序性的，所以这种方法可以结合任何描述物体外观或动力学的计算模型。举个例子，粒子的运动和变换能够与一组偏微分方程的解联系在一起，或者粒子的属性能够基于统计力学被分配。因此，我们能利用那些已经在其它科学或工程学科中被开发的模型。</li>
+<li>  在本文的研究中，我们是用简易的随机过程作为帧生成的每个步骤的程序性要素。为了在粒子系统中控制粒子的形状、外观和动力学特性，模型设计者需要用到一组参数。一般来说，每组参数表明了粒子属性值的范围。我们通常使用平均值和最大方差来指定这些范围。</li>
+<li>  后续小节更加详尽地描述了粒子系统的基本模型和在我们编写的软件中这些粒子是如何被控制和规定的。</li>
+</ul>
+<h2 id="2-1-粒子生成"><a href="#2-1-粒子生成" class="headerlink" title="2.1 粒子生成"></a>2.1 粒子生成</h2><ul>
+<li>  粒子在系统中以受控随机过程生成。该过程确定在每个时间间隔（给定帧）内进入系统的粒子数。生成的粒子数目很重要，因为它强烈影响模糊物体的密度。</li>
+<li>  模型设计者可以在下面两种方法中选择一种来控制新粒子的数目。第一种方法是，设计者控制每帧内生成的粒子的平均数量及其方差。在帧f上生成的实际粒子数为：<center>NParts<sub>f</sub> = MeanParts<sub>f</sub> + Rand( ) × VarParts<sub>f</sub>，</center>
+其中Rand是一个程序过程，它返回一个在-1.0和+1.0之间概率均匀分布的随机数，MeanParts<sub>f</sub>是粒子数量的平均数，VarParts<sub>f</sub>是粒子数量的方差。</li>
+<li>  第二种方法是新粒子的数量取决于物体在屏幕上的大小。模型设计者控制每个屏幕单位面积内生成粒子的平均数及其方差。程序化粒子系统可以决定每一个特定帧的视图参数，计算其覆盖的大致区域，并相应地设定新粒子的数量。对应的方程为：<center>NParts<sub>f</sub> = (MeanParts<sub>sa<sub>f</sub></sub> + Rand( ) × VarParts<sub>sa<sub>f</sub></sub>) x ScreenArea，</center>
+其中MeanParts<sub>sa</sub>是每单位屏幕面积粒子数的平均值，MeanParts<sub>sa<sub>f</sub></sub>是其方差，ScreenArea则是粒子系统在屏幕上所占的面积。这个方法
+控制了粒子系统细节的级别，从而控制渲染其图像所需的时间。举个例子，我们没必要在屏幕上4个像素大小的区域生成100000个粒子。</li>
+<li>  为了使粒子系统能够在密度上增减，设计者可以随时间去改变每帧生成的粒子的平均数量（即，MeanParts<sub>f</sub>和MeanParts<sub>sa<sub>f</sub></sub>是如上所述的帧数函数）。目前，我们使用一个简单的线性函数：<center>MeanParts<sub>f</sub> = InitialMeanParts + DeltaMeanParts<sub>sa<sub>f</sub></sub> x (f - f<sub>0</sub>) </center>
+或
+<center>MeanParts<sub>sa<sub>f</sub></sub>= InitialMeanParts<sub>sa</sub> + DeltaMeanParts<sub>sa</sub> x ( f - f<sub>0</sub>), </center>
+其中f是当前帧，f<sub>0</sub>是粒子系统处于活动状态的第一帧，InitialMeanParts<sub>sa</sub>表示该第一帧的粒子平均数，VarParts<sub>sa<sub>f</sub></sub>表示其变化率，方差约束量VarParts<sub>sa<sub>f</sub></sub>和VarParts<sub>f</sub>目前在所有帧上都是常量。更复杂的二次型、三次型甚至随机变化在均值和方差参数中都很容易添加。</li>
+<li>  为了控制粒子系统中的粒子生成，设计者指定f<sub>0</sub>和参数InitialMeanParts、DeltaMeanParts和VarParts，或和参数InitialMeanParts<sub>sa</sub>、DeltaMeanParts<sub>sa</sub>和VarParts<sub>sa</sub>。</li>
+</ul>
+<h2 id="2-2-粒子属性"><a href="#2-2-粒子属性" class="headerlink" title="2.2 粒子属性"></a>2.2 粒子属性</h2><ul>
+<li>  对于每个被生成的新粒子，粒子系统必须指定其以下属性值：</li>
+<li>初始位置</li>
+<li>初始速度（包含速率和方向）</li>
+<li>初始大小</li>
+<li>初始颜色</li>
+<li>初始透明度</li>
+<li>形状</li>
+<li>寿命</li>
+<li>  粒子系统的几个参数控制着粒子的初始位置。粒子系统在三维空间内有一个用于定义原点的位置，通过原点绕坐标系旋转的两个角度得出其方向 <em>（球坐标系）</em>。粒子系统也有一个 <em>生成形状</em>，它定义了一个关于其原点的区域，新产生的粒子被随机放置在该区域内。我们已经实现的生成形状有：半径为r的球体，坐标系内xoy平面上的半径为r的圆形，以及坐标系内xoy平面上的长l宽w的矩形。图1展示了一个典型的球形生成形状的粒子系统。基于物理系统或混沌吸引子的更复杂的生成形状已被构思出来但仍未实现。<br>（插图）</li>
+<li>  粒子系统的生成形状也描述了新粒子移动的初始方向。在一个球形生成形状内，粒子从粒子系统的原点向外移动。在圆形或矩形形状中，粒子从x-y平面向上移动，但被允许根据另一个参数——“放射”角度——偏移垂直方向。粒子的初始速度由该公式决定：<center>InitialSpeed = MeanSpeed + Rand( ) x VarSpeed，</center>
+其中MeanSpeed和VarSpeed是粒子系统的另外两个参数，它们分别表示平均速度和速度的方差。</li>
+<li>  为了确定一个粒子的初始颜色，粒子系统需要一个平均颜色和与该颜色的最大偏差。粒子透明度和粒子大小也由平均值和最大变化范围决定。这些方程与上面给出的初速公式类似。</li>
+<li>  粒子系统有一个用于明确每个被生成粒子的形状的参数。目前已实现的粒子形状有球形、矩形和条纹球形。后者被用于运动态模糊化粒子——一个在给快速移动物体建模时十分重要的特性。我们在2.5小节和3小节更加详细地探讨了条纹粒子。</li>
+<li>  可能的属性控制参数及其变体的数量是无限的。我们目前呈现的是已经找到的最有用和最有趣的。</li>
+</ul>
+<h2 id="2-3-粒子动力学"><a href="#2-3-粒子动力学" class="headerlink" title="2.3 粒子动力学"></a>2.3 粒子动力学</h2><ul>
+<li>  在粒子系统内的单个粒子在三维空间内随着时间移动，并改变颜色、透明度和尺寸。</li>
+<li>  将粒子从一帧移动到下一帧（的位置）易如反掌，只需将它的速度矢量加到它的位置矢量上即可。更复杂一些，粒子系统也使用加速度在帧与帧之间修改黎姿的速度。通过这个参数，模型设计师能够模拟重力并让粒子以抛物线轨迹而不是直线轨迹运动。</li>
+<li>  粒子随着时间的颜色变化是由颜色变化率这一参数所规定的。粒子的透明度和尺寸也是这么被控制的。在我们的实现方案中，这些变化率在粒子系统中的影响对所有粒子而言是全局的，我们也很容易想到将这个参数也做成随机变化的。</li>
+</ul>
+<h2 id="2-4-粒子销毁"><a href="#2-4-粒子销毁" class="headerlink" title="2.4 粒子销毁"></a>2.4 粒子销毁</h2><ul>
+<li>  粒子在被生成时赋予了一个以帧为衡量单位的寿命。随着每一帧被计算，（剩余）寿命也逐渐减少。当粒子的（剩余）寿命减为0时，粒子就被销毁了。</li>
+<li>  只要粒子对图像没有任何贡献，也可以用其它机制来安排粒子的销毁。如果根据颜色和透明度计算的粒子强度低于指定阈值，则该粒子将被销毁。从其父粒子系统的原点沿指定方向移动的距离超过规定值的粒子也会被销毁。这一机制能够被用于去除在关注区域以外的粒子。</li>
+</ul>
+<h2 id="2-5-粒子渲染"><a href="#2-5-粒子渲染" class="headerlink" title="2.5 粒子渲染"></a>2.5 粒子渲染</h2><ul>
+<li>  一旦一帧内所有粒子的位置和外形参数都被计算了，渲染算法就会生成一张图片。一般的粒子渲染问题与更常见的图元（如多边形和曲面）组成的物体对象的渲染一样复杂。粒子可以在屏幕深度上遮挡其它粒子。它们既能变得透明也能在其它粒子上投射阴影。此外，粒子可以在场景中与基于曲面的建模基元的物体共存，而且这些物体能够和粒子交合。</li>
+<li>  在我们已有的系统中，有两个假设允许我们简化渲染算法。第一个假设是，我们假设粒子系统不与其它基于曲面的建模基元交合，因此我们的渲染算法只需处理粒子。使用其它技术建模的对象将在渲染后的合成阶段与粒子系统对象合成在一起。为了让粒子系统和其它物体交合或在它们后面，渲染系统将基于在模型坐标空间中定义的剪裁平面使粒子系统图像分为多个子图像，然后在合成阶段将这些子图像与其它图像混合。</li>
+<li>  另外一个在目前的渲染系统中做出的假设是每个粒子能够被显示为一个点光源。借助这个假设，确定隐藏曲面不再是一个问题。每个粒子都向它覆盖的像素增加一点光强。一个在其它粒子后面的粒子不再被遮挡，而是给其覆盖的像素添加更多光强。添加的光强及其颜色取决于粒子的透明度和颜色。目前，增加光强的数值不再取决于粒子间距和观察位置，但这些是简单的拓展。观察到的变化、粒子的尺寸和它的形状决定了哪个像素要被遮挡。为了防止时间混叠和残影（的出现），所有粒子的形状都进行反锯齿绘制处理。许多粒子的光可能叠加到一个像素上，因此渲染算法固定红、绿、蓝通道的强度值固定在帧缓存器的最大强度值处，而不是让它们任意溢出。</li>
+<li>  借助上述算法和假设，我们不再需要给粒子排序，它们以任意生成顺序渲染到帧缓存器。阴影不再是问题，因为粒子不再反射光而是发光。</li>
+</ul>
+<h2 id="2-6-粒子层级"><a href="#2-6-粒子层级" class="headerlink" title="2.6 粒子层级"></a>2.6 粒子层级</h2> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/03/24/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%911/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D%E5%BB%BA%E6%A8%A1/" rel="tag">3D建模</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E6%A8%A1%E6%8B%9F/" rel="tag">物理模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/" rel="tag">粒子系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" rel="tag">论文翻译</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/03/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B03/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            数据库原理笔记3
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/03/22/FinalIK%E5%92%8CRagdoll(2)/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">FinalIK和Ragdoll(2)：FullyBodyBipedIK</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Daniel Qi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.svg" alt="Welcome to DanielQi&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/photos/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2022/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/1.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/2.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=139774&auto=0&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

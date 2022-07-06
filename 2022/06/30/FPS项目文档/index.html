@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>FPS项目文档v1.0 |  Welcome to DanielQi&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <script src="https://mermaid-js.github.io/mermaid/"></script>
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-FPS项目文档"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  FPS项目文档v1.0
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/06/30/FPS%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/" class="article-date">
+  <time datetime="2022-06-30T03:45:30.000Z" itemprop="datePublished">2022-06-30</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">4.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">14 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="0-前言（套盾）"><a href="#0-前言（套盾）" class="headerlink" title="0.前言（套盾）"></a>0.前言（<del>套盾</del>）</h1><p><strong>本文档仅供项目组内部参考使用</strong><br><strong>本文档内链接均用于学习</strong><br><strong>本文档所属项目仅为学习用demo，非商业化作品</strong><br><strong>本文档中包含游戏机制、游戏道具、各类属性的说明与策划给出的部分实现思路</strong></p>
+<hr>
+<h1 id="1-项目目标"><a href="#1-项目目标" class="headerlink" title="1.项目目标"></a>1.项目目标</h1><ul>
+<li><p>实现多人联机功能：</p>
+<ul>
+<li>房间的创建、删除</li>
+<li>地图加载</li>
+<li>房间的进入、退出</li>
+<li>同步</li>
+</ul>
+</li>
+<li><p>实现FPS的基本内容：</p>
+<ul>
+<li>战斗<ul>
+<li>武器</li>
+<li>道具</li>
+<li>技能</li>
+<li>动作</li>
+</ul>
+</li>
+<li>角色<ul>
+<li>角色定位</li>
+<li>外观</li>
+<li>数值</li>
+<li>技能（是在地图里获取技能还是角色自带技能）</li>
+</ul>
+</li>
+<li>交互<ul>
+<li>UI</li>
+<li>键位</li>
+<li>与场景交互</li>
+</ul>
+</li>
+<li>地图/场景<ul>
+<li>地图加载/销毁</li>
+<li>地图内设施</li>
+<li>道具刷新点</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li><p>实现游戏核心机制：</p>
+<ul>
+<li>角色<ul>
+<li>角色选择</li>
+<li>角色创建与初始化<ul>
+<li>角色数值初始化</li>
+<li>出生点选择</li>
+</ul>
+</li>
+<li>角色状态与转换<ul>
+<li>健康</li>
+<li>负伤</li>
+<li>死亡（<del>盒子</del>）</li>
+<li>转换</li>
+</ul>
+</li>
+<li>角色掉落<ul>
+<li>部分掉落</li>
+<li>完全掉落</li>
+</ul>
+</li>
+<li>角色属性与变化机制</li>
+<li>角色销毁<ul>
+<li>撤离点</li>
+<li>被击杀</li>
+<li>迷失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>限时撤离</li>
+<li>胜利目标</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="2-项目设定"><a href="#2-项目设定" class="headerlink" title="2.项目设定"></a>2.项目设定</h1><h2 id="2-1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）"><a href="#2-1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）" class="headerlink" title="2.1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）"></a>2.1分工（这个清清来吧，还是需要一个书面的东西来详细划定的）</h2><h2 id="2-2项目参考-（更新中）"><a href="#2-2项目参考-（更新中）" class="headerlink" title="2.2项目参考 （更新中）"></a>2.2项目参考 <em>（更新中）</em></h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zPZK7C5_BQo">利用Photon实现服务器</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kC4y1s73">搭建服务器框架和实现联机大厅</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uh8XaC0Y5MA">Unity C#服务器</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aTnBAzin9vE">UnityFPS官方示例</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ms411E7XE">枪械后坐力参考</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1V3411j7NN">逃离塔科夫枪械后坐参数说明</a></p>
+<hr>
+<h1 id="3-具体设计说明"><a href="#3-具体设计说明" class="headerlink" title="3.具体设计说明"></a>3.具体设计说明</h1><h2 id="3-0-游戏总体设计"><a href="#3-0-游戏总体设计" class="headerlink" title="3.0 游戏总体设计"></a>3.0 游戏总体设计</h2><p>玩家在初始界面设定联机ID创建角色，连接进入游戏大厅，选择房间或创建房间。开始游戏后，玩家先有若干秒选择角色，同时地图上随机刷新资源，倒计时结束后出生在随机出生点。玩家可在地图上搜集资源。击杀其他玩家时，可以获取其携带物资和标识，并获得少量分数，当地图上仅剩一名玩家时，游戏界面倒计时撤离时间，若最后一名玩家未在规定时间内撤出，则会被强制击杀。被击杀或撤离时弹出结算界面和分数，物资可兑换少量分数，击杀玩家可兑换大量分数。游戏结束后，分数汇总生成表格推送给玩家。</p>
+<h2 id="3-1-武器与战斗（策划与动画、美术、叶宝对接）"><a href="#3-1-武器与战斗（策划与动画、美术、叶宝对接）" class="headerlink" title="3.1 武器与战斗（策划与动画、美术、叶宝对接）"></a>3.1 武器与战斗（策划与动画、美术、叶宝对接）</h2><h3 id="3-1-0-战斗的大致介绍"><a href="#3-1-0-战斗的大致介绍" class="headerlink" title="3.1.0 战斗的大致介绍"></a>3.1.0 战斗的大致介绍</h3><p>主要以中近程战斗为主，玩家使用武器与自身技能击杀敌人，使用道具回复血量与护甲，击杀敌人后获取1击杀数，并根据被击杀玩家的击杀数获取奖励分数，敌人变成道具箱（道具箱UI同角色背包）；被击杀则在倒地后画面逐渐变黑，显示被击杀页面</p>
+<h3 id="3-1-1-武器"><a href="#3-1-1-武器" class="headerlink" title="3.1.1 武器"></a>3.1.1 武器</h3><h4 id="武器的基本设定"><a href="#武器的基本设定" class="headerlink" title="武器的基本设定"></a>武器的基本设定</h4><ul>
+<li>外观</li>
+<li>射击条件（枪械配件槽内有弹匣、弹匣内有子弹方可射击，只有这个配件决定枪械是否开火）</li>
+<li>枪声（枪声的更改发生在消音器被安装/取下的时候）</li>
+<li>射速（理解为枪口生成子弹的速度）</li>
+<li>后坐力（分为水平和垂直，水平后坐力导致枪身左右晃动，垂直导致枪身上下晃动）</li>
+<li>枪口回落速度（射击停止后枪口朝向回到原方向的时间，也可以设置为速度）</li>
+<li>子弹散布（我的思路是后坐力方向变化范围，参考2.2给出的塔科夫枪械后座参数说明）</li>
+<li>可用弹种</li>
+<li>可使用配件（配件将可能对枪械的基本属性进行更改）</li>
+<li>枪械本身分值（枪械本身不含配件的分数）</li>
+</ul>
+<h4 id="武器种类与数值"><a href="#武器种类与数值" class="headerlink" title="武器种类与数值"></a>武器种类与数值</h4><p>较为具体的设计我在表格内已经给出了，这里要补充的一点是半自动步枪的定位。半自动步枪的定位是精准，因此初始散布应当是最小的，且具有最快的枪口回落速度。</p>
+<h3 id="3-1-2-战斗"><a href="#3-1-2-战斗" class="headerlink" title="3.1.2 战斗"></a>3.1.2 战斗</h3><ul>
+<li>射击（鼠标左键）：使用不同瞄具的瞄准和腰射<ul>
+<li>需要考虑的要素：当前使用的瞄具，当前使用的握把，后坐力的大小，目前站姿势（站立、蹲、趴）</li>
+<li>注意：跳跃不可射击</li>
+<li>弹匣内无弹药且背包内无可用弹药时再按鼠标左键切换武器</li>
+</ul>
+</li>
+<li>换弹匣（R）<ul>
+<li>需要考虑的要素：弹匣的种类，技能是否开启（对换弹时间的改变）</li>
+</ul>
+</li>
+<li>切换枪械（1和2）：一支在手里一支在背上（背上可以放置武器的地方在背两侧），当切换枪械时，先将手里的换到背上空出的地方，再将另一把从背上换到手里，播放完动画才可进行其他对武器的操作<ul>
+<li>需要考虑的要素：枪械大小，枪械移位与角色部位活动的绑定</li>
+<li></li>
+</ul>
+</li>
+<li>改装武器（动作可以先不做，但改装武器必须花费时间）每更换一次配件，整个枪的状态就要更新一次，更换配件的方法是将背包内的配件拖到配件槽上，更换时间结束后两个配件的图标交换，更换时间=原配件的更换时间（见表格）+新配件的更换时间（见表格），若选择</li>
+<li>一个准则：对武器的操作之间是互斥进行的（瞄准包含在射击内）<h2 id="3-2-道具（策划与叶宝对接）"><a href="#3-2-道具（策划与叶宝对接）" class="headerlink" title="3.2 道具（策划与叶宝对接）"></a>3.2 道具（策划与叶宝对接）</h2><h3 id="3-2-1-道具分类"><a href="#3-2-1-道具分类" class="headerlink" title="3.2.1 道具分类"></a>3.2.1 道具分类</h3></li>
+<li>弹药<ul>
+<li>手枪弹药：低伤害低分数带的多</li>
+<li>步枪弹药：高伤害高分数带的少</li>
+<li>弹药击中玩家屏幕中央给出击中X形图标反馈，由枪械生成。暂时不做弹道下坠，弹药击中场景内物体（除弹药箱、玩家死后变成的盒子、玩家外）生成贴图</li>
+</ul>
+</li>
+<li>回复道具（护甲回复与血量回复）<ul>
+<li>维修套装（一次性）：中刷新中分值</li>
+<li>血量回复<ul>
+<li>急救包（一次性回血）：高刷新低分值</li>
+<li>回血针（持续回血）：低刷新高分值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配件<ul>
+<li>带倍率瞄具：试着做镜内放大吧</li>
+<li>机瞄和红点：实际上是两种类型的机瞄</li>
+<li>握把和后托，握把实现垂直后坐力的削弱和枪口散布范围的缩小，后托实现水平后坐力的削弱</li>
+</ul>
+</li>
+<li>稀有道具（高分极低刷）<ul>
+<li>金/银/铜球</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-2-道具刷新"><a href="#3-2-2-道具刷新" class="headerlink" title="3.2.2 道具刷新"></a>3.2.2 道具刷新</h3><p>道具的刷新点、爆率、特性已经在表格内给出。</p>
+<h2 id="3-3-角色（策划与动画、叶宝对接）"><a href="#3-3-角色（策划与动画、叶宝对接）" class="headerlink" title="3.3 角色（策划与动画、叶宝对接）"></a>3.3 角色（策划与动画、叶宝对接）</h2><h3 id="3-3-1-角色的属性"><a href="#3-3-1-角色的属性" class="headerlink" title="3.3.1 角色的属性"></a>3.3.1 角色的属性</h3><ul>
+<li>血量（见表格）</li>
+<li>护甲值（见表格）</li>
+<li>技能点（见表格）</li>
+<li>移速（具有三档速度，数值举例见表格，按x进入/退出静步，静步将不再发出声音，按shift进入快跑，<strong>快跑持续时间和回复速度待定</strong>）</li>
+<li>耐力（见表格，决定了玩家能连续跑多久）</li>
+<li>耐力消耗速度/回复速度（见表格）</li>
+<li>击杀数（见表格）</li>
+<li>得分（玩家按两下3即可在画面右上角显示，显示时间为3s，3s内再发出查询命令则重置计时器）</li>
+</ul>
+<h3 id="3-3-2-角色状态、数值的转化机制"><a href="#3-3-2-角色状态、数值的转化机制" class="headerlink" title="3.3.2 角色状态、数值的转化机制"></a>3.3.2 角色状态、数值的转化机制</h3><ul>
+<li>玩家被击中时若有护甲，则被击中产生的伤害80%由护甲承担，剩余20%为真伤，<strong>该伤害判定在击中时发生，若剩余护甲小于子弹伤害的80%，则护甲置0，剩余伤害均为真伤。</strong></li>
+<li>玩家可通过回复道具回复血量，<strong>产生的溢出不会被计算</strong>。</li>
+<li>若判定玩家承受该子弹伤害后血量&lt;=0，则触发死亡退出机制，使用布娃娃系统实现脱力倒地成为尸体，可以搜刮。</li>
+</ul>
+<h3 id="3-3-3-角色的动作"><a href="#3-3-3-角色的动作" class="headerlink" title="3.3.3 角色的动作"></a>3.3.3 角色的动作</h3><ul>
+<li>移动：匍匐（z）、蹲走（ctrl）、静步（x）、快走、跑步、跳跃</li>
+<li>战斗：举枪、瞄准、射击、换弹、切换武器、死亡</li>
+<li><em>拿取物品（暂定为静止不动）</em></li>
+<li>恢复：包扎（急救包）、扎针（回血针）、修补护甲（参照apex）</li>
+<li>技能<ul>
+<li>方案1：专门做一套技能动画</li>
+<li>方案2：在原有动作上进行更改（比如增速技能就提高跑步动画的播放速度）</li>
+</ul>
+</li>
+<li>死亡（先倒地再黑屏后结算）</li>
+<li>迷失（先黑屏后结算）</li>
+</ul>
+<h3 id="3-3-4-角色的背包"><a href="#3-3-4-角色的背包" class="headerlink" title="3.3.4 角色的背包"></a>3.3.4 角色的背包</h3><p>每个角色的背包是和角色绑定的，不会变化。玩家进入游戏并选好角色后按照表格内给出的刷新概率刷新物品，并更新玩家的得分。玩家被击杀时，计算背包内物品的总分数，玩家对背包内物品的每次调整都将刷新分数，玩家随时可以查询。角色的背包由通用武器槽、子弹槽、回复道具槽和任意物品槽四类槽位构成，各个槽位能放置的物品及其数量上限见表格，不能放在槽内的物品被拖拽时将不会被换入槽内，结束拖拽，图标将自行归位。</p>
+<h4 id="子弹的消耗机制（涉及到背包）"><a href="#子弹的消耗机制（涉及到背包）" class="headerlink" title="子弹的消耗机制（涉及到背包）"></a>子弹的消耗机制（涉及到背包）</h4><p><strong>每个槽内只能放一种子弹</strong>，当玩家换弹时自动查询弹药槽，<strong>只会消耗放在弹药槽内的弹药</strong>若有该类弹匣对应的子弹则自动填充，若没有则按3.1.2对换弹的说明进行切换武器，如果弹药在任意物品槽内则不会被自动消耗，需玩家自行拖拽至弹药槽内。</p>
+<h4 id="你可以把不要的东西丢出去！"><a href="#你可以把不要的东西丢出去！" class="headerlink" title="你可以把不要的东西丢出去！"></a>你可以把不要的东西丢出去！</h4><p>如果你想丢掉一些东西，右键点击即可抛弃，然后这个物体的模型将从身体周围生成并掉到地上。</p>
+<h4 id="我后悔了怎么办"><a href="#我后悔了怎么办" class="headerlink" title="我后悔了怎么办"></a>我后悔了怎么办</h4><p><strong>对于半径1m以内的物体</strong>看向它（轮廓会高亮）<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1R3411W73E">高亮教程</a>，然后按左键，将对背包进行查询，如果有位置就能放入。</p>
+<h2 id="3-4-地图（策划与美术、叶宝对接）"><a href="#3-4-地图（策划与美术、叶宝对接）" class="headerlink" title="3.4 地图（策划与美术、叶宝对接）"></a>3.4 地图（策划与美术、叶宝对接）</h2><h3 id="3-4-0-地图设定"><a href="#3-4-0-地图设定" class="headerlink" title="3.4.0 地图设定"></a>3.4.0 地图设定</h3><p>目前的方案是商场内的一个区域，多楼层，多房间，多过道，中央是一个天井供中距离战斗，包含多个出生点且均有随机性，撤离点有通用撤离点、限时撤离点、随机撤离点、触发撤离点四种，房间最大人数10，具体每层的设计后续会和美术磋商。</p>
+<h3 id="3-4-1-出生点"><a href="#3-4-1-出生点" class="headerlink" title="3.4.1 出生点"></a>3.4.1 出生点</h3><p>出生点是玩家刷新的地方，角色初始满甲满血，按表格内给出的爆率在背包内刷新物品。出生点的数量和房间内最大玩家容量一致且均匀分布在地图角落，玩家在哪个出生点进入游戏是随机的。玩家在各个刷新点的刷新概率应均等（这个好做，比如在玩家池中随机选出一个玩家，然后随机安排出生点，再从剩余玩家里接着选一个并安排，以此类推），每个玩家的出生点都被设置好，所有资源均加载完毕后进入游戏。</p>
+<h3 id="3-4-2-撤离点"><a href="#3-4-2-撤离点" class="headerlink" title="3.4.2 撤离点"></a>3.4.2 撤离点</h3><p>撤离点是玩家触发退出机制的地方，若撤离点可用，则玩家进入判定区域将弹出倒计时页面，待一段时间就可撤离并进入结算页面，不会留下任何东西。</p>
+<h4 id="通用撤离点"><a href="#通用撤离点" class="headerlink" title="通用撤离点"></a>通用撤离点</h4><p><strong>玩家进入游戏后随时都可撤离</strong>，将会被放在商场的门口、通风管道这样的地方，<strong>难以找到或比较偏僻</strong>。</p>
+<h4 id="限时撤离点"><a href="#限时撤离点" class="headerlink" title="限时撤离点"></a>限时撤离点</h4><p><strong>会在特定的时间点开启，并有限定时间</strong>，比如从天而降的救生舱、临时开启的大门等等，玩家可以从外表判断该撤离点可否撤离且该撤离点有人员限制（如逃生舱）。</p>
+<h4 id="随机撤离点"><a href="#随机撤离点" class="headerlink" title="随机撤离点"></a>随机撤离点</h4><p>会在<strong>每局开始时就决定是否开启，若开启则会有外观的变化（比如某处墙壁是否有裂口）</strong>。</p>
+<h4 id="触发撤离点"><a href="#触发撤离点" class="headerlink" title="触发撤离点"></a>触发撤离点</h4><p><strong>满足某种条件才可激活（比如拉电闸），需在一定时间内赶到撤离点撤离，否则需重新触发</strong>，比如电梯。</p>
+<h3 id="3-4-3-物品箱"><a href="#3-4-3-物品箱" class="headerlink" title="3.4.3 物品箱"></a>3.4.3 物品箱</h3><p>物品箱的种类和道具爆率等设定均已在表格内给出。</p>
+<h2 id="3-5-游戏机制"><a href="#3-5-游戏机制" class="headerlink" title="3.5 游戏机制"></a>3.5 游戏机制</h2><h3 id="3-5-1-房间（策划与lzy对接）"><a href="#3-5-1-房间（策划与lzy对接）" class="headerlink" title="3.5.1 房间（策划与lzy对接）"></a>3.5.1 房间（策划与lzy对接）</h3><p>进入游戏，设定用户名，分配玩家ID，连接到游戏大厅，玩家点击开始游戏，若当前没有可加入的房间则生成一个房间，客户端显示一定时长的倒计时，若在时间内房间满员则开始游戏，进入角色选择页面（给30s准备时间）并加载地图内资源，30s倒计时结束且地图资源加载完毕即可进入游戏；如果倒计时结束没有足够玩家（2人）则退回主页面。游戏结束（所有玩家都已完成游戏或每局时间上线已到）后对玩家分数进行排名，生成分数记录榜并通过邮件系统推送给玩家（实现服务器的用户连接、创建房间、加入房间、玩家信息记录、玩家同步、排行榜的创建）</p>
+<h3 id="3-5-2-游戏内机制（策划与ycy对接）"><a href="#3-5-2-游戏内机制（策划与ycy对接）" class="headerlink" title="3.5.2 游戏内机制（策划与ycy对接）"></a>3.5.2 游戏内机制（策划与ycy对接）</h3><h4 id="撤离点和出生点（见3-4-1与3-4-2）"><a href="#撤离点和出生点（见3-4-1与3-4-2）" class="headerlink" title="撤离点和出生点（见3.4.1与3.4.2）"></a>撤离点和出生点（见3.4.1与3.4.2）</h4><h4 id="玩家分数的计算规则"><a href="#玩家分数的计算规则" class="headerlink" title="玩家分数的计算规则"></a>玩家分数的计算规则</h4><p><strong>如果你死亡</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5<br><strong>如果你在最后10分钟内撤离</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5 <strong>+1000</strong><br><strong>如果你在最初5分钟撤离</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5 <strong>-1000</strong><br><strong>如果你迷失</strong>玩家得分=玩家击杀分（规则见表格）+ 道具得分 + 剩余血量x10 + 剩余护甲x2.5 <strong>-1500</strong></p>
+<h4 id="游戏结束的触发条件"><a href="#游戏结束的触发条件" class="headerlink" title="游戏结束的触发条件"></a>游戏结束的触发条件</h4><p><strong>场上玩家均死亡/迷失/撤离</strong></p>
+<hr>
+<h1 id="4-美术需求（动画、美术、策划对接）"><a href="#4-美术需求（动画、美术、策划对接）" class="headerlink" title="4.美术需求（动画、美术、策划对接）"></a>4.美术需求（动画、美术、策划对接）</h1><h2 id="4-1-模型-目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型"><a href="#4-1-模型-目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型" class="headerlink" title="4.1 模型 目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型"></a>4.1 模型 <em>目前暂时以现有素材替代，借助现有素材完成动画制作后再套新模型</em></h2><ul>
+<li>人物的模型</li>
+<li>各类武器、道具、配件的模型（种类表格内已给出）</li>
+<li>场景需要的模型<ul>
+<li>建筑物（地图本身）</li>
+<li>各类摆设</li>
+<li>各类道具箱</li>
+<li>撤离点</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-2-UI"><a href="#4-2-UI" class="headerlink" title="4.2 UI"></a>4.2 UI</h2><h3 id="4-2-1-图标-目前需要的Sprite暂以现有素材替代"><a href="#4-2-1-图标-目前需要的Sprite暂以现有素材替代" class="headerlink" title="4.2.1 图标 目前需要的Sprite暂以现有素材替代"></a>4.2.1 图标 <em>目前需要的Sprite暂以现有素材替代</em></h3><h4 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h4><ul>
+<li>（如果选择实现方案1）武器、配件、道具的图标均由模型的截图替代</li>
+<li>（如果选择实现方案2）武器、配件、道具的图标均需另画</li>
+<li>此外还需要：HUD（血条、技能条、护甲条、耐力条、击杀反馈图标、受伤反馈），背包内图标（配件槽的图标（配件槽可使用/配件槽不可使用）、各类道具槽的图标），道具箱内图标（武器槽、弹药槽、配件槽、药品槽、随机槽）</li>
+</ul>
+<h4 id="互动方案"><a href="#互动方案" class="headerlink" title="互动方案"></a>互动方案</h4><ul>
+<li>实现方案1：塔科夫，点击后可以检视物品（观察模型），配有文字说明弹出</li>
+<li>实现方案2：点击后弹出一个带固定图片和文字介绍的UI</li>
+</ul>
+<h3 id="4-2-2-面板-目前需要的Sprite暂以现有素材替代"><a href="#4-2-2-面板-目前需要的Sprite暂以现有素材替代" class="headerlink" title="4.2.2 面板 目前需要的Sprite暂以现有素材替代"></a>4.2.2 面板 <em>目前需要的Sprite暂以现有素材替代</em></h3><ul>
+<li>HUD（弹匣内弹药数/总弹药数，</li>
+<li>背包的面板</li>
+<li>各类道具箱的面板</li>
+<li>服务器选房间的面板</li>
+<li>选择角色页面的面板：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1jF41137n4">选择角色的页面我想做成滑动的</a></li>
+<li>被击杀页面的面板：显示存活时间、最终分数和击杀者（每颗子弹带有击杀者信息，角色需记录并更新最后一颗射向自己的子弹是谁，初始为NULL，死亡时调用这个属性）</li>
+</ul>
+<h3 id="4-2-3-字体（实在没空就先默认字体吧，有空再做）"><a href="#4-2-3-字体（实在没空就先默认字体吧，有空再做）" class="headerlink" title="4.2.3 字体（实在没空就先默认字体吧，有空再做）"></a>4.2.3 字体（实在没空就先默认字体吧，有空再做）</h3><h2 id="4-3-动画与特效"><a href="#4-3-动画与特效" class="headerlink" title="4.3 动画与特效"></a>4.3 动画与特效</h2><h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><p>动作分类我已在3.1.2和3.3.3给出，不过技能和护甲受击是否需要做特效呢？</p>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>撤离点状态的切换（比如仓库大门的打开和关闭、逃生舱的降落与起飞）<br>道具箱状态的切换（打开和关闭）</p>
+<hr>
+<h1 id="5-音乐与音效需求"><a href="#5-音乐与音效需求" class="headerlink" title="5.音乐与音效需求"></a>5.音乐与音效需求</h1><h2 id="5-1-背景音乐-（有空再找）"><a href="#5-1-背景音乐-（有空再找）" class="headerlink" title="5.1 背景音乐  （有空再找）"></a>5.1 背景音乐  <em>（有空再找）</em></h2><p>主场景、选择角色、结算</p>
+<h2 id="5-2-音效"><a href="#5-2-音效" class="headerlink" title="5.2 音效"></a>5.2 音效</h2><ul>
+<li>玩家移动的各类音效</li>
+<li>枪械切换、射击、换弹的各类音效</li>
+<li>技能开启的音效</li>
+<li>与场景互动的音效</li>
+<li>护甲被击中的音效</li>
+<li>受伤、濒死的声音反馈</li>
+<li>回复道具使用的音效</li>
+</ul>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/30/FPS%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FPS/" rel="tag">FPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%81%94%E6%9C%BA/" rel="tag">联机</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/04/18/%E8%A7%86%E9%A2%91%E6%8B%8D%E6%91%84%E6%96%B9%E6%A1%88/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">视频拍摄方案</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Daniel Qi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.svg" alt="Welcome to DanielQi&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/photos/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2022/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/1.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/2.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=139774&auto=0&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
