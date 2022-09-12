@@ -144,6 +144,160 @@
     
     
     <article
+  id="post-多态"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/02/09/%E5%A4%9A%E6%80%81/"
+    >方法重写与多态</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/02/09/%E5%A4%9A%E6%80%81/" class="article-date">
+  <time datetime="2022-02-09T12:39:06.000Z" itemprop="datePublished">2022-02-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">课程笔记_面向对象编程</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。"><a href="#本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。" class="headerlink" title="本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。"></a>本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。</h2><h1 id="方法重写"><a href="#方法重写" class="headerlink" title="方法重写"></a>方法重写</h1><h2 id="我们为什么需要方法重写？"><a href="#我们为什么需要方法重写？" class="headerlink" title="我们为什么需要方法重写？"></a>我们为什么需要方法重写？</h2><p>有一个父类/超类叫pet，它有两个子类dog和cat，dog和cat有共同的属性名字和性别，有共同的输入和输出信息方法setInfo()和showInfo(),将这些属性和方法都写在父类里。现在有新的要求，dog增加了一个属性是品种，cat增加了一个属性是体重，这时候发现方法原来的写法不能同时满足两个子类不同属性的输出，此时我们提出三种解决方案：</p>
+<ol>
+<li>删除父类的方法，在子类内分别写方法并调用：这种方法简单粗暴，但是一旦像这样的同时具有相同和不同属性与方法的子类增多，会使得代码有很多重复的部分，增大了工作量。</li>
+<li>保留父类的方法，同时将不同的部分分别写入子类专属的方法内：这种方法较上一种的工作量减少了，但是在调用的时候会变得麻烦，既然都是输入输出信息的功能，为什么不让它们名称相同呢？</li>
+<li>子类<strong>重写</strong>父类方法：<ul>
+<li>子类根据需求对从父类继承的方法进行重新编写</li>
+<li>重写时，可以用super.方法的方式保留父类的方法</li>
+<li><strong>构造方法不能被重写</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="方法重写的规则"><a href="#方法重写的规则" class="headerlink" title="方法重写的规则"></a>方法重写的规则</h2><ul>
+<li><strong>方法名相同</strong></li>
+<li><strong>参数列表相同</strong></li>
+<li><strong>返回值类型相同或是其子类</strong></li>
+<li><strong>访问权限不能严于父类</strong></li>
+<li><strong>父类的私有方法不能被子类覆盖</strong></li>
+<li><strong>子类方法不能抛出比父类方法更多的异常</strong></li>
+<li><strong>父类的静态方法不能被子类覆盖为非静态方法，父类的非静态方法也不能被子类覆盖为静态方法</strong></li>
+<li>由于super不能在静态方法中使用，因此子类可以定义与父类同名的静态方法，以便在子类中隐藏父类的静态方法</li>
+</ul>
+<h2 id="代码示例（因仅供个人学习用，因此略写了测试类，且由于两个子类大同小异，故只给出cat类（说什么我都开摆！）"><a href="#代码示例（因仅供个人学习用，因此略写了测试类，且由于两个子类大同小异，故只给出cat类（说什么我都开摆！）" class="headerlink" title="代码示例（因仅供个人学习用，因此略写了测试类，且由于两个子类大同小异，故只给出cat类（说什么我都开摆！）"></a>代码示例（因仅供个人学习用，因此略写了测试类，且由于两个子类大同小异，故只给出cat类（<del>说什么我都开摆！</del>）</h2><h3 id="父类写法"><a href="#父类写法" class="headerlink" title="父类写法"></a>父类写法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Pet &#123;//父类</span><br><span class="line">    //按照方法1的写法，这里可以啥都没有x</span><br><span class="line">    public String name;//方法2中这里要保留</span><br><span class="line">    public String sex;</span><br><span class="line">    //方法3写法（方法2中父类的写法和方法3一致，故略）</span><br><span class="line">    public void setInfo(String name, String sex)&#123;</span><br><span class="line">    	this.name=name;</span><br><span class="line">    	this.sex=sex;</span><br><span class="line">    &#125;</span><br><span class="line">    public void showInfo()&#123;</span><br><span class="line">    	System.out.println(&quot;宠物的名字是：&quot;+name+&quot;，宠物的性别是：&quot;+sex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="子类写法"><a href="#子类写法" class="headerlink" title="子类写法"></a>子类写法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class Cat extends Pet&#123;//子类</span><br><span class="line">    private float weight;//体重</span><br><span class="line">    private String name;//名字</span><br><span class="line">    private String sex;//性别</span><br><span class="line">    /*方法1写法</span><br><span class="line">     public void setInfo(String name,String sex, float weight)&#123;</span><br><span class="line">    	 this.name = name;//这里实际上略写了name和sex的声明，这两个属性的声明可以在父类中以public关键字做保留，也可以在子类中写</span><br><span class="line">    	 this.sex = sex;</span><br><span class="line">    	 this.weight = weight;</span><br><span class="line">     &#125;</span><br><span class="line">     public void showInfo()&#123;</span><br><span class="line">    	 System.out.println(&quot;宠物的名字是：&quot;+name+&quot;，宠物的性别是：&quot;+sex+&quot;，猫的体重是&quot;+weight);</span><br><span class="line">     &#125;</span><br><span class="line">     */</span><br><span class="line">    /*方法2写法</span><br><span class="line">     public void setInfo(String name,String sex, float weight)&#123;</span><br><span class="line">    	 this.name = name;</span><br><span class="line">    	 this.sex = sex;</span><br><span class="line">    	 this.weight = weight;</span><br><span class="line">     &#125;</span><br><span class="line">     public void showCatInfo()&#123;//注意此处的改名</span><br><span class="line">         showInfo();</span><br><span class="line">    	 System.out.println(&quot;猫的体重是&quot;+weight);</span><br><span class="line">     &#125;</span><br><span class="line">     */</span><br><span class="line">    //方法3写法</span><br><span class="line"></span><br><span class="line">    public void showInfo()&#123;</span><br><span class="line">    	super.showInfo();</span><br><span class="line">        System.out.println(&quot;猫的体重是&quot;+weight+&quot;kg&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Super"><a href="#Super" class="headerlink" title="Super"></a>Super</h2><ul>
+<li>super可以用来访问父类的<strong>非私有（private）成员</strong></li>
+<li><strong>静态方法中不能出现super</strong></li>
+<li>当子类中定义了和父类同名的成员时，super可以使被屏蔽的成员可见</li>
+<li>super只能出现在<strong>子类的方法和构造方法中</strong></li>
+<li>super调用父类构造方法时，只能是super所在方法的第一句</li>
+<li>super可以用于调用<strong>继承关系中最近</strong>的父类/间接父类的成员<ul>
+<li>当子类、父类、间接父类中都有同名的成员时（子类重写/覆盖父类，父类重写/覆盖间接父类）时，子类中使用super只能访问父类的成员。</li>
+<li>当子类和间接父类中有同名成员时，子类中使用super可以访问<strong>继承关系中最近</strong>的间接父类成员。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//访问父类方法</span><br><span class="line">super.print();</span><br><span class="line">//访问父类属性</span><br><span class="line">super.name;</span><br><span class="line">//访问父类构造方法</span><br><span class="line">super();</span><br><span class="line">super(name)</span><br></pre></td></tr></table></figure>
+<h3 id="super和this比较"><a href="#super和this比较" class="headerlink" title="super和this比较"></a>super和this比较</h3><table>
+<thead>
+<tr>
+<th>区别</th>
+<th align="center">this</th>
+<th align="right">super</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>访问属性</td>
+<td align="center">访问<strong>本类</strong>属性，如果没有则从父类找</td>
+<td align="right">访问<strong>父类</strong>属性</td>
+</tr>
+<tr>
+<td>访问普通方法</td>
+<td align="center">访问<strong>本类</strong>普通方法，如果没有则从父类找</td>
+<td align="right">访问<strong>父类</strong>普通方法</td>
+</tr>
+<tr>
+<td>访问构造方法</td>
+<td align="center">调用<strong>本类</strong>构造，放在构造方法首行</td>
+<td align="right">调用<strong>父类</strong>构造，放在子类构造方法首行</td>
+</tr>
+</tbody></table>
+<h3 id="继承条件下的构造方法"><a href="#继承条件下的构造方法" class="headerlink" title="继承条件下的构造方法"></a>继承条件下的构造方法</h3><ul>
+<li>当子类构造方法没有通过super显式调用父类的<strong>带参</strong>构造方法，也没有通过this显式调用自身其他构造方法时，系统默认调用父类的<strong>无参构造方法</strong></li>
+<li>相对的，当子类构造方法通过super显式调用父类的<strong>带参构造方法</strong>时，系统执行父类的带参构造方法而不执行父类的<strong>无参构造方法</strong></li>
+<li>子类构造方法通过this显式调用自身的其他构造方法，在相应构造方法中应用上述两条规则</li>
+<li><strong>注意，子类的构造方法在执行时，无论是否有显式给出，父类的构造方法在逻辑顺序上永远是第一个执行的</strong></li>
+</ul>
+<h1 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h1><h2 id="Object类是什么？"><a href="#Object类是什么？" class="headerlink" title="Object类是什么？"></a>Object类是什么？</h2><ul>
+<li><strong>Object类是所有类的直接或间接父类</strong>，而且是继承关系<strong>最远</strong>的那个直接或间接父类<h2 id="Object类有什么？"><a href="#Object类有什么？" class="headerlink" title="Object类有什么？"></a>Object类有什么？</h2></li>
+<li><strong>自己找个IDE（比如myeclipse），新建类然后写个this，Object类里的东西就在提示弹窗里显示出来了</strong></li>
+<li>Object类被子类经常重写的方法<ul>
+<li><strong>toString()</strong>: 返回当前对象本身的有关信息，按字符串对象返回</li>
+<li><strong>equals()</strong>: 比较两个对象是否是同一个对象，是则返回true</li>
+<li><strong>hashCode()</strong>: 返回该对象的哈希值</li>
+<li><strong>getClass()</strong>: 获取当前对象所属的类信息，返回Class对象</li>
+</ul>
+</li>
+</ul>
+<p><strong>此处的小补充</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//equals函数判断是否是一个对象的依据是看两个对象是否占用同一处内存</span><br><span class="line">//这里假设有一个Student类</span><br><span class="line">Student s1 = new Student();</span><br><span class="line">Student s2 = new Student();</span><br><span class="line">Student s3 = s1;</span><br><span class="line">System.out.println(s1.equals(s3));//结果为true</span><br><span class="line">System.out.println(s1.equals(s2));//结果为false，因为二者成员虽然一样，但在不占用同一处内存。</span><br></pre></td></tr></table></figure>
+<h2 id="重写Object类的方法（此处以重写equals方法为例）"><a href="#重写Object类的方法（此处以重写equals方法为例）" class="headerlink" title="重写Object类的方法（此处以重写equals方法为例）"></a>重写Object类的方法（此处以重写equals方法为例）</h2><p>我们接着上面的问题来，如果两个学生类的所有属性都一样，按理说它们指的就是一个人，但按照equals()的原理却不能认为两个对象相同，即当<strong>认为属性相同就是同一对象</strong>时，就有了重写equals()的需要。<br>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//如果两个学生的属性（此处为姓名name和学号sid）相同，就认为是同一个学生对象。</span><br><span class="line">public boolean equals(Object obj)&#123;//注意，此处是Student的equals方法。</span><br><span class="line">    //如果占用的是同一处内存</span><br><span class="line">    if(this == obj)&#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    //此处应用instanceof运算符，“对象a instanceof 类型b”的意思是判断a是否为b的实例</span><br><span class="line">    elif(!(obj instance of Student))&#123;//如果对象不是Student类型</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    Student s = (Student)Obj;//将Obj强制转换为student类型，这里实际上也可以省去这一步，但是这样更保险一些。</span><br><span class="line">    if (this.name==s.name&amp;&amp;this.sid==s.sid)//这里判断name是否相同还有一种写法就是“this.name.equals(s.name)”，由此可见Java.lang.String已经重写过一遍equals方法，使其可以用于判断字符串是否相同。</span><br><span class="line">        return true;</span><br><span class="line">    else</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><h2 id="我们为什么需要多态？"><a href="#我们为什么需要多态？" class="headerlink" title="我们为什么需要多态？"></a>我们为什么需要多态？</h2><p>接着上面说过的dog、cat和pet类继续讲，现在我们设定pet类增加了健康值health这个属性，当健康值小于50时，认定宠物生病了，需要治疗，我们将治疗方法cure()放在新建的主人类master里，治疗方法的内容是显示治疗方案和修改宠物实例的health值为60。而不同的宠物需要不同的治疗方式，我们设定治疗猫时需要显示“打针”，治疗狗时需要显示“吃药”。我们可以使用<strong>方法重载</strong>来实现，主人类的代码此时如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Master&#123;</span><br><span class="line">    public void cure(Cat cat)&#123;</span><br><span class="line">        if(cat.health&lt;50)&#123;</span><br><span class="line">         System.out.println(&quot;打针&quot;);</span><br><span class="line">         cat.health=60;</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">    public void cure(Dog dog)&#123;</span><br><span class="line">        if(dog.health&lt;50)&#123;</span><br><span class="line">         System.out.println(&quot;吃药&quot;);</span><br><span class="line">         dog.health=60</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但当宠物的种类变多时，这种写法会需要频繁修改，更不用说如果不止是主人类需要有这个cure方法，<strong>还有其他和主人类类似的类需要有这个cure方法时</strong>，就会导致代码<strong>臃肿、可扩展性、可维护性差</strong>，因此我们需要多态来优化。</p>
+<h2 id="什么是多态？"><a href="#什么是多态？" class="headerlink" title="什么是多态？"></a>什么是多态？</h2><p>多态：<strong>同一个引用类型，使用不同的实例而执行不同的操作</strong><br><strong>使用父类作为方法的形参，是Java中实现和使用多态的主要方式。</strong><br><strong>使用父类作为方法的返回值，也是Java中实现和使用多态的主要方式。</strong><br>我们接着来看刚才的例子。我们的优化思路是将治疗方法cure移到父类pet内，pet的各个子类重写父类的pet方法，此时主人类、父类、子类的代码简化如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Master&#123;//主人类写法</span><br><span class="line">    public void cure(Pet pet)&#123;//父类作为方法的形参</span><br><span class="line">        if(pet.health&lt;50)&#123;</span><br><span class="line">          pet.cure();</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Pet&#123;//父类写法</span><br><span class="line">     public int health;</span><br><span class="line">     public String name;</span><br><span class="line">     public String sex;</span><br><span class="line">     public void cure()&#123;</span><br><span class="line">       //这里不要写属性的修改，因为修改的是子类的属性（我好像在说废话x）</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Cat extends Pet&#123;//子类写法</span><br><span class="line">    public void cure()&#123;</span><br><span class="line">        System.out.println(&quot;打针&quot;);</span><br><span class="line">        this.heatlh=60;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里附上一个<strong>父类作为方法的返回值</strong>的多态用法，假设我们要送动物给别人。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Master&#123;//主人类写法</span><br><span class="line">    public Pet sendPet(int type)&#123;//以父类作为返回对象，也是多态的一种用法</span><br><span class="line">        Pet pet = null;</span><br><span class="line">        switch(type)&#123;</span><br><span class="line">            case 1:</span><br><span class="line">                 Pet pet=new Cat();</span><br><span class="line">                 break;</span><br><span class="line">            case 2:</span><br><span class="line">                 Pet pet=new Dog();</span><br><span class="line">                 break;</span><br><span class="line">            default:</span><br><span class="line">                System.out.println(&quot;私密马赛！没有这种宠物&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        return pet;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>，这时你再构建对象，你就得写成<strong>Pet xx = new Xx()<strong>，即</strong>向上转型</strong>这里和以前的写法规定不一样了。而当master的cure函数收到Pet类型的对象时，系统会<strong>找到这个对象指向的具体的类型Xx</strong>,也就是实际上在调用时将其<strong>视作Xx类型的对象</strong>。</p>
+<h3 id="关于向上（向下）转型"><a href="#关于向上（向下）转型" class="headerlink" title="关于向上（向下）转型"></a>关于向上（向下）转型</h3><p>上文中我们把<strong>父类类型引用变量指向子类对象，自动进行类型转换</strong>的写法称为<strong>向上转型</strong>，自然地，我们也将<strong>父类类型引用变量强制转换为子类类型引用变量</strong>的写法称为<strong>向下转型</strong>。</p>
+<h4 id="我们为什么需要转型"><a href="#我们为什么需要转型" class="headerlink" title="我们为什么需要转型"></a>我们为什么需要转型</h4><p>当我们需要以多态写法（我个人将多态理解成一种写法）去简化调用这些子类的方法时，我们需要将参数表里传入的类型向上转型成子类共同继承的父类类型来使方法在具备简洁的方法体的同时可以<strong>灵活调用各个子类重写的父类方法</strong>，而当我们需要调用子类的<strong>特有方法</strong>时，由于<strong>父类对象不能调用子类特有的方法</strong>就需要将其强制转换回子类，即向下转型，从而实现调用。</p>
+<h4 id="转型需要注意的地方"><a href="#转型需要注意的地方" class="headerlink" title="转型需要注意的地方"></a>转型需要注意的地方</h4><ul>
+<li><strong>向上转型后只能调用子类覆盖或继承父类的方法，不能调用子类特有的方法</strong></li>
+<li>在向下转型的过程中<strong>如果没有转换成真实子类类型，会出现类型转换异常</strong>，来看下面的代码。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Test()&#123;//测试类</span><br><span class="line">    public static void main(String[]args)&#123;</span><br><span class="line">        Pet dog = new Dog();//先来个向上转型</span><br><span class="line">        Cat cat = (Cat) dog;//再来个向下转型</span><br><span class="line">        cat.meow();//让猫（实际上是“变成猫”的狗）调用喵喵叫方法（狗肯定不会喵喵叫啊所以是猫的特有方法）</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码在写的时候IDE不会给你报错，也就是没有语法问题。但当你编译它的时候，IDE会告诉你存在编译错误（至少我的Myeclipse是这样）<strong>java.lang.ClassCastException:Dog cannot be cast to Cat</strong>（<strong>类型转换异常</strong>：狗变不成猫！），所以注意，向下转型时如果没有转化为真实的子类类型，会触发类型转换异常。<br>如果想要避免类型转换异常的出现，我们可以借助<strong>instanceof</strong>来进行辅助判断，来看下面的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Test()&#123;//测试类</span><br><span class="line">    public static void main(String[]args)&#123;</span><br><span class="line">        Pet dog = new Dog();//先来个向上转型</span><br><span class="line">        if (dog instanceof Dog)&#123;</span><br><span class="line">            dog.bark();//汪汪汪</span><br><span class="line">        &#125;</span><br><span class="line">        elif(dog instanceof Cat)&#123;</span><br><span class="line">            cat.meow();//喵喵喵</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>，使用instanceof时，对象的类型必须和instanceof后面的类<strong>在继承上有上下级关系</strong></li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Object%E7%B1%BB/" rel="tag">Object类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/instanceof/" rel="tag">instanceof</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/super/" rel="tag">super</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99/" rel="tag">方法重写</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8Boop/" rel="tag">面向对象编程oop</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-计网课程笔记1"
   class="article article-type-post"
   itemscope
