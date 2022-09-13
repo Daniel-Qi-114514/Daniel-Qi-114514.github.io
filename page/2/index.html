@@ -144,6 +144,95 @@
     
     
     <article
+  id="post-FinalIK和Ragdoll(2)"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/22/FinalIK%E5%92%8CRagdoll(2)/"
+    >FinalIK和Ragdoll(2)：FullyBodyBipedIK</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/22/FinalIK%E5%92%8CRagdoll(2)/" class="article-date">
+  <time datetime="2022-03-22T14:15:30.000Z" itemprop="datePublished">2022-03-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Unity/">Unity</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1CW411N7ri?spm_id_from=333.999.0.0">教程视频</a><br>本文仅供个人学习和知识点记录用。<br>Unity版本：2021.2.15f1c1<br>Final IK版本：2.1<del>（工作室群文件里有）</del><br>Low Poly模型素材包：Heist<br>状态机来源：Unity Standard Assets</p>
+<hr>
+<h1 id="2-1-FullyBodyBipedIK介绍"><a href="#2-1-FullyBodyBipedIK介绍" class="headerlink" title="2.1 FullyBodyBipedIK介绍"></a>2.1 FullyBodyBipedIK介绍</h1><h2 id="FullyBodyBipedIK还是BipedIK？"><a href="#FullyBodyBipedIK还是BipedIK？" class="headerlink" title="FullyBodyBipedIK还是BipedIK？"></a>FullyBodyBipedIK还是BipedIK？</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ddcd668345b5">分析链接</a></p>
+<h2 id="FullyBodyBipedIK提供了哪些功能？"><a href="#FullyBodyBipedIK提供了哪些功能？" class="headerlink" title="FullyBodyBipedIK提供了哪些功能？"></a>FullyBodyBipedIK提供了哪些功能？</h2><p>FullyBodyBipedIK自动将模型的骨骼点添加入Reference内，可以通过FullyBodyBipedIK调整骨骼各个结点位置、旋转角度、扭曲程度受IK影响的权重和计算中结点的位置，由于你可以更改这些结点的位置（比如用一个别的什么物体的位置来替代它们），因此可以做出各种效果，比如躯体的扭曲。你也可以通过更改这些替代者的位置来改变模型的姿态。</p>
+<h2 id="2-1-1-来看看FullyBodyBipedIK里面有些啥"><a href="#2-1-1-来看看FullyBodyBipedIK里面有些啥" class="headerlink" title="2.1.1 来看看FullyBodyBipedIK里面有些啥"></a>2.1.1 来看看FullyBodyBipedIK里面有些啥</h2><p><img src="../photos/Unity/FinalIK/2_1.png" title="FullyBodyBipedIK"></p>
+<ul>
+<li>Fix Transforms：勾选则每一帧刷新一次结点状态（对算力消耗大）。</li>
+<li>References：IK计算时需要的各个结点位置。<ul>
+<li>Root Node：</li>
+<li>Weight：一切Weight的权重基数，1为完全受IK影响，0为完全受状态机影响（本处及下文所提到的所有Weight都具有该共性，故仅提一次），它和后面各个结点的Weight是相乘关系（若某结点的Weight是0而References的Weight是1则该结点不受IK影响，若References的Weight是0则无论如何所有结点都不受IK影响。</li>
+<li>Iterations：</li>
+</ul>
+</li>
+<li>Target：</li>
+<li>Position Weight：结点位置受IK影响的权重。</li>
+<li>Rotation Weight：结点旋转受IK影响的权重。</li>
+<li>Use Thighs：</li>
+<li>Spine Stiffness：</li>
+<li>Pull Body Vertical：</li>
+<li>Pull Body Horizontal：</li>
+<li>Spine Iterations：</li>
+<li>Spine Twist Weight：结点扭曲受IK影响的权重。</li>
+<li>Maintain Head Rot：</li>
+<li>Maintain Relative Position：</li>
+<li>Pull：</li>
+<li>Push：</li>
+<li>Push Parent：</li>
+<li>Reach：</li>
+<li>Bend Goal：</li>
+<li>Bend Goal Weight：</li>
+<li>Mapping Weight：</li>
+</ul>
+<h1 id="2-1-x-问题解决方案"><a href="#2-1-x-问题解决方案" class="headerlink" title="2.1.x 问题解决方案"></a>2.1.x 问题解决方案</h1><ul>
+<li>如果有红色/黄色的骨骼点，首先锁住模型的Inspector（在Inspector的右上角）以方便在你调整出错位置时骨骼点仍然显示,对问题骨骼点进行调整直至为蓝点。</li>
+<li>如果运动时发现模型的某个部位没有随着模型一起运动（越远离根结点模型的该部位越朝起点倾斜），则要检查FullyBodyBipedIK内的该部位的<strong>Body Effector的Target</strong>是否绑定了该结点。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Final-IK/" rel="tag">Final IK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ragdoll/" rel="tag">Ragdoll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-FinalIK和Ragdoll(1)"
   class="article article-type-post"
   itemscope
@@ -1614,121 +1703,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/try-catch-finally/" rel="tag">try-catch-finally</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8Boop/" rel="tag">面向对象编程oop</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-抽象类和接口"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/02/13/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/"
-    >抽象类和接口</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/02/13/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/" class="article-date">
-  <time datetime="2022-02-13T02:55:43.000Z" itemprop="datePublished">2022-02-13</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">课程笔记_面向对象编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。"><a href="#本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。" class="headerlink" title="本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。"></a>本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。</h2><h1 id="抽象方法和抽象类（欧内的手方法和奥利安费类）"><a href="#抽象方法和抽象类（欧内的手方法和奥利安费类）" class="headerlink" title="抽象方法和抽象类（欧内的手方法和奥利安费类）"></a>抽象方法和抽象类（<del>欧内的手方法和奥利安费类</del>）</h1><h2 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h2><p><a target="_blank" rel="noopener" href="https://daniel-qi-114514.github.io/2022/02/09/%E5%A4%9A%E6%80%81/">书接上文</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Master&#123;//主人类写法</span><br><span class="line">    public void cure(Pet pet)&#123;//父类作为方法的形参</span><br><span class="line">        if(pet.health&lt;50)&#123;</span><br><span class="line">          pet.cure();</span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Pet&#123;//父类写法</span><br><span class="line">     public int health;</span><br><span class="line">     public String name;</span><br><span class="line">     public String sex;</span><br><span class="line">     public void cure()&#123;</span><br><span class="line">       //这里不要写属性的修改，因为要修改的是子类的属性（我好像在说废话x）</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Cat extends Pet&#123;//子类写法</span><br><span class="line">    public void cure()&#123;</span><br><span class="line">        System.out.println(&quot;打针&quot;);</span><br><span class="line">        this.heatlh=60;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们注意到，在上面Pet类里的cure方法内没有具体内容，而它的实现在子类里，此时我们就可以将它写成<strong>public abstract void cure();<strong>，也就是将其写成一个</strong>抽象方法</strong>。而抽象方法所在的类也要通过<strong>public abstract class Pet</strong>的改写来转变为<strong>抽象类</strong>。</p>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>当声明这个类的一个对象是没有意义的时候，就可以将这个类写为抽象类，<strong>抽象类不能被实例化</strong>。</p>
-<h2 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h2><ul>
-<li><strong>抽象类不能被实例化（不存在抽象构造方法），但可以创建一个抽象类的引用变量指向非抽象的子类实例</strong>。</li>
-<li><strong>如果子类没有实现父类的所有抽象方法，子类必须被定义为抽象类</strong>。</li>
-<li>抽象方法没有方法体</li>
-<li><strong>抽象方法必须在抽象类里，而抽象类里可以没有抽象方法。</strong></li>
-<li>不存在抽象静态方法</li>
-<li><strong>抽象类可以有非抽象构造方法，因为构造非抽象子类实例时可能需要用到，这样可以节省代码</strong></li>
-<li>抽象方法<strong>必须在子类中被实现</strong>，<strong>除非子类是抽象类</strong><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2></li>
-<li>当子类们既有共性方法又有各自特性方法的时候，我们可以通过声明抽象方法和抽象类来简化代码、方便调用。</li>
-</ul>
-<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h2 id="我们为什么需要接口"><a href="#我们为什么需要接口" class="headerlink" title="我们为什么需要接口"></a>我们为什么需要接口</h2><p>我们知道一个类只能有一个父类，而当<strong>一个类需要继承多组相互之间不相关的方法</strong>时，这些方法都塞在一个父类里或者多个间接父类里显然不合理，因此我们需要多个<strong>接口</strong>来存放和管理各组方法。</p>
-<h2 id="什么是接口"><a href="#什么是接口" class="headerlink" title="什么是接口"></a>什么是接口</h2><ul>
-<li>概念性的接口指系统对外提供的所有服务。</li>
-<li><strong>interface</strong>定义的接口叫<strong>接口类型</strong>,<strong>但是接口不是类</strong></li>
-<li>JDK8之前的接口特性<ul>
-<li>接口中的变量默认都是静态常量，必须显式初始化</li>
-<li>接口中所有方法默认都是抽象方法</li>
-<li>接口没有构造方法，不可以被实例化，但可以被实现</li>
-<li>通过<strong>implements</strong>关键字声明实现类，一个实现类可以实现多个接口</li>
-<li>实现类必须实现接口的所有方法，<strong>除非实现类也是一个抽象类</strong></li>
-</ul>
-</li>
-<li>JDK8新增接口特性1：<strong>接口内可以有默认方法</strong>了<ul>
-<li>通过<strong>default</strong>关键字来声明默认方法，<strong>默认方法的用处在于简化代码，降低实现类和接口的耦合度，提升代码可维护性</strong></li>
-<li>默认方法可以被继承，通过实例调用</li>
-<li>如果一个类实现了多个接口，多个接口都定义了多个同样的默认方法<ul>
-<li>实现方案1：实现类需要覆盖重写接口中的默认方法不然会报错</li>
-<li>实现方案2：可以使用this来调用指定接口的默认方法</li>
-</ul>
-</li>
-<li>如果一个类继承了一个抽象类，实现了一个接口，抽象类和接口存在相同的方法<ul>
-<li>采取类优先的原则，有限继承抽象类的方法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>JDK8新增接口特性2：**接口内可以声明（并且可以提供实现）静态方法了<ul>
-<li>回顾：静态方法可以直接用类名调用（不用专门new一个对象了）</li>
-<li>接口中的静态方法必须是public的，public修饰符可以省略，static修饰符不能省略</li>
-<li>静态方法不能被继承及重写，所以只能被具体所在的接口调用</li>
-<li>接口中可以有多个静态方法。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/*接口格式</span><br><span class="line">访问修饰符 interface 接口名称 extends 其他接口名（如果有的话）&#123;</span><br><span class="line">    声明变量</span><br><span class="line">    声明方法</span><br><span class="line">&#125;*/</span><br><span class="line">//接口示例</span><br><span class="line">public interface Interface1&#123;</span><br><span class="line">     public static final double PI =3.14;//在接口里，你写个double PI =3.14 也等同于左边的写法</span><br><span class="line">     public void m2();//等同于 public abstract void m2();</span><br><span class="line">     default void m3()&#123;</span><br><span class="line">         System.out.println(&quot;已调用接口Interface1中的默认方法m3&quot;);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">//实现类示例</span><br><span class="line">public class Implementation implements Interface1&#123;//多个接口间用逗号隔开</span><br><span class="line">     public void m2()&#123;</span><br><span class="line">         System.out.println(&quot;实现用接口Interface1中的默认方法m2&quot;);</span><br><span class="line">     &#125;</span><br><span class="line">     public void usem3()&#123;</span><br><span class="line">         this.m3();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="抽象类和接口的比较"><a href="#抽象类和接口的比较" class="headerlink" title="抽象类和接口的比较"></a>抽象类和接口的比较</h2><ul>
-<li>相同点<ul>
-<li>代表系统的抽象层</li>
-<li>都不能被实例化</li>
-<li>都能包含抽象方法</li>
-</ul>
-</li>
-<li>不同点<ul>
-<li>在抽象类中可以为部分普通方法提供默认实现，而接口在JDK8之前只能包含抽象方法，JDK8之后接口可包含默认方法</li>
-<li> 一个类只能继承一个直接的父类，但可以实现多个接口</li>
-</ul>
-</li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%BD%E8%B1%A1%E7%B1%BB/" rel="tag">抽象类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3/" rel="tag">接口</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8Boop/" rel="tag">面向对象编程oop</a></li></ul>
 
     </footer>
   </div>
