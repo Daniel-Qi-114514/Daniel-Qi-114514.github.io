@@ -144,6 +144,119 @@
     
     
     <article
+  id="post-论文翻译1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/24/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%911/"
+    >论文翻译1_粒子系统</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/24/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%911/" class="article-date">
+  <time datetime="2022-03-24T04:11:11.000Z" itemprop="datePublished">2022-03-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E7%BF%BB%E8%AF%91/">个人翻译</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p><strong>原文作者：William T.Reeves, Lucasfilm.Ltd</strong><br><strong>原文题目：Particle Systems-A Technique for Modeling a Class of Fuzzy Objects</strong>(Computer Graphics, Volume 17, Number 3, July 1983)<br><strong>翻译仅供个人学习，勿做他用</strong><br><strong>部分地方为了语义通顺，在尊重原文意思的同时使用了意译</strong><br><strong>翻译限于个人水平，敬请见谅</strong></p>
+<hr>
+<h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h1><ul>
+<li>  当下的计算机图像合成技术对诸如云、雾、水和火等自然事物进行建模已经被证明是困难的。这些“模糊”的物体并没有平滑、界限清晰、闪闪发亮的表面，而是拥有不平整、复杂、界限模糊的表面。我们对这些事物形体的动态、流动变化深感兴趣。它们的动作既不一成不变也不能被计算机图像中的常见简单仿射变换所描绘。</li>
+<li>  本文提供了一种对模糊物体的建模方法，称为“粒子系统”。粒子系统在图像合成方面与一般使用的呈现方式有三个基本的不同点。第一， 物体并不由一系列基本的面元素如多面形或色块所呈现，且它的边界也不为这些元素所定义，而是借助基本粒子组成的云团来定义它的体积；第二，粒子系统并不是确切的实体，它的粒子随着时间的变化而改变外观，粒子新旧更替。第三，由粒子系统所呈现的物体的外形并不被明确规定，因此其不具确定性。此外，随机处理被用于生成和改变物体的外观。</li>
+<li>  在模糊物体的建模过程中，相较于传统以面为导向的技术，粒子系统方法有几个重要的优势。首先，粒子（目前将其想象为三维空间的一个点）是比多边形更加原始和简易的，是表面呈现方式中最为简化的。因此，在相同的计算时间内采用粒子系统可以处理更多的基元并产生更加复杂的图像。由于粒子是简易的，所以它也易于运动模糊。时态混叠效应下快速运动的物体导致的运动模糊现象在计算机图像合成中已经被长久地忽视了；第二个优势是模型定义是程序性的，并且由随机数控制。因此，相比于通常使用现有的基于表面的系统，使用粒子系统获得一个十分精细的模型并不一定需要人们长时间设计。由于它是程序性的，所以粒子系统可以调整其细节级别以适应特定的一组查看参数。使用分形曲面，使用粒子系统放大可以显示越来越多的细节；第三，使用粒子系统建模的物体是“活的”，也就是说，它们会在一段时间内改变外观。而这种复杂的动力学形式使用基于曲面的建模技术则难以实现。</li>
+<li>  建模时将物体做成粒子的集合并非新想法。十五年前，最早的电脑磁带游戏将太空飞船的爆炸描绘成充满屏幕的许多光点。尽管在文献中很少提及它们，但在许多三维建模系统中，点源被用作图形数据类型。俄亥俄州的Roger Wilson使用粒子来建模从烟囱中冒出的烟雾。在他的模型中既没有随机控制，也没有动力学。Alvy Ray Smith和Jim Blinn在他们的系列节目《宇宙》（Cosmos）中使用粒子来给恒星消亡建模。Alan Norton使用粒子生成和显示三维分形形状。Jim Blinn讨论过模拟光通过和被粒子层反射的光反射函数。他的技术被用于生成土星环的图片。Blinn并没有解决模糊物体的建模问题，这也是他论文的主题。体积表示法也被认为是曲面表示的可行替代方案。实体建模是体积表示的一种，就如Norm Badler和Joe O’Rourke的《泡泡人》（Bubble-man）的一样。在分形建模中，随机建模的使用将我们的工作和最新的进展联系起来。</li>
+<li>  第二部分更加详尽地描述了粒子系统的基本框架。第三部分研究了在《星际迷航2：可汗之怒》中粒子系统是怎样用于在“创世纪演示”中生成火，第四部分展现了粒子系统的另外几个应用，第五部分讨论了该领域未来的进一步研究。</li>
+</ul>
+<hr>
+<h1 id="2-粒子系统的基本模型"><a href="#2-粒子系统的基本模型" class="headerlink" title="2 粒子系统的基本模型"></a>2 粒子系统的基本模型</h1><ul>
+<li>  粒子系统是许多微小粒子的集合，它们共同表示一个模糊的物体。在一段时间内，许多粒子将被生成为一个系统、在这个系统内移动和改变外观，最后随着这个系统销毁。</li>
+<li>  为了在动态演示中计算每一帧，需要进行以下步骤：(1)新粒子被生成到系统内，（2）每个粒子都被分配独立的属性，（3）系统中任何存在时间超过预定寿命的粒子都会被销毁，（4）剩余的粒子根据它们的动力学属性被移动和转化，（5）最后在帧缓存器中渲染活动粒子的图像。粒子系统可通过编程被设定为在每一步执行任何一组指令。由于它是程序性的，所以这种方法可以结合任何描述物体外观或动力学的计算模型。举个例子，粒子的运动和变换能够与一组偏微分方程的解联系在一起，或者粒子的属性能够基于统计力学被分配。因此，我们能利用那些已经在其它科学或工程学科中被开发的模型。</li>
+<li>  在本文的研究中，我们是用简易的随机过程作为帧生成的每个步骤的程序性要素。为了在粒子系统中控制粒子的形状、外观和动力学特性，模型设计者需要用到一组参数。一般来说，每组参数表明了粒子属性值的范围。我们通常使用平均值和最大方差来指定这些范围。</li>
+<li>  后续小节更加详尽地描述了粒子系统的基本模型和在我们编写的软件中这些粒子是如何被控制和规定的。</li>
+</ul>
+<h2 id="2-1-粒子生成"><a href="#2-1-粒子生成" class="headerlink" title="2.1 粒子生成"></a>2.1 粒子生成</h2><ul>
+<li>  粒子在系统中以受控随机过程生成。该过程确定在每个时间间隔（给定帧）内进入系统的粒子数。生成的粒子数目很重要，因为它强烈影响模糊物体的密度。</li>
+<li>  模型设计者可以在下面两种方法中选择一种来控制新粒子的数目。第一种方法是，设计者控制每帧内生成的粒子的平均数量及其方差。在帧f上生成的实际粒子数为：<center>NParts<sub>f</sub> = MeanParts<sub>f</sub> + Rand( ) × VarParts<sub>f</sub>，</center>
+其中Rand是一个程序过程，它返回一个在-1.0和+1.0之间概率均匀分布的随机数，MeanParts<sub>f</sub>是粒子数量的平均数，VarParts<sub>f</sub>是粒子数量的方差。</li>
+<li>  第二种方法是新粒子的数量取决于物体在屏幕上的大小。模型设计者控制每个屏幕单位面积内生成粒子的平均数及其方差。程序化粒子系统可以决定每一个特定帧的视图参数，计算其覆盖的大致区域，并相应地设定新粒子的数量。对应的方程为：<center>NParts<sub>f</sub> = (MeanParts<sub>sa<sub>f</sub></sub> + Rand( ) × VarParts<sub>sa<sub>f</sub></sub>) x ScreenArea，</center>
+其中MeanParts<sub>sa</sub>是每单位屏幕面积粒子数的平均值，MeanParts<sub>sa<sub>f</sub></sub>是其方差，ScreenArea则是粒子系统在屏幕上所占的面积。这个方法
+控制了粒子系统细节的级别，从而控制渲染其图像所需的时间。举个例子，我们没必要在屏幕上4个像素大小的区域生成100000个粒子。</li>
+<li>  为了使粒子系统能够在密度上增减，设计者可以随时间去改变每帧生成的粒子的平均数量（即，MeanParts<sub>f</sub>和MeanParts<sub>sa<sub>f</sub></sub>是如上所述的帧数函数）。目前，我们使用一个简单的线性函数：<center>MeanParts<sub>f</sub> = InitialMeanParts + DeltaMeanParts<sub>sa<sub>f</sub></sub> x (f - f<sub>0</sub>) </center>
+或
+<center>MeanParts<sub>sa<sub>f</sub></sub>= InitialMeanParts<sub>sa</sub> + DeltaMeanParts<sub>sa</sub> x ( f - f<sub>0</sub>), </center>
+其中f是当前帧，f<sub>0</sub>是粒子系统处于活动状态的第一帧，InitialMeanParts<sub>sa</sub>表示该第一帧的粒子平均数，VarParts<sub>sa<sub>f</sub></sub>表示其变化率，方差约束量VarParts<sub>sa<sub>f</sub></sub>和VarParts<sub>f</sub>目前在所有帧上都是常量。更复杂的二次型、三次型甚至随机变化在均值和方差参数中都很容易添加。</li>
+<li>  为了控制粒子系统中的粒子生成，设计者指定f<sub>0</sub>和参数InitialMeanParts、DeltaMeanParts和VarParts，或和参数InitialMeanParts<sub>sa</sub>、DeltaMeanParts<sub>sa</sub>和VarParts<sub>sa</sub>。</li>
+</ul>
+<h2 id="2-2-粒子属性"><a href="#2-2-粒子属性" class="headerlink" title="2.2 粒子属性"></a>2.2 粒子属性</h2><ul>
+<li>  对于每个被生成的新粒子，粒子系统必须指定其以下属性值：</li>
+<li>初始位置</li>
+<li>初始速度（包含速率和方向）</li>
+<li>初始大小</li>
+<li>初始颜色</li>
+<li>初始透明度</li>
+<li>形状</li>
+<li>寿命</li>
+<li>  粒子系统的几个参数控制着粒子的初始位置。粒子系统在三维空间内有一个用于定义原点的位置，通过原点绕坐标系旋转的两个角度得出其方向 <em>（球坐标系）</em>。粒子系统也有一个 <em>生成形状</em>，它定义了一个关于其原点的区域，新产生的粒子被随机放置在该区域内。我们已经实现的生成形状有：半径为r的球体，坐标系内xoy平面上的半径为r的圆形，以及坐标系内xoy平面上的长l宽w的矩形。图1展示了一个典型的球形生成形状的粒子系统。基于物理系统或混沌吸引子的更复杂的生成形状已被构思出来但仍未实现。<br>（插图）</li>
+<li>  粒子系统的生成形状也描述了新粒子移动的初始方向。在一个球形生成形状内，粒子从粒子系统的原点向外移动。在圆形或矩形形状中，粒子从x-y平面向上移动，但被允许根据另一个参数——“放射”角度——偏移垂直方向。粒子的初始速度由该公式决定：<center>InitialSpeed = MeanSpeed + Rand( ) x VarSpeed，</center>
+其中MeanSpeed和VarSpeed是粒子系统的另外两个参数，它们分别表示平均速度和速度的方差。</li>
+<li>  为了确定一个粒子的初始颜色，粒子系统需要一个平均颜色和与该颜色的最大偏差。粒子透明度和粒子大小也由平均值和最大变化范围决定。这些方程与上面给出的初速公式类似。</li>
+<li>  粒子系统有一个用于明确每个被生成粒子的形状的参数。目前已实现的粒子形状有球形、矩形和条纹球形。后者被用于运动态模糊化粒子——一个在给快速移动物体建模时十分重要的特性。我们在2.5小节和3小节更加详细地探讨了条纹粒子。</li>
+<li>  可能的属性控制参数及其变体的数量是无限的。我们目前呈现的是已经找到的最有用和最有趣的。</li>
+</ul>
+<h2 id="2-3-粒子动力学"><a href="#2-3-粒子动力学" class="headerlink" title="2.3 粒子动力学"></a>2.3 粒子动力学</h2><ul>
+<li>  在粒子系统内的单个粒子在三维空间内随着时间移动，并改变颜色、透明度和尺寸。</li>
+<li>  将粒子从一帧移动到下一帧（的位置）易如反掌，只需将它的速度矢量加到它的位置矢量上即可。更复杂一些，粒子系统也使用加速度在帧与帧之间修改黎姿的速度。通过这个参数，模型设计师能够模拟重力并让粒子以抛物线轨迹而不是直线轨迹运动。</li>
+<li>  粒子随着时间的颜色变化是由颜色变化率这一参数所规定的。粒子的透明度和尺寸也是这么被控制的。在我们的实现方案中，这些变化率在粒子系统中的影响对所有粒子而言是全局的，我们也很容易想到将这个参数也做成随机变化的。</li>
+</ul>
+<h2 id="2-4-粒子销毁"><a href="#2-4-粒子销毁" class="headerlink" title="2.4 粒子销毁"></a>2.4 粒子销毁</h2><ul>
+<li>  粒子在被生成时赋予了一个以帧为衡量单位的寿命。随着每一帧被计算，（剩余）寿命也逐渐减少。当粒子的（剩余）寿命减为0时，粒子就被销毁了。</li>
+<li>  只要粒子对图像没有任何贡献，也可以用其它机制来安排粒子的销毁。如果根据颜色和透明度计算的粒子强度低于指定阈值，则该粒子将被销毁。从其父粒子系统的原点沿指定方向移动的距离超过规定值的粒子也会被销毁。这一机制能够被用于去除在关注区域以外的粒子。</li>
+</ul>
+<h2 id="2-5-粒子渲染"><a href="#2-5-粒子渲染" class="headerlink" title="2.5 粒子渲染"></a>2.5 粒子渲染</h2><ul>
+<li>  一旦一帧内所有粒子的位置和外形参数都被计算了，渲染算法就会生成一张图片。一般的粒子渲染问题与更常见的图元（如多边形和曲面）组成的物体对象的渲染一样复杂。粒子可以在屏幕深度上遮挡其它粒子。它们既能变得透明也能在其它粒子上投射阴影。此外，粒子可以在场景中与基于曲面的建模基元的物体共存，而且这些物体能够和粒子交合。</li>
+<li>  在我们已有的系统中，有两个假设允许我们简化渲染算法。第一个假设是，我们假设粒子系统不与其它基于曲面的建模基元交合，因此我们的渲染算法只需处理粒子。使用其它技术建模的对象将在渲染后的合成阶段与粒子系统对象合成在一起。为了让粒子系统和其它物体交合或在它们后面，渲染系统将基于在模型坐标空间中定义的剪裁平面使粒子系统图像分为多个子图像，然后在合成阶段将这些子图像与其它图像混合。</li>
+<li>  另外一个在目前的渲染系统中做出的假设是每个粒子能够被显示为一个点光源。借助这个假设，确定隐藏曲面不再是一个问题。每个粒子都向它覆盖的像素增加一点光强。一个在其它粒子后面的粒子不再被遮挡，而是给其覆盖的像素添加更多光强。添加的光强及其颜色取决于粒子的透明度和颜色。目前，增加光强的数值不再取决于粒子间距和观察位置，但这些是简单的拓展。观察到的变化、粒子的尺寸和它的形状决定了哪个像素要被遮挡。为了防止时间混叠和残影（的出现），所有粒子的形状都进行反锯齿绘制处理。许多粒子的光可能叠加到一个像素上，因此渲染算法固定红、绿、蓝通道的强度值固定在帧缓存器的最大强度值处，而不是让它们任意溢出。</li>
+<li>  借助上述算法和假设，我们不再需要给粒子排序，它们以任意生成顺序渲染到帧缓存器。阴影不再是问题，因为粒子不再反射光而是发光。</li>
+</ul>
+<h2 id="2-6-粒子层级"><a href="#2-6-粒子层级" class="headerlink" title="2.6 粒子层级"></a>2.6 粒子层级</h2> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3D%E5%BB%BA%E6%A8%A1/" rel="tag">3D建模</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E6%A8%A1%E6%8B%9F/" rel="tag">物理模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/" rel="tag">粒子系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" rel="tag">论文翻译</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-FinalIK和Ragdoll(2)"
   class="article article-type-post"
   itemscope
@@ -1580,129 +1693,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/connection-was-aborted/" rel="tag">connection was aborted</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-bash/" rel="tag">git bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-error-10053/" rel="tag">git_error 10053</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-error-443/" rel="tag">git_error 443</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-异常"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/02/14/%E5%BC%82%E5%B8%B8/"
-    >异常与异常处理</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/02/14/%E5%BC%82%E5%B8%B8/" class="article-date">
-  <time datetime="2022-02-14T08:02:45.000Z" itemprop="datePublished">2022-02-14</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">课程笔记_面向对象编程</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。"><a href="#本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。" class="headerlink" title="本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。"></a>本文为华为开发者学堂-面向对象编程的课程笔记，仅供个人学习使用。</h2><h1 id="异常与异常处理"><a href="#异常与异常处理" class="headerlink" title="异常与异常处理"></a>异常与异常处理</h1><h2 id="什么是异常和异常处理"><a href="#什么是异常和异常处理" class="headerlink" title="什么是异常和异常处理"></a>什么是异常和异常处理</h2><p>异常：<strong>异常是在程序的运行过程中所发生的不正常的事件，它会中断正在运行的程序</strong>。在Java中，它是一种特殊的对象，类型为java.lang.Exception或其子类<br>如何解决呢？</p>
-<ul>
-<li>程序员通过代码堵住程序可能出现的漏洞</li>
-<li>程序员在设计程序的阶段预测可能出现的异常并写好对应措施，当程序遇到这些异常时，会按照事先规定好的代码去处理异常而不含让程序中断运行</li>
-<li>IDE和编程语言提供的<strong>异常处理机制</strong>（标红，报错等等）</li>
-</ul>
-<h2 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h2><ul>
-<li>Java的异常处理是通过<strong>try、catch、finally、throw和throws</strong>五个关键字来完成的，<strong>try执行可能产生异常的代码，catch捕获异常，无论是否发生异常，finally中的代码总能执行，throws声明方法可能要抛出的各种异常，throw手动抛出异常</strong></li>
-<li>Java内的异常Exception是一个<strong>类</strong>，catch要捕获的是Exception类的对象<ul>
-<li>常见的异常类型<ul>
-<li><strong>Exception</strong>:异常层次结构的父类</li>
-<li><strong>ArithmeticException</strong>:算术错误</li>
-<li><strong>InputMismatchException</strong>：输入格式不匹配 <em>（比如要求输入int但得到字符串）</em></li>
-<li><strong>ArrayIndexOutOfBoundsException</strong>:数组下标越界</li>
-<li><strong>NullPointerException</strong>:尝试访问null对象成员 <em>（比如你将一个字符串用equals()跟指向null的字符串比较）</em></li>
-<li><strong>ClassNotFoundException</strong>:不能加载所需的类 <em>（比如打错类名了）</em></li>
-<li><strong>lllegalArgumentException</strong>:方法接收到非法参数</li>
-<li><strong>ClassCastException</strong>:对象强制类型转换错误</li>
-<li><strong>NumberFormatException</strong>:数字格式转换异常 <em>（比如把“abc”转换成数字）</em></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>在catch块中处理异常：<ul>
-<li>使用**System.err.println()**来输出错误反馈信息</li>
-<li>使用**e.printStackTrace()**来输出异常的堆栈信息并跟踪异常产生的位置和过程</li>
-<li>使用**e.getMessage()**得到描述异常的字符串，而该字符串是printStackTrace()输出信息的一部分，如果异常没有描述字符串则输出null</li>
-</ul>
-</li>
-<li>关于多重catch块<ul>
-<li>排列catch语句的顺序：<strong>先子类后父类</strong></li>
-<li>发生异常时按顺序逐个匹配</li>
-<li><strong>只执行第一个与异常类型匹配的catch语句</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="try-catch-finally"><a href="#try-catch-finally" class="headerlink" title="try-catch-finally"></a>try-catch-finally</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//使用try-catch-finally处理、捕捉异常，分为三种情况：</span><br><span class="line">public void method()&#123;</span><br><span class="line">    try&#123;</span><br><span class="line">        //可能产生异常的代码块</span><br><span class="line">    &#125;</span><br><span class="line">    catch(异常类型 ex)&#123;</span><br><span class="line">        //对异常进行处理的代码段</span><br><span class="line">    &#125;</span><br><span class="line">    finally&#123;</span><br><span class="line">        //无论如何都会执行的代码段，除了极个别情况</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//第一种情况：无事发生，执行顺序：try——&gt;finally（跳过catch）</span><br><span class="line">//第二种情况：产生可以处理的异常：try（try内产生异常的行后面的代码不会被执行）——&gt;catch——&gt;finally（除非catch内的处理方法里有退出Java虚拟机方法System.exit(1)，否则继续）</span><br><span class="line">//第三种情况：产生异常类型不匹配：try——&gt;产生的异常会和catch的异常类型进行匹配，如果不匹配则中断运行，但是一定会在中断之前执行finally</span><br></pre></td></tr></table></figure>
-<h3 id="使用throws声明异常"><a href="#使用throws声明异常" class="headerlink" title="使用throws声明异常"></a>使用throws声明异常</h3><p>如果一个方法体可能抛出异常，我们使用throws声明可能抛出的各种异常，异常之间用逗号隔开<br>调用者的对应方式有：</p>
-<ul>
-<li>处理异常</li>
-<li>继续声明异常，比如a方法声明了异常，调用它的b方法不解决异常，可以继续声明a的异常，由于这些方法最后都会回到main方法，所以如果这些方法都不解决异常，就交给虚拟机处理 <em>main方法声明的异常由Java虚拟机处理</em></li>
-</ul>
-<h3 id="使用throw抛出异常"><a href="#使用throw抛出异常" class="headerlink" title="使用throw抛出异常"></a>使用throw抛出异常</h3><p>写法见以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">throw new 某类型Exception(&quot;异常信息&quot;);//当使用throw显式抛出异常，必须对异常处理，或throws声明异常</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>throw</th>
-<th align="center">throws</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>生成并抛出异常</td>
-<td align="center">声明方法内抛出了异常</td>
-</tr>
-<tr>
-<td>位于方法体内部，可作为单独语句使用</td>
-<td align="center">必须跟在方法参数列表后面，不能单独使用</td>
-</tr>
-<tr>
-<td>抛出一个异常对象，且只能是一个</td>
-<td align="center">声明抛出异常类型，可以用来一次声明多个异常类型</td>
-</tr>
-</tbody></table>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
-<li>如果在try和catch中遇到return，<strong>先执行finally，再执行return</strong>、</li>
-<li>try\catch\finally可以任意组合， 但必须有try，catch和finally至少出现一个</li>
-<li>如果方法内产生异常却不在方法内处理 <em>有throw但没有catch</em>，就必须使用throws声明该异常</li>
-</ul>
-<h2 id="异常体系结构"><a href="#异常体系结构" class="headerlink" title="异常体系结构"></a>异常体系结构</h2><p>我们注意到，Exception对象的直接父类是Throwable类，而Throwable类除了Exception类这个直接子类外，还有一个直接子类叫Error。Error为<strong>仅靠程序本身无法恢复的严重错误，代表Java虚拟机的底层问题</strong>（比如AWTError <em>（发生严重的Abstract Window Toolkit错误时抛出）</em>、线程意外终止ThreadDeath等、内存溢出OutOfMemoryError）而Exception为<strong>由Java应用程序抛出和处理的非严重错误</strong>。而Exception又进一步可细分为<strong>Checked异常和运行时异常RuntimeException</strong>，Checked异常在编译时会被检查出来，程序必须处理该类异常，如ClassNotFoundException、ClassCastException等。RuntimeException表示该异常为运行时可能出现的异常，在编译时不会检查的异常，不要求程序必须做出处理，如ArithmeticException算术异常、调用null对象异常NullPointerException等，这些异常一般是由程序的逻辑错误引起的。</p>
-<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><h2 id="异常链与异常处理原则"><a href="#异常链与异常处理原则" class="headerlink" title="异常链与异常处理原则"></a>异常链与异常处理原则</h2> 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/try-catch-finally/" rel="tag">try-catch-finally</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8Boop/" rel="tag">面向对象编程oop</a></li></ul>
 
     </footer>
   </div>

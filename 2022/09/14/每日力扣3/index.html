@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>每日力扣3 |  Welcome to DanielQi&#39;s Blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <script src="https://mermaid-js.github.io/mermaid/"></script>
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-每日力扣3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  每日力扣3
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/09/14/%E6%AF%8F%E6%97%A5%E5%8A%9B%E6%89%A33/" class="article-date">
+  <time datetime="2022-09-14T06:22:22.000Z" itemprop="datePublished">2022-09-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8A%9B%E6%89%A3/">力扣</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">9 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="今日题目"><a href="#今日题目" class="headerlink" title="今日题目"></a>今日题目</h1><p><strong>正则表达式匹配</strong><br><strong>通配符匹配</strong><br><strong>复制带随机指针的链表</strong><br><strong>合并K个排序链表</strong><br><strong>最小覆盖子串</strong></p>
+<hr>
+<h1 id="正则表达式匹配（动态规划）"><a href="#正则表达式匹配（动态规划）" class="headerlink" title="正则表达式匹配（动态规划）"></a>正则表达式匹配（动态规划）</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/">题目链接</a><br>.匹配任意单个字符，<em>要么匹配长度为0的子串要么匹配长度不为0的和前一个字符一样的子串。和上一题类似，我们用一个二维bool数组dp=new bool[m+1,n+1]来存储s中1到i，p中1到j的匹配情况。而dp[i,j]的递推公式，我们发现，当p[j-1]，即第j个字符为字母的时候，只要判断和当前的第i个字符是否匹配即可，即dp[i,j]=dp[i-1,j-1]&amp;&amp;s[i-1]==p[j-1];<br>当其为’.’的时候，直接i++,j++;当其为’</em>‘的时候，我们先判断s[i-1]是否等于p[j-2]，如果不相等就等同于匹配长度为0的子串，即dp[i,j]=dp[i,j-2]，如果相等，就仍然和最开始的那样有两种选择。如果匹配长度为0的子串，直接dp[i,j]=dp[i,j-2]即可，如果匹配长度不为0的子串，则有以下的规律：<br>f[i][j]=f[i−1][j−2],if s[i]=p[j−1]<br>f[i][j]=f[i−2][j−2],if s[i−1]=s[i]=p[j−1]<br>f[i][j]=f[i−3][j−2],if s[i−2]=s[i−1]=s[i]=p[j−1]<br>⋯⋯<br>我们可以转成一个很巧妙的带有递归思想的式子：dp[i,j]=dp[i-1,j]，如果s[i-2]=p[j-2]的话，将继续触发dp[i-2,j]，如此往复直至到达这串相同字母的最左侧。<br>来看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public bool IsMatch(string s, string p) &#123;//正则表达式匹配</span><br><span class="line">        int m = s.Length;</span><br><span class="line">        int n = p.Length;</span><br><span class="line">        bool[,] dp = new bool[m+1,n+1];</span><br><span class="line">        dp[0,0] = true;</span><br><span class="line">        for(int i = 0;i&lt;m+1;i++)&#123;</span><br><span class="line">            for(int j = 1;j&lt;n+1;j++)&#123;</span><br><span class="line">                if(p[j-1]==&#x27;*&#x27;)&#123;</span><br><span class="line">                    dp[i,j]=dp[i,j-2];</span><br><span class="line">                    if(match(s,p,i,j-1))&#123;</span><br><span class="line">                        dp[i,j]=dp[i,j]||dp[i-1,j];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(match(s,p,i,j))&#123;</span><br><span class="line">                        dp[i,j]=dp[i-1,j-1];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[m,n];</span><br><span class="line">    &#125;</span><br><span class="line">    public bool match(string s,string p,int i,int j)&#123;</span><br><span class="line">        if(i==0)</span><br><span class="line">           return false;</span><br><span class="line">        if(p[j-1]==&#x27;.&#x27;)</span><br><span class="line">           return true;</span><br><span class="line">        return s[i-1]==p[j-1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="通配符匹配（动态规划）"><a href="#通配符匹配（动态规划）" class="headerlink" title="通配符匹配（动态规划）"></a>通配符匹配（动态规划）</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wildcard-matching/">题目链接</a><br>(和上面的类似，实在不想写了)<br>来看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public bool IsMatch(string s, string p) &#123;//通配符匹配</span><br><span class="line">        int m = s.Length;</span><br><span class="line">        int n = p.Length;</span><br><span class="line">        bool[,] record= new bool[m+1,n+1];</span><br><span class="line">        record[0,0]=true;</span><br><span class="line">        for(int i = 1;i&lt;n+1;i++)&#123;</span><br><span class="line">            if(p[i-1]==&#x27;*&#x27;)&#123;</span><br><span class="line">                record[0,i]=true;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i = 1;i&lt;m+1;i++)&#123;</span><br><span class="line">            for(int j = 1;j&lt;n+1;j++)&#123;</span><br><span class="line">                if(p[j-1]==&#x27;*&#x27;)&#123;</span><br><span class="line">                    record[i,j]=(record[i,j-1]||record[i-1,j]);//要么不匹配，要么匹配</span><br><span class="line">                &#125;else if(p[j-1]==&#x27;?&#x27;||p[j-1]==s[i-1])&#123;</span><br><span class="line">                    record[i,j]=record[i-1,j-1];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return record[m,n]==true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="复制带随机指针的链表（链表、哈希表）"><a href="#复制带随机指针的链表（链表、哈希表）" class="headerlink" title="复制带随机指针的链表（链表、哈希表）"></a>复制带随机指针的链表（链表、哈希表）</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/copy-list-with-random-pointer/">题目链接</a><br>使用哈希表存储新链表中结点和旧链表的对应关系，同时我们可以通过HashMap.get(p.random)直接获取对应的q.random<br>来看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">// Definition for a Node.</span><br><span class="line">class Node &#123;</span><br><span class="line">    int val;</span><br><span class="line">    Node next;</span><br><span class="line">    Node random;</span><br><span class="line"></span><br><span class="line">    public Node(int val) &#123;</span><br><span class="line">        this.val = val;</span><br><span class="line">        this.next = null;</span><br><span class="line">        this.random = null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    public Node copyRandomList(Node head) &#123;//复制带随机指针的链表-Java</span><br><span class="line">        Node p = head;//</span><br><span class="line">        Node q = new Node(0);</span><br><span class="line">        Node res = q;</span><br><span class="line">        Node tempRandom = new Node(0);//指向random的指针</span><br><span class="line">        HashMap&lt;Node,Node&gt; record = new HashMap&lt;&gt;();</span><br><span class="line">        while(p!=null)&#123;//录入新旧链表中结点的对应关系</span><br><span class="line">             q.next = new Node(p.val);</span><br><span class="line">             record.put(p,q.next);</span><br><span class="line">             p=p.next;</span><br><span class="line">             q=q.next;</span><br><span class="line">        &#125;   </span><br><span class="line">        p=head;</span><br><span class="line">        q=res.next;</span><br><span class="line">        while(p!=null)&#123;</span><br><span class="line">             tempRandom=record.get(p.random);</span><br><span class="line">             q.random=tempRandom;</span><br><span class="line">             p=p.next;</span><br><span class="line">             q=q.next;</span><br><span class="line">        &#125;  </span><br><span class="line">        return res.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="合并K个升序链表（链表、分治法）"><a href="#合并K个升序链表（链表、分治法）" class="headerlink" title="合并K个升序链表（链表、分治法）"></a>合并K个升序链表（链表、分治法）</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-k-sorted-lists/">题目链接</a><br>分治法的思路就是用相同的步骤将大的问题分解成多个小问题解决。这个题我们将多个链表进行分组，每个组只有一个链表或两个链表，将两个链表合并成一个链表，如此递归向上直至返回结果。<br>来看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     public int val;</span><br><span class="line"> *     public ListNode next;</span><br><span class="line"> *     public ListNode(int val=0, ListNode next=null) &#123;</span><br><span class="line"> *         this.val = val;</span><br><span class="line"> *         this.next = next;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode MergeKLists(ListNode[] lists) &#123;//排序链表-分治法：化大为小，思路统一</span><br><span class="line">          if(lists.Length==0)//如果没有链表</span><br><span class="line">            return null;</span><br><span class="line">          return FenZhi(lists,0,lists.Length-1);</span><br><span class="line">    &#125;</span><br><span class="line">    public ListNode FenZhi(ListNode[] lists,int left, int right)&#123;</span><br><span class="line">         if(left==right)//如果就一个链表了</span><br><span class="line">            return lists[left];</span><br><span class="line">         if(left&gt;right)</span><br><span class="line">            return null;</span><br><span class="line">         int m = right+left&gt;&gt;1;//实际上就是(r+l)/2,利用了运算符优先级</span><br><span class="line">         return merge(FenZhi(lists,left,m),FenZhi(lists,m+1,right));//将几个链表拆分到最小组，然后递归merge</span><br><span class="line">    &#125;</span><br><span class="line">    public ListNode merge(ListNode l1,ListNode l2)&#123;</span><br><span class="line">        if(l1==null)</span><br><span class="line">          return l2;</span><br><span class="line">        if(l2==null)</span><br><span class="line">          return l1;</span><br><span class="line">        ListNode res= new ListNode();//新链表的头结点，res.next才是结果的头结点</span><br><span class="line">        ListNode temp = res;//指向当前插入位置的前一个结点</span><br><span class="line">        while(l1!=null&amp;&amp;l2!=null)&#123;//如果两个链表都不为空</span><br><span class="line">            if(l1.val&lt;l2.val)&#123;</span><br><span class="line">                temp.next=l1;</span><br><span class="line">                l1=l1.next;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                temp.next=l2;</span><br><span class="line">                l2=l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            temp=temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(l1!=null)&#123;</span><br><span class="line">            temp.next=l1;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            temp.next=l2;</span><br><span class="line">        &#125;</span><br><span class="line">        return res.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="最小覆盖子串（滑动窗口）"><a href="#最小覆盖子串（滑动窗口）" class="headerlink" title="最小覆盖子串（滑动窗口）"></a>最小覆盖子串（滑动窗口）</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/">题目链接</a><br>滑动窗口的核心思路就是反复调整左右边界以实现目的。在本题中如果当前窗口满足条件了（包含t中的所有字符），就收缩左边界直至不满足条件了，然后右边界扩张直至满足条件，如此循环。<br>来看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public string MinWindow(string s, string t) &#123;</span><br><span class="line">        char[] S = s.ToCharArray();</span><br><span class="line">        char[] T = t.ToCharArray();//匹配的时候用这俩数组和字典，截取的时候用 res=s.Substring()</span><br><span class="line">        //字典是这个题的要素，字典内的值有两种，一种是缺省值Int32.MaxValue，用来判断当前字母在t里有没有</span><br><span class="line">        //另一种是会变化的，用来表示滑动窗口内至少应该包含多少个该类字母，如果右边界右扩的时候遇到需要的字母，对应的值就会-1，表示收集到了一个这类字母，而左边界右缩的时候如果遇到了该类字母，对应的值就要+1，表示该类字母在滑动窗口内的需求量+1。</span><br><span class="line">        Dictionary&lt;char,int&gt; dict = new Dictionary&lt;char,int&gt;();</span><br><span class="line">        int l = S.Length;</span><br><span class="line">        int min = Int32.MaxValue;</span><br><span class="line">        string res = &quot;&quot;;</span><br><span class="line">        int threshold = 0;</span><br><span class="line">        int cnt = 0;//cnt用于统计当前滑动窗口内的目标字母集齐了多少个，cnt++的触发条件是字典中t里包含的字母对应的数量变为0，即滑动窗口内有和t一样多的该字母</span><br><span class="line">        int left = 0;</span><br><span class="line">        int right = 0;</span><br><span class="line">        for(int i = 0;i&lt; T.Length;i++)&#123;</span><br><span class="line">            if(!dict.ContainsKey(T[i]))&#123;</span><br><span class="line">                dict.Add(T[i],0);</span><br><span class="line">            &#125;</span><br><span class="line">            int val = dict[T[i]]+1;</span><br><span class="line">            if(val==1)</span><br><span class="line">              threshold++;//指的是有t里有多少种字母</span><br><span class="line">            dict[T[i]]=val;</span><br><span class="line">        &#125;</span><br><span class="line">        while(right&lt;l)&#123;</span><br><span class="line">            if(!dict.ContainsKey(S[right]))&#123;</span><br><span class="line">                dict.Add(S[right],Int32.MaxValue);</span><br><span class="line">            &#125;</span><br><span class="line">            int rval = dict[S[right]];</span><br><span class="line">            if(rval == Int32.MaxValue)&#123;</span><br><span class="line">                right++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(--rval==0)&#123;//怎么着都要减，如果这个字母的数量减为0了，说明滑动窗口内该字母的数量达到要求，也就是集齐了这个字母</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">            dict[S[right]]=rval;</span><br><span class="line">            while(cnt==threshold &amp;&amp; left&lt;=right)&#123;</span><br><span class="line">                int length = right - left+1;</span><br><span class="line">                if(length&lt;min)&#123;</span><br><span class="line">                    min = length;</span><br><span class="line">                    res=s.Substring(left,length);</span><br><span class="line">                &#125;</span><br><span class="line">                int lval = dict[S[left]];</span><br><span class="line">                if(lval==Int32.MaxValue)&#123;//如果left指向的字母t里没有，说明没啥用，可以继续缩小左边界</span><br><span class="line">                    left++;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                if(lval==0)&#123;//如果left指向的字母在滑动窗口内的数量刚好满足要求，然而left右移会导致滑动窗口内缺一个该字母，导致滑动窗口不满足要求，从而触发当前while循环终止，进入right右扩循环</span><br><span class="line">                    cnt--;</span><br><span class="line">                &#125;</span><br><span class="line">                dict[S[left]]=++lval;//能执行到这里的都是left指向的字母在t里有，left右扩会导致窗口需要更多的该字母，所以字典内对应的值+1</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            right++;</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/09/14/%E6%AF%8F%E6%97%A5%E5%8A%9B%E6%89%A33/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" rel="tag">分治法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/09/13/%E6%AF%8F%E6%97%A5%E5%8A%9B%E6%89%A32/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">每日力扣2</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Daniel Qi
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.svg" alt="Welcome to DanielQi&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/photos/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2022/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/1.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/2.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=139774&auto=0&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
